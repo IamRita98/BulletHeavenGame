@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Stats : MonoBehaviour
 {
-    private float baseValue;
-    private float bonusValue;
-    private float multiplier;
+    [SerializeField] float baseValue;
+    [SerializeField]  float bonusValue;
+    [SerializeField]  float multiplier;
 
     public float StatsValue()
     {
@@ -21,5 +22,9 @@ public class Stats : MonoBehaviour
     public void AddMultiValue(float valueMult)
     {
         multiplier += valueMult;
+    }
+    public Stats(float baseValue)
+    {
+        this.baseValue = baseValue;
     }
 }

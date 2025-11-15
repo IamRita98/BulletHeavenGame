@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     {
         bStats = gameObject.GetComponent<BaseStats>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        moveSpeed = bStats.MovementSpeed.StatsValue();
+        
     }
 
     private void FixedUpdate()
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+        moveSpeed = bStats.MovementSpeed.StatsValue();
         Movement();
     }
 

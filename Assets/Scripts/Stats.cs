@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Stats : MonoBehaviour
+public class Stats
 {
     [SerializeField] float baseValue;
     [SerializeField]  float bonusValue;
     [SerializeField]  float multiplier;
 
+    public float GetValue()
+    {
+        return (baseValue + bonusValue) * multiplier;
+    }
     public float StatsValue()
     {
         return (baseValue + bonusValue) * multiplier;

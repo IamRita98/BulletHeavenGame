@@ -298,7 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3655961653620078618, guid: 28b1e5851f4b7524caf9e1392ed48f69, type: 3}
-  spawnPos: {x: 0, y: 0}
   enemiesToSpawn: 10
 --- !u!4 &714919607
 Transform:

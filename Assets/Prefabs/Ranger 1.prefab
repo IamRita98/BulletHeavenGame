@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 262969877460355598}
   - component: {fileID: -5518224994411204026}
   m_Layer: 0
-  m_Name: Ranger
+  m_Name: Ranger 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6672f9c46c772841a422327465faa8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
 --- !u!212 &6289887177545696766
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -178,6 +177,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   attackPower: 2
+  speed: 10
+  AttackPower:
+    baseValue: 0
+  MovementSpeed:
+    baseValue: 0
+  Health:
+    baseValue: 0
 --- !u!1 &5986132716307518295
 GameObject:
   m_ObjectHideFlags: 0

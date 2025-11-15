@@ -24,11 +24,6 @@ public class TempEnemyStats : MonoBehaviour
         {
             Die();
         }
-        if(timer >= 3)
-        {
-            currentHP = 0;
-            timer = 0;
-        }
     }
 
     void Die()

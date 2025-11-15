@@ -6,16 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     Vector2 dir;
     Rigidbody2D rb;
-    [SerializeField] float speed;
+    BaseStats bStats;
+    float moveSpeed;
 
     private void Start()
     {
+        bStats = gameObject.GetComponent<BaseStats>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        moveSpeed = bStats.MovementSpeed.StatsValue();
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = dir * speed;
+        rb.velocity = dir * moveSpeed;
     }
 
     private void Update()

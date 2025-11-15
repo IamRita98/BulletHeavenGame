@@ -6,13 +6,9 @@ using UnityEngine;
 public class Stats
 {
     [SerializeField] float baseValue;
-    [SerializeField]  float bonusValue;
-    [SerializeField]  float multiplier;
+    float bonusValue;
+    float multiplier = 1;
 
-    public float GetValue()
-    {
-        return (baseValue + bonusValue) * multiplier;
-    }
     public float StatsValue()
     {
         return (baseValue + bonusValue) * multiplier;

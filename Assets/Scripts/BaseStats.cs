@@ -6,14 +6,21 @@ using UnityEngine;
 
 public class BaseStats : MonoBehaviour
 {
-    [SerializeField] float health=10f;
-    [SerializeField] float attackPower= 5f;
-    [SerializeField] private Stats Health;
     [SerializeField] private Stats AttackPower;
+
+    float speed = 0;
+    public Stats MovementSpeed;
+
+    float health = 0;
+    [SerializeField] Stats Health;
+
     private void Start()
     {
+        MovementSpeed = new Stats(speed);
         Health = new Stats(health);
-        AttackPower = new Stats(attackPower);
+
+        print(Health.StatsValue());
+        print(AttackPower.StatsValue());
+        //AttackPower = new Stats(attackPower);
     }
-    
 }

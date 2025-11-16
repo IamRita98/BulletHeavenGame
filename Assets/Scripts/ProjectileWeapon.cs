@@ -9,7 +9,7 @@ public class ProjectileWeapon : MonoBehaviour
 
     BaseWeaponStats bWeaponStats;
     BaseStats bStats;
-
+    TrackNeareastEnemy tNear;
     float fireRate;
     float damage;
     float lifeTime;
@@ -26,6 +26,7 @@ public class ProjectileWeapon : MonoBehaviour
         bStats = gameObject.transform.parent.GetComponent<BaseStats>();
         bWeaponStats = gameObject.GetComponent<BaseWeaponStats>();
         oPool = gameObject.GetComponent<ObjectPooling>();
+        tNear = gameObject.transform.parent.GetComponent<TrackNeareastEnemy>();
         MakeStats();
     }
 
@@ -51,8 +52,9 @@ public class ProjectileWeapon : MonoBehaviour
 
     private void FireBullet()
     {
+        GameObject nearestEnemy = tNear.NearestEnemy();
         for (int i = 0; i < bStats.Projectiles.StatsValue(); i++)
-        {
+        {   //rotate bullet to face nearest enemy
             //GameObject t = oPool.objectPool[0];
             //t.transform.position = transform.position;
             //t.SetActive(true);
@@ -62,6 +64,7 @@ public class ProjectileWeapon : MonoBehaviour
             //t.damage = damage; //Maybe pass each stat to bullet in this way
             //t.transform.looktowards == nearestenemy.transform.position
             //t.transform.translate(projectileSpeed)
+
         }
     }
 }

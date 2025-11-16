@@ -72,6 +72,7 @@ public class EnemySpawner : MonoBehaviour
             t.transform.position = spawnPos;
             t.SetActive(true);
             oPool.objectPool.Remove(t);
+            oPool.activePool.Add(t);
             enemiesPerWave--;
 
         }

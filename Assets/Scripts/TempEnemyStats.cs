@@ -30,6 +30,7 @@ public class TempEnemyStats : MonoBehaviour
     {
         currentHP = maxHP;
         oPool.objectPool.Add(gameObject);
+        oPool.activePool.Remove(gameObject);
         gameObject.SetActive(false);
     }
 }

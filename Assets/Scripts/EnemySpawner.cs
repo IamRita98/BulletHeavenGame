@@ -38,44 +38,33 @@ public class EnemySpawner : MonoBehaviour
     }
     void SpawnFunc()
     {
-        int enemiesPerWave = enemiesToSpawn+scalingDiff;
-        for (int i = 0; i < enemiesToSpawn+scalingDiff; i++)
+        int enemiesPerWave = enemiesToSpawn + scalingDiff;
+
+        for (int i = 0; i < enemiesPerWave; i++)
         {
-            int r1 = Random.Range(1, 5);
-            if (r1 == 1)
-            {
-                //top spawn
-                spawnPos = camera.ViewportToWorldPoint(new Vector2(Random.Range(0f, 1f), 1 + spawnBuffer));
+            float x = Random.Range(0f, 1f);
+            float y = Random.Range(0f, 1f);
 
-            }
-            if (r1 == 2)
-            {
-                //right spawn
-                spawnPos = camera.ViewportToWorldPoint(new Vector2(1 + spawnBuffer, Random.Range(0f, 1f)));
+            int side = Random.Range(0, 4); // 0 - 3 represents the dimensional shifts
 
-            }
-            if (r1 == 3)
+            switch (side)
             {
-                //bottom spawn
-                spawnPos = camera.ViewportToWorldPoint(new Vector2(Random.Range(0f, 1f), 0 - spawnBuffer));
-
-            }
-            if (r1 == 4)
-            {
-                //left spawn
-                spawnPos = camera.ViewportToWorldPoint(new Vector2(0 - spawnBuffer, Random.Range(0f, 1f)));
-
+                case 0: y = 1f + spawnBuffer; break;
+                case 1: x = 1f + spawnBuffer; break;
+                case 2: y = 0f - spawnBuffer; break;
+                case 3: x = 0f - spawnBuffer; break;
             }
 
-
+            spawnPos = camera.ViewportToWorldPoint(new Vector2(x, y));
+        }
             GameObject t = oPool.objectPool[0];
             t.transform.position = spawnPos;
             t.SetActive(true);
             oPool.objectPool.Remove(t);
             oPool.activePool.Add(t);
             enemiesPerWave--;
-
-        }
-        scalingDiff++;
+            scalingDiff++;
     }
+        
+    
 }

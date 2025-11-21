@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,11 +9,14 @@ public class ProjectileBehaviour : MonoBehaviour
     ObjectPooling oPool;
     [SerializeField]float speed;
     float lifeTime;
-    float timer = 0;
+    float timer = 0; 
+    BaseWeaponStats bws;
+    public static event System.Action<float, GameObject> OnAttackHit;
 
     private void Start()
     {
         oPool = gameObject.transform.parent.GetComponent<ObjectPooling>();
+        bws = gameObject.GetComponentInParent<BaseWeaponStats>();
     }
 
     private void Update()
@@ -28,8 +32,22 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        //DealDamage
-        ReturnToPool();
+        OnAttackHit?.Invoke(bws.BaseDamage.StatsValue(),collision.gameObject);
+        /*
+        EnemyBaseStats ebs = collision.GetComponent<EnemyBaseStats>();
+
+        float dam=bws.BaseDamage.StatsValue(); 
+        float health=ebs.Health.StatsValue();
+        if (health-dam<= 0)
+        {
+            //enemy kill
+        }
+        else
+        {
+            ebs.Health.AddFlatValue((health - dam)*-1);
+        }
+        */
+            ReturnToPool();
     }
 
     private void ReturnToPool()

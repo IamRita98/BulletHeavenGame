@@ -10,14 +10,22 @@ public class EnemyBaseStats : BaseStats
     public Stats ContactDamage;
     public Stats AttackDamage;
 
+    ObjectPooling oPool;
     void Start()
     {
         MakeStats();
+        oPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }
 
     void Update()
     {
         
+    }
+    public void ReturnToPool()
+    {
+        oPool.objectPool.Add(gameObject);
+        oPool.activePool.Remove(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void MakeStats()

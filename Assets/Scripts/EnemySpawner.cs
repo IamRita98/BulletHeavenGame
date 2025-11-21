@@ -64,7 +64,6 @@ public class EnemySpawner : MonoBehaviour
         enemySpawned.SetActive(true);
         oPool.objectPool.Remove(enemySpawned);
         oPool.activePool.Add(enemySpawned);
-        enemiesPerWave--;
         scalingDiff++;
     }
 }

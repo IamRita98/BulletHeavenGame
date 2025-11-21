@@ -6,6 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class BasicEnemyMovement : MonoBehaviour
 {
+    EnemyBaseStats eBaseStats;
     Rigidbody2D rb;
     [SerializeField] float speed;
     GetPlayerPosition getPlayerPos;
@@ -15,15 +16,16 @@ public class BasicEnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        eBaseStats = GetComponent<EnemyBaseStats>();
         rb = GetComponent<Rigidbody2D>();
         getPlayerPos = GetComponent<GetPlayerPosition>();
+        speed = eBaseStats.MovementSpeed.StatsValue();
     }
 
     private void Update()
     {
         currentPos = transform.position;
         targetPos = getPlayerPos.playerPos;
-        //dir = new Vector2(targetPos.x - transform.position.x, targetPos.y - transform.position.y);
         dir = targetPos - currentPos;
         dir.Normalize();
     }

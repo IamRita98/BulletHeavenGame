@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
         SpawnFunc();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -34,8 +33,9 @@ public class EnemySpawner : MonoBehaviour
             SpawnFunc();
             timer = 0;
         }
-        
+
     }
+
     void SpawnFunc()
     {
         int enemiesPerWave = enemiesToSpawn + scalingDiff;
@@ -57,14 +57,14 @@ public class EnemySpawner : MonoBehaviour
 
             spawnPos = camera.ViewportToWorldPoint(new Vector2(x, y));
         }
-            GameObject t = oPool.objectPool[0];
-            t.transform.position = spawnPos;
-            t.SetActive(true);
-            oPool.objectPool.Remove(t);
-            oPool.activePool.Add(t);
-            enemiesPerWave--;
-            scalingDiff++;
+        GameObject enemySpawned = oPool.objectPool[0];
+        EnemyBaseStats eBaseStats = enemySpawned.GetComponent<EnemyBaseStats>();
+        eBaseStats.Health = eBaseStats.MaxHealth;
+        enemySpawned.transform.position = spawnPos;
+        enemySpawned.SetActive(true);
+        oPool.objectPool.Remove(enemySpawned);
+        oPool.activePool.Add(enemySpawned);
+        enemiesPerWave--;
+        scalingDiff++;
     }
-        
-    
 }

@@ -25,8 +25,8 @@ public class BaseWeaponStats : BaseStats
 
     private void Start()
     {
-        tNearestEnemy = gameObject.transform.parent.GetComponent<TrackNeareastEnemy>();
-        MakeStats();
+        
+        MakeStats();   
     }
 
 /*    private void Update()

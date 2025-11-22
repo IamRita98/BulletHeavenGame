@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
         camera = Camera.main.GetComponent<Camera>(); //(0,0)bot left and (1,1) top right
-        print(oPool);
+        
         SpawnFunc();
     }
 

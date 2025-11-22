@@ -63,14 +63,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  projectiles: 1
+  maxHealth: 10
   speed: 3.5
-  MovementSpeed:
-    baseValue: 0
-  Health:
-    baseValue: 0
-  Projectiles:
-    baseValue: 0
+  projectiles: 1
 --- !u!212 &6289887177545696766
 SpriteRenderer:
   m_ObjectHideFlags: 0

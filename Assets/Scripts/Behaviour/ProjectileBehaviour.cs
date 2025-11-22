@@ -13,17 +13,22 @@ public class ProjectileBehaviour : MonoBehaviour
     BaseWeaponStats bws;
     public static event System.Action<float, GameObject> OnAttackHit;
 
-    private void Start()
+    private void Awake()
     {
         oPool = gameObject.transform.parent.GetComponent<ObjectPooling>();
-        bws = gameObject.GetComponentInParent<BaseWeaponStats>();
+        bws = gameObject.transform.parent.GetComponent<BaseWeaponStats>();
+        lifeTime = bws.LifeTime.StatsValue();
     }
+    
 
     private void Update()
     {
+        
+        if (!this.isActiveAndEnabled) return;
         if(timer >= lifeTime)
         {
             ReturnToPool();
+            print("cum");
             timer = 0;
         }
         transform.Translate((Vector2.up * speed) * Time.deltaTime);

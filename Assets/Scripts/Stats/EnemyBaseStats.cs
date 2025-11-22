@@ -11,8 +11,9 @@ public class EnemyBaseStats : BaseStats
     public Stats AttackDamage;
 
     ObjectPooling oPool;
-    void Start()
+    private void Start()
     {
+        
         MakeStats();
         oPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }

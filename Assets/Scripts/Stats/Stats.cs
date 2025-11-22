@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stats
 {
-    [SerializeField] float baseValue;
+    float baseValue;
     float bonusValue;
     float multiplier = 1;
 
@@ -23,8 +23,8 @@ public class Stats
     {
         multiplier += valueMult;
     }
-    public Stats(float baseValue)
+    public Stats(float passedbaseValue)
     {
-        this.baseValue = baseValue;
+        baseValue = passedbaseValue;
     }
 }

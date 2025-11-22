@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 260093664454194956}
+  - component: {fileID: 5634857816219580311}
+  - component: {fileID: -3051653935412281818}
+  - component: {fileID: 5041478233300303979}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -31,3 +34,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5634857816219580311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120650930306449738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9317857afc5354d8a54c5442b626fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3051653935412281818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120650930306449738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6da3ba015d28b5489a54fa6f6ffa5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 1
+  speed: 1
+  projectiles: 1
+  isMelee: 0
+  baseDamage: 2
+  attackRate: 1.5
+  lifeTime: 5
+  area: 1
+  projectileSpeed: 1
+  pierce: 0
+--- !u!114 &5041478233300303979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120650930306449738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf3e93dcbf7d5941a22b32bbc3ed1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 7659888470333955816, guid: 2b4d95d5eb900ab40979f8561c7fd1a2, type: 3}
+  objectAmount: 100
+  objectPool: []
+  activePool: []

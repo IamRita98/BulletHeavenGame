@@ -8,7 +8,7 @@ public class BasicEnemyMovement : MonoBehaviour
 {
     EnemyBaseStats eBaseStats;
     Rigidbody2D rb;
-    [SerializeField] float speed;
+    float speed;
     GetPlayerPosition getPlayerPos;
     Vector2 targetPos;
     Vector2 currentPos;

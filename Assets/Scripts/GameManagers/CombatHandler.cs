@@ -16,8 +16,9 @@ public class CombatHandler : MonoBehaviour
     {
         if (gObject.CompareTag("Enemy"))
         {
-            EnemyBaseStats ebs = gameObject.GetComponent<EnemyBaseStats>();
-            ebs.Health.AddFlatValue(dam*-1);
+            EnemyBaseStats ebs = gObject.GetComponent<EnemyBaseStats>();
+            ebs.Health.AddFlatValue(-dam);
+            print(ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue());
             if (ebs.Health.StatsValue() <= 0)
             {
                 ebs.ReturnToPool();

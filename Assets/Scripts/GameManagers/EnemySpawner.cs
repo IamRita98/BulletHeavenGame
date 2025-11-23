@@ -54,16 +54,16 @@ public class EnemySpawner : MonoBehaviour
                 case 2: y = 0f - spawnBuffer; break;
                 case 3: x = 0f - spawnBuffer; break;
             }
-
             spawnPos = camera.ViewportToWorldPoint(new Vector2(x, y));
+
+            GameObject enemySpawned = oPool.objectPool[0];
+            EnemyBaseStats eBaseStats = enemySpawned.GetComponent<EnemyBaseStats>();
+            eBaseStats.Health.StatOverwrite(eBaseStats.MaxHealth.StatsValue());
+            enemySpawned.transform.position = spawnPos;
+            enemySpawned.SetActive(true);
+            oPool.objectPool.Remove(enemySpawned);
+            oPool.activePool.Add(enemySpawned);
         }
-        GameObject enemySpawned = oPool.objectPool[0];
-        EnemyBaseStats eBaseStats = enemySpawned.GetComponent<EnemyBaseStats>();
-        eBaseStats.Health = eBaseStats.MaxHealth;
-        enemySpawned.transform.position = spawnPos;
-        enemySpawned.SetActive(true);
-        oPool.objectPool.Remove(enemySpawned);
-        oPool.activePool.Add(enemySpawned);
         scalingDiff++;
     }
 }

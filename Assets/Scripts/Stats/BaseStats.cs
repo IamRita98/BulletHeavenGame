@@ -23,12 +23,14 @@ public class BaseStats : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float projectiles = 1;
     [SerializeField] float xp = 0;
+    [SerializeField] float pickUpRadius= 0;
 
     public Stats Health;
     public Stats MaxHealth;
     public Stats MovementSpeed;
     public Stats Projectiles;
     public Stats XP;
+    public Stats PickupRadius;
 
     private void Awake()
     {
@@ -51,5 +53,6 @@ public class BaseStats : MonoBehaviour
         MovementSpeed = new Stats(speed);
         Projectiles = new Stats(projectiles);
         XP = new Stats(xp);
+        PickupRadius = new Stats(pickUpRadius);
     }
 }

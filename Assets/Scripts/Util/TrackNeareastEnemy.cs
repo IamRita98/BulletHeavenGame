@@ -13,11 +13,10 @@ public class TrackNeareastEnemy : MonoBehaviour
         oPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }
 
-
     public GameObject NearestEnemy()
     {
         float dist=Mathf.Infinity;
-        if (oPool.activePool.Count <= 1) return null;
+        if (oPool.activePool.Count < 1) return null;
 
         for (int i = 0; i < oPool.activePool.Count; i++)//there may be a more efficient way (2b optimized)
         {

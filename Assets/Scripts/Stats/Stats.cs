@@ -23,7 +23,13 @@ public class Stats
     {
         multiplier += valueMult;
     }
+
     public Stats(float passedbaseValue)
+    {
+        baseValue = passedbaseValue;
+    }
+
+    public void StatOverwrite(float passedbaseValue)
     {
         baseValue = passedbaseValue;
     }

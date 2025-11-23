@@ -6,28 +6,35 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    Transform gunParent;
     ObjectPooling oPool;
-    [SerializeField]float speed;
+    [SerializeField] float speed;
     float lifeTime;
-    float timer = 0; 
-    BaseWeaponStats bws;
+    float damage;
+    Vector3 baseArea;
+    float area;
+    float timer = 0;
+    //BaseWeaponStats bws;
     public static event System.Action<float, GameObject> OnAttackHit;
+
+    private void Start()
+    {
+        oPool = gameObject.GetComponentInParent<ObjectPooling>();
+        //bws = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
+        baseArea = transform.localScale;
+    }
 
     private void OnEnable()
     {
-        oPool = gameObject.GetComponentInParent<ObjectPooling>();
-        bws = gameObject.GetComponentInParent<BaseWeaponStats>();
+        transform.localScale *= area;
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
-        lifeTime = bws.LifeTime.StatsValue(); //This is prob not good. Temp fix
-        print(lifeTime);
         if (timer >= lifeTime)
         {
             ReturnToPool();
-            print("cum");
             timer = 0;
         }
         transform.Translate((Vector2.up * speed) * Time.deltaTime);
@@ -36,28 +43,23 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        OnAttackHit?.Invoke(bws.BaseDamage.StatsValue(),collision.gameObject);
-        /*
-        EnemyBaseStats ebs = collision.GetComponent<EnemyBaseStats>();
-
-        float dam=bws.BaseDamage.StatsValue(); 
-        float health=ebs.Health.StatsValue();
-        if (health-dam<= 0)
-        {
-            //enemy kill
-        }
-        else
-        {
-            ebs.Health.AddFlatValue((health - dam)*-1);
-        }
-        */
-            ReturnToPool();
+        OnAttackHit?.Invoke(damage, collision.gameObject);
+        ReturnToPool();
     }
 
     private void ReturnToPool()
     {
         oPool.objectPool.Add(gameObject);
         oPool.activePool.Remove(gameObject);
+        transform.localScale = baseArea;
         gameObject.SetActive(false);
+    }
+
+    public void SetStats(float dam, float size, float lTime, float moveSpeed)
+    {
+        damage = dam;
+        lifeTime = lTime;
+        area = size;
+        speed = moveSpeed;
     }
 }

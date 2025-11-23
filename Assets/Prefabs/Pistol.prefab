@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 260093664454194956}
   - component: {fileID: 5634857816219580311}
   - component: {fileID: -3051653935412281818}
-  - component: {fileID: 5041478233300303979}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -67,21 +66,5 @@ MonoBehaviour:
   attackRate: 1.5
   lifeTime: 5
   area: 1
-  projectileSpeed: 1
+  projectileSpeed: 20
   pierce: 0
---- !u!114 &5041478233300303979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120650930306449738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cf3e93dcbf7d5941a22b32bbc3ed1da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolObject: {fileID: 7659888470333955816, guid: 2b4d95d5eb900ab40979f8561c7fd1a2, type: 3}
-  objectAmount: 100
-  objectPool: []
-  activePool: []

@@ -25,15 +25,15 @@ public class ProjectileWeapon : MonoBehaviour
             timer = 0f;
         }
     }
+
     private void AimWeapon()
     {
-        TrackNeareastEnemy tne = gameObject.GetComponentInParent<TrackNeareastEnemy>();
-        GameObject target = tne.NearestEnemy();
-        //dir = target.transform.position - transform.position;
-        //dir.Normalize();
-        FireProjectiles();
+        GameObject tne = gameObject.GetComponentInParent<TrackNeareastEnemy>().NearestEnemy();
+        Vector2 targetPos = tne.transform.position - transform.position;
+        FireProjectiles(targetPos);
     }
-    private void FireProjectiles()
+
+    private void FireProjectiles(Vector2 targetPos)
     {
         //if (dir == null) return;
         float projectiles = bws.Projectiles.StatsValue();
@@ -44,7 +44,7 @@ public class ProjectileWeapon : MonoBehaviour
             projGO.SetActive(true);
             oPool.activePool.Add(projGO);
             oPool.objectPool.Remove(projGO);
-            projGO.transform.LookAt(dir,Vector2.up);
+            projGO.transform.up = targetPos;
             projGO.transform.position = transform.position;
             print(projGO);
         }

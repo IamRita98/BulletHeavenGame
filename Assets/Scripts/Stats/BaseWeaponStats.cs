@@ -15,8 +15,8 @@ public class BaseWeaponStats : BaseStats
     [SerializeField] float pierce = 0;
     
     public Stats BaseDamage;
-    public Stats LifeTime;
     public Stats AttackRate;
+    public Stats LifeTime;
     public Stats Area;
     public Stats ProjectileSpeed;
     public Stats Pierce;
@@ -25,7 +25,6 @@ public class BaseWeaponStats : BaseStats
 
     private void Start()
     {
-        
         MakeStats();   
     }
 

@@ -15,17 +15,24 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        oPool = gameObject.transform.parent.GetComponent<ObjectPooling>();
-        bws = gameObject.transform.parent.GetComponent<BaseWeaponStats>();
-        lifeTime = bws.LifeTime.StatsValue();
+        
+        
     }
-    
+
+    private void OnEnable()
+    {
+        oPool = gameObject.GetComponentInParent<ObjectPooling>();
+        bws = gameObject.GetComponentInParent<BaseWeaponStats>();
+    }
 
     private void Update()
     {
         
         if (!this.isActiveAndEnabled) return;
-        if(timer >= lifeTime)
+        timer += Time.deltaTime;
+        lifeTime = bws.LifeTime.StatsValue(); //This is prob not good. Temp fix
+        print(lifeTime);
+        if (timer >= lifeTime)
         {
             ReturnToPool();
             print("cum");

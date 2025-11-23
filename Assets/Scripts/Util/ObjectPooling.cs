@@ -6,7 +6,7 @@ public class ObjectPooling : MonoBehaviour
 {
     [SerializeField] GameObject poolObject;
     [SerializeField] int objectAmount=1;
-    public List<GameObject> objectPool=new List<GameObject>();
+    public List<GameObject> objectPool = new List<GameObject>();
     public List<GameObject> activePool = new List<GameObject>();
 
     void Start()

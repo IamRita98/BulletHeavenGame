@@ -9,6 +9,7 @@ TagManager:
   - ProjectilePool
   - GameManager
   - Weapon
+  - Pickup
   layers:
   - Default
   - TransparentFX

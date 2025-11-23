@@ -13,12 +13,6 @@ public class ProjectileBehaviour : MonoBehaviour
     BaseWeaponStats bws;
     public static event System.Action<float, GameObject> OnAttackHit;
 
-    private void Awake()
-    {
-        
-        
-    }
-
     private void OnEnable()
     {
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
@@ -27,8 +21,6 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void Update()
     {
-        
-        if (!this.isActiveAndEnabled) return;
         timer += Time.deltaTime;
         lifeTime = bws.LifeTime.StatsValue(); //This is prob not good. Temp fix
         print(lifeTime);

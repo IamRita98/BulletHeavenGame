@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1939150554407955480}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cac04b306d9fa4f9a34d6d45ccf604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
 --- !u!114 &-8819010685745275723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,20 +65,8 @@ MonoBehaviour:
   maxHealth: 10
   speed: 2.5
   projectiles: 0
-  Health:
-    baseValue: 0
-  MaxHealth:
-    baseValue: 0
-  MovementSpeed:
-    baseValue: 0
-  Projectiles:
-    baseValue: 0
   contactDamage: 0
   attackDamage: 0
-  ContactDamage:
-    baseValue: 0
-  AttackDamage:
-    baseValue: 0
 --- !u!114 &-4559813156497836592
 MonoBehaviour:
   m_ObjectHideFlags: 0

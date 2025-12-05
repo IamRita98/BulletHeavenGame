@@ -8,6 +8,7 @@ public class Stats
     float baseValue;
     float bonusValue;
     float multiplier = 1;
+    int tier;
 
     public float StatsValue()
     {
@@ -31,4 +32,5 @@ public class Stats
     {
         baseValue = passedbaseValue;
     }
+
 }

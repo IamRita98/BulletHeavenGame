@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class PickupBehavior : MonoBehaviour
 {
-    public static event System.Action<float> OnXPPickup;
+    public static event System.Action<GameObject> OnXPPickup;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (!other.gameObject.CompareTag("Pickup"))return;
-        OnXPPickup?.Invoke(0f);
-
+        if (!collision.gameObject.CompareTag("XpPickup")) return;
+        OnXPPickup?.Invoke(collision.gameObject);
     }
 }

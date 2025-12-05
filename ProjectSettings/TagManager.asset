@@ -10,6 +10,8 @@ TagManager:
   - GameManager
   - Weapon
   - Pickup
+  - XpPickup
+  - XpPool
   layers:
   - Default
   - TransparentFX

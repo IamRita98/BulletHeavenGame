@@ -7,11 +7,14 @@ public class LevelUpManager : MonoBehaviour
     [SerializeField]float XPThreshold = 10;//base value
     BaseStats playerStats;
     ObjectPooling xpPool;
+    BaseWeaponStats bws;
+    UpgradeManager um;
 
     private void Awake()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
+        um = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
     }
 
     private void OnEnable()
@@ -52,6 +55,21 @@ public class LevelUpManager : MonoBehaviour
         //other things
         playerStats.XP.AddFlatValue(-XPThreshold);//subtract level up xp from current avoid overwriting
         ScalingThreshold();
+        switch (playerStats.characterSelected)
+        {
+            case BaseStats.Character.DefaultDaniel:
+                playerStats.Health.AddFlatValue(3);
+                //ability damage stat increase here
+                //ability cdr stat increase here
+                bws.BaseDamage.AddMultiValue(.01f);
+                break;
+            case BaseStats.Character.SarahSword:
+                playerStats.Health.AddFlatValue(4);
+                //ability damage stat increase here
+                bws.BaseDamage.AddMultiValue(.02f);
+                break;
+        }
+        um.RollUpgrades();
     }
 
     void ScalingThreshold()

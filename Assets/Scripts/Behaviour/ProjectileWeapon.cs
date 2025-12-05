@@ -38,10 +38,11 @@ public class ProjectileWeapon : MonoBehaviour
         for (int i = 0; i < projectiles; i++)
         {
             GameObject projGO = oPool.objectPool[0];
+            projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
             projGO.SetActive(true);
             oPool.activePool.Add(projGO);
             oPool.objectPool.Remove(projGO);
-            projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
+            //projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
             projGO.transform.up = targetPos;
             projGO.transform.position = transform.position;
         }

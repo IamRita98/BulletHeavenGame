@@ -8,7 +8,7 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     Transform gunParent;
     ObjectPooling oPool;
-    [SerializeField] float speed;
+    float speed;
     float lifeTime;
     float damage;
     Vector3 baseArea;
@@ -22,11 +22,6 @@ public class ProjectileBehaviour : MonoBehaviour
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
         //bws = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
         baseArea = transform.localScale;
-    }
-
-    private void OnEnable()
-    {
-        transform.localScale *= area;
     }
 
     private void Update()
@@ -61,5 +56,6 @@ public class ProjectileBehaviour : MonoBehaviour
         lifeTime = lTime;
         area = size;
         speed = moveSpeed;
+        transform.localScale *= area;
     }
 }

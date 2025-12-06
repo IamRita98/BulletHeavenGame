@@ -32,6 +32,14 @@ public class BaseStats : MonoBehaviour
     public Stats XP;
     public Stats PickupRadius;
 
+    //upgrade tiers trackers
+    public int globalDamT = 0;
+    public int healthUpgT = 0;
+    public int movementSpUpgT = 0;
+    public int projUpgT = 0;
+    public int XpPickupUpgT = 0;
+
+
     private void Awake()
     {
         MakeStats();

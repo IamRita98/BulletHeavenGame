@@ -75,6 +75,7 @@ public class LevelUpManager : MonoBehaviour
     void ScalingThreshold()
     {
         XPThreshold *= 2;
+        //will add more to xp scaling
     }
 
     void DropXpOnEnemyDeath(GameObject gObject)

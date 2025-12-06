@@ -10,18 +10,27 @@ public class BaseWeaponStats : BaseStats
     [SerializeField] float baseDamage = 0;
     [SerializeField] float attackRate = 0;
     [SerializeField] float lifeTime = 0;
-    [SerializeField] float area = 0;
+    [SerializeField] float weapArea = 0;
     [SerializeField] float projectileSpeed;
     [SerializeField] float pierce = 0;
     
     public Stats BaseDamage;
     public Stats AttackRate;
     public Stats LifeTime;
-    public Stats Area;
+    public Stats WeapArea;
     public Stats ProjectileSpeed;
     public Stats Pierce;
-
+    
     float attackTimer;
+
+    //upgrade tiers trackers
+    public int bDamUpgT = 0;
+    public int attackRUpgT = 0;
+    public int weapAreaUpgT = 0;
+    public int ProjSpeedUpgT =0;
+    public int lifeTimeUpgT = 0;
+    public int pierceUpgT = 0;
+
 
     private void Start()
     {
@@ -33,7 +42,7 @@ public class BaseWeaponStats : BaseStats
         BaseDamage = new Stats(baseDamage);
         LifeTime = new Stats(lifeTime);
         AttackRate = new Stats(attackRate);
-        Area = new Stats(area);
+        WeapArea = new Stats(weapArea);
         ProjectileSpeed = new Stats(projectileSpeed);
         Pierce = new Stats(pierce);
     }

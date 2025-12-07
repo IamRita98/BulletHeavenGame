@@ -5,15 +5,20 @@ using UnityEngine;
 public class CombatHandler : MonoBehaviour
 {
     public static event System.Action<GameObject> OnEnemyDeath;
+    public static event System.Action OnPlayerDeath;
 
     private void OnEnable()
     {
         ProjectileBehaviour.OnAttackHit += HandleDamage;
+        ContactDamage.OnCollision += CollisionDamage;
     }
     private void OnDisable()
     {
         ProjectileBehaviour.OnAttackHit -= HandleDamage;
+        ContactDamage.OnCollision -= CollisionDamage;
     }
+
+
     void HandleDamage(float dam, GameObject gObject)
     {
         if (gObject.CompareTag("Enemy"))
@@ -27,10 +32,19 @@ public class CombatHandler : MonoBehaviour
                 ebs.ReturnToPool();
             }
         }
-        else
+        else if (gObject.CompareTag("Player"))
         {
             //player stats calcs
         }
 
+    }
+
+    void CollisionDamage(float damage, GameObject GO)
+    {
+        BaseStats pbs = GO.GetComponent<BaseStats>();
+        pbs.Health.AddFlatValue(-damage);
+        print(pbs.Health.StatsValue() + "/" + pbs.MaxHealth.StatsValue() + "Player HP");
+        if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
+        //Invinciblity on hit
     }
 }

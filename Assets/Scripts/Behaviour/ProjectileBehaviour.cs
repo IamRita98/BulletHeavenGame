@@ -15,6 +15,12 @@ public class ProjectileBehaviour : MonoBehaviour
     float area;
     float timer = 0;
     //BaseWeaponStats bws;
+
+    /// <summary>
+    /// Pass damage dealt and the object being dealt damage to
+    /// </summary>
+    /// <param name="dam"></param>
+    /// <param name="gObject"></param>
     public static event System.Action<float, GameObject> OnAttackHit;
 
     private void Start()

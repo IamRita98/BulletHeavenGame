@@ -58,12 +58,14 @@ public class LevelUpManager : MonoBehaviour
         switch (playerStats.characterSelected)
         {
             case BaseStats.Character.DefaultDaniel:
+                playerStats.MaxHealth.AddFlatValue(3);
                 playerStats.Health.AddFlatValue(3);
                 //ability damage stat increase here
                 //ability cdr stat increase here
                 bws.BaseDamage.AddMultiValue(.01f);
                 break;
             case BaseStats.Character.SarahSword:
+                playerStats.MaxHealth.AddFlatValue(4);
                 playerStats.Health.AddFlatValue(4);
                 //ability damage stat increase here
                 bws.BaseDamage.AddMultiValue(.02f);

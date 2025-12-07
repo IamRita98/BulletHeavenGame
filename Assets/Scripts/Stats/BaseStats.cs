@@ -24,6 +24,7 @@ public class BaseStats : MonoBehaviour
     [SerializeField] float projectiles = 1;
     [SerializeField] float xp = 0;
     [SerializeField] float pickUpRadius= 0;
+    public float invincibilityDuration;
 
     public Stats Health;
     public Stats MaxHealth;

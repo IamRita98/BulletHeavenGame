@@ -1399,6 +1399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5518224994411204026, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
+      propertyPath: invincibilityDuration
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3213125667346825657, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

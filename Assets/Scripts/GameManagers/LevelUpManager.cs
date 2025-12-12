@@ -47,7 +47,6 @@ public class LevelUpManager : MonoBehaviour
         if (playerStats.XP.StatsValue() >= XPThreshold)
         {
             print("LevelUp");
-            Time.timeScale = 0;
             LevelUp();
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 public class UpgradeManager : MonoBehaviour
 {
     public Button WeapDamageButton;
@@ -20,26 +19,19 @@ public class UpgradeManager : MonoBehaviour
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
     }
-    void WeaponDamageUpgrade()
-    {
 
-    }
     public void RollUpgrades()
     {
         //string[] rolledUpg=new string[possibleChoices];
-        System.Random random = new();
-        for(int i = 0; i < possibleChoices; i++)
+        List<int> rolledUpgrades = new List<int>();
+        for (int i = 0; i < possibleChoices; i++)
         {
-            int rolled = random.Next(upgradeArr.Length);
+            int rolled = Random.Range(0, upgradeArr.Length);
+            while(rolledUpgrades.Contains(rolled)) rolled = Random.Range(0, upgradeArr.Length);
+            rolledUpgrades.Add(rolled);
             print("rolled: " + rolled);
-            uIManager.GetUpgradeInfo(upgradeArr[rolled],i);
+            uIManager.GetUpgradeInfo(upgradeArr[rolled], i);
         }
     }
 
-    void UpgradeTier(string key,int tier)
-    {
-        
-            
-    }
-    
 }

@@ -42,8 +42,21 @@ public class UIManager : MonoBehaviour
                     GetTier = () => baseWeaponStats.bDamUpgT,
                     descriptions = new Dictionary<int, string>
                     {
-                        {0,"15% Damage"},
+                        {0,"Weapon Damage \n 15% Damage \n Flavor text"},
                         {1,"+10% Damage, +10% Area" },
+                        {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
+                        {3,"+40% Damage, +1 Projectiles, -10% Firerate" }
+                    }
+                }
+            },
+            {
+                UpgradeTypes.globalDam,
+                new UpgradeInfo{
+                    GetTier = () => playerBStats.globalDamT,
+                    descriptions = new Dictionary<int, string>
+                    {
+                        {0,"+15% Global Damage"},
+                        {1,"+10% Global Damage, +10% Area" },
                         {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                         {3,"+40% Damage, +1 Projectiles, -10% Firerate" }
                     }
@@ -115,9 +128,9 @@ public class UIManager : MonoBehaviour
             case "weaponDam":
                 DisplayUpgrade(upgrades[UpgradeTypes.weapDam], upgradeButton);
                 break;
-            //case "globalDam":
-            //    DisplayUpgrade(upgrades[UpgradeTypes.globalDam], upgradeButton);
-            //    break;
+            case "globalDam":
+                DisplayUpgrade(upgrades[UpgradeTypes.globalDam], upgradeButton);
+                break;
             case "fireRate":
                 DisplayUpgrade(upgrades[UpgradeTypes.weapFireRate], upgradeButton);
                 break;

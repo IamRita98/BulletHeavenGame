@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     BaseStats playerBStats;
     BaseWeaponStats baseWeaponStats;
     public List<Button> upgradeButtonList;
+    int buttonCount = 0;
     public enum UpgradeTypes
     {
         weapDam,
@@ -106,32 +108,39 @@ public class UIManager : MonoBehaviour
             //add more here
         };
     }
-    public void GetUpgradeInfo(string upgrade)
+    public void GetUpgradeInfo(string upgrade,int upgradeButton)
     {
         switch (upgrade)
         {
             case "weaponDam":
-                DisplayUpgrade(upgrades[UpgradeTypes.weapDam]);
+                DisplayUpgrade(upgrades[UpgradeTypes.weapDam], upgradeButton);
                 break;
-            case "globalDam":
-                DisplayUpgrade(upgrades[UpgradeTypes.globalDam]);
-                break;
+            //case "globalDam":
+            //    DisplayUpgrade(upgrades[UpgradeTypes.globalDam], upgradeButton);
+            //    break;
             case "fireRate":
-                DisplayUpgrade(upgrades[UpgradeTypes.weapFireRate]);
+                DisplayUpgrade(upgrades[UpgradeTypes.weapFireRate], upgradeButton);
                 break;
             case "health":
-                DisplayUpgrade(upgrades[UpgradeTypes.health]);
+                DisplayUpgrade(upgrades[UpgradeTypes.health], upgradeButton);
                 break;
             case "projectile":
-                DisplayUpgrade(upgrades[UpgradeTypes.projectiles]);
+                DisplayUpgrade(upgrades[UpgradeTypes.projectiles], upgradeButton);
                 break;
             case "weapArea":
-                DisplayUpgrade(upgrades[UpgradeTypes.weapArea]);
+                DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton);
                 break;
         }
     }
-    void DisplayUpgrade(UpgradeInfo upgradeInfo)
+    void DisplayUpgrade(UpgradeInfo upgradeInfo,int upgradeButton)
     {
-        
+        InitializeUpgrades();
+        Button tempButton = upgradeButtonList[upgradeButton];
+        tempButton.gameObject.SetActive(true);
+        TMP_Text textToDisplay = tempButton.GetComponentInChildren<TMP_Text>();
+        int t = upgradeInfo.GetTier();
+        string imLosingIt;
+        imLosingIt= upgradeInfo.descriptions[t];
+        textToDisplay.text = imLosingIt;
     }
 }

@@ -27,11 +27,12 @@ public class UpgradeManager : MonoBehaviour
     public void RollUpgrades()
     {
         //string[] rolledUpg=new string[possibleChoices];
-        System.Random rnd = new();
+        System.Random random = new();
         for(int i = 0; i < possibleChoices; i++)
         {
-            int rolled = rnd.Next(upgradeArr.Length);
-            uIManager.GetUpgradeInfo(upgradeArr[rolled]);
+            int rolled = random.Next(upgradeArr.Length);
+            print("rolled: " + rolled);
+            uIManager.GetUpgradeInfo(upgradeArr[rolled],i);
         }
     }
 

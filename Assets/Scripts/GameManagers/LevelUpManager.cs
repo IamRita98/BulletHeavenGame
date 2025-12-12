@@ -15,6 +15,7 @@ public class LevelUpManager : MonoBehaviour
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
         um = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
+        bws = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
     }
 
     private void OnEnable()

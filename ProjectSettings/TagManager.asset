@@ -15,6 +15,7 @@ TagManager:
   - Ability1
   - Ability2
   - Ability3
+  - Target
   layers:
   - Default
   - TransparentFX

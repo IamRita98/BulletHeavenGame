@@ -12,6 +12,9 @@ TagManager:
   - Pickup
   - XpPickup
   - XpPool
+  - Ability1
+  - Ability2
+  - Ability3
   layers:
   - Default
   - TransparentFX

@@ -64,8 +64,8 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"Weapon Damage \n 15% Damage \n Flavor text"},
                         {1,"+10% Damage, +10% Area" },
-                        {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
-                        {3,"+40% Damage, +1 Projectiles, -10% Firerate" }
+                        {2,"+40% Damage, +1 Projectiles, -10% Firerate" }
+                        {3,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                     }
                 }
             },
@@ -75,10 +75,10 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => playerBStats.globalDamT,
                     descriptions = new Dictionary<int, string>
                     {
-                        {0,"+15% Global Damage"},
-                        {1,"+10% Global Damage, +10% Area" },
-                        {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
-                        {3,"+40% Damage, +1 Projectiles, -10% Firerate" }
+                        {0,"+10% Global Damage"},
+                        {1,"+15% Global Damage" },
+                        {2,"+40% Global Damage" },
+                        {3,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                     }
                 }
             },
@@ -182,6 +182,7 @@ public class UpgradeManager : MonoBehaviour
                         baseWeaponStats.BaseDamage.AddMultiValue(.10f);
                         baseWeaponStats.WeapArea.AddMultiValue(.10f);
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 2:
@@ -189,6 +190,8 @@ public class UpgradeManager : MonoBehaviour
                         playerBStats.Projectiles.AddFlatValue(1f);
                         baseWeaponStats.AttackRate.AddMultiValue(-.10f);
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 3:
@@ -200,10 +203,19 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        baseWeaponStats.WeapArea.AddMultiValue(.10f);
+                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
+                        baseWeaponStats.weapAreaUpgT++;
                         break;
                     case 1:
+                        baseWeaponStats.WeapArea.AddMultiValue(.15f);
+                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
+                        baseWeaponStats.weapAreaUpgT++;
                         break;
                     case 2:
+                        baseWeaponStats.WeapArea.AddMultiValue(.20f);
+                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
+                        baseWeaponStats.weapAreaUpgT++;
                         break;
                     case 3:
                         break;
@@ -213,10 +225,19 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        playerBStats.Projectiles.AddFlatValue(1f);
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        playerBStats.projUpgT++;
                         break;
                     case 1:
+                        playerBStats.Projectiles.AddFlatValue(1f);
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        playerBStats.projUpgT++;
                         break;
                     case 2:
+                        playerBStats.Projectiles.AddFlatValue(1f);
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        playerBStats.projUpgT++;
                         break;
                     case 3:
                         break;
@@ -226,10 +247,23 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        baseWeaponStats.AttackRate.AddMultiValue(.15f);
+                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
+                        baseWeaponStats.attackRUpgT++;
                         break;
                     case 1:
+                        baseWeaponStats.AttackRate.AddMultiValue(.10f);
+                        playerBStats.Projectiles.AddFlatValue(1);
+                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        baseWeaponStats.attackRUpgT++;
                         break;
                     case 2:
+                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(-.10f);
+                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
+                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        baseWeaponStats.attackRUpgT++;
                         break;
                     case 3:
                         break;
@@ -252,10 +286,19 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        playerBStats.Health.AddFlatValue(10);
+                        playerBStats.MaxHealth.AddFlatValue(10);
+                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
                         break;
                     case 1:
+                        playerBStats.Health.AddFlatValue(20);
+                        playerBStats.MaxHealth.AddFlatValue(20);
+                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
                         break;
                     case 2:
+                        playerBStats.Health.AddFlatValue(30);
+                        playerBStats.MaxHealth.AddFlatValue(30);
+                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
                         break;
                     case 3:
                         break;

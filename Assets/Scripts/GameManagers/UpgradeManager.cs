@@ -64,7 +64,7 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"Weapon Damage \n 15% Damage \n Flavor text"},
                         {1,"+10% Damage, +10% Area" },
-                        {2,"+40% Damage, +1 Projectiles, -10% Firerate" }
+                        {2,"+40% Damage, +1 Projectiles, -10% Firerate" },
                         {3,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                     }
                 }
@@ -269,7 +269,7 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
-            case UpgradeManager.UpgradeTypes.globalDam:
+            case UpgradeManager.UpgradeTypes.globalDam: //Increment both Weap dam & all ability dam, then increment the tier stat in base stats
                 switch (tier)
                 {
                     case 0:

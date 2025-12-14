@@ -25,10 +25,6 @@ public class DanielBeamBehaviur : MonoBehaviour
         beamRenderer.enabled = false;
     }
 
-    private void OnEnable()
-    {
-    }
-
     private void OnDisable()
     {
         foundNearestEnemy = false;

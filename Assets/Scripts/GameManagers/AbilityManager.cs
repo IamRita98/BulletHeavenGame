@@ -35,8 +35,6 @@ public class AbilityManager : MonoBehaviour
         ability2 = GameObject.FindGameObjectWithTag("Ability2");
         ability3 = GameObject.FindGameObjectWithTag("Ability3");
         target = GameObject.FindGameObjectWithTag("Target");
-        
-
     }
 
     private void Start()

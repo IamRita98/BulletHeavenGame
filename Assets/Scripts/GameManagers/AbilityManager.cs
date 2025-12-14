@@ -93,10 +93,10 @@ public class AbilityManager : MonoBehaviour
 
     public void Ability3()
     {
-        //if (ability3OnCoolDown) return;
+        if (ability3OnCoolDown) return;
 
-        //ability3.SetActive(true);
-        //ability3OnCoolDown = true;
+        ability3.SetActive(true);
+        ability3OnCoolDown = true;
     }
 
 }

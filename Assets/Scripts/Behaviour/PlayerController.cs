@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     BaseStats bStats;
     float moveSpeed;
     AbilityManager abilityManager;
+    GameStateManager gameStateManager;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         moveSpeed = bStats.MovementSpeed.StatsValue();
         abilityManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AbilityManager>();
+        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
     }
 
     private void FixedUpdate()
@@ -27,9 +29,9 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) abilityManager.Ability1();
-        if (Input.GetKeyDown(KeyCode.Mouse1)) abilityManager.Ability2();
-        if (Input.GetKeyDown(KeyCode.Space)) abilityManager.Ability3();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !gameStateManager.gameIsPaused) abilityManager.Ability1();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !gameStateManager.gameIsPaused) abilityManager.Ability2();
+        if (Input.GetKeyDown(KeyCode.Space) && !gameStateManager.gameIsPaused) abilityManager.Ability3();
     }
 
     void Movement()

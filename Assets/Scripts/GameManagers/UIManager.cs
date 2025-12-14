@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     UpgradeManager upgradeManager;
     LevelUpManager levelUpManager;
     AbilityManager abilityManager;
+    GameStateManager gameStateManager;
     public List<Button> upgradeButtonList;
     public TMP_Text playerHp;
     public TMP_Text playerXp;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
         abilityManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AbilityManager>();
+        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
     }
 
     private void Update()
@@ -64,8 +66,9 @@ public class UIManager : MonoBehaviour
 
     public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo,int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)
     {
-        Time.timeScale = 0f;
+        gameStateManager.PauseGame();
         Button tempButton = upgradeButtonList[upgradeButton];
+        tempButton.onClick.RemoveAllListeners();
         tempButton.gameObject.SetActive(true);
         TMP_Text buttonText = tempButton.GetComponentInChildren<TMP_Text>();
         int tier = upgradeInfo.GetTier();
@@ -81,6 +84,6 @@ public class UIManager : MonoBehaviour
         {
             btn.gameObject.SetActive(false);
         }
-        Time.timeScale = 1f;
+        gameStateManager.UnPauseGame();
     }
 }

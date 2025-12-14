@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 748041947}
   - component: {fileID: 748041948}
   - component: {fileID: 748041949}
+  - component: {fileID: 748041950}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: GameManager
@@ -486,9 +487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e61163d73b686488b1d99258996414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability1: {fileID: 991302462}
-  ability2: {fileID: 755876976}
-  ability3: {fileID: 0}
   ability1CoolDown: 0
   ability2CoolDown: 0
   ability3CoolDown: 0
@@ -498,11 +496,19 @@ MonoBehaviour:
   ability1Timer: 0
   ability2Timer: 0
   ability3Timer: 0
---- !u!1 &755876976 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2351470803210316672, guid: 9fe2f1d69a19c5f4ba1a3721c54ba2dd, type: 3}
-  m_PrefabInstance: {fileID: 7440820252421998263}
+--- !u!114 &748041950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748041943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9399062997f710f42814f2cb0c21734c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameIsPaused: 0
 --- !u!1001 &808564103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -699,11 +705,6 @@ RectTransform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3213125667346825657, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
   m_PrefabInstance: {fileID: 808564103}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &991302462 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1318835206316900291, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
-  m_PrefabInstance: {fileID: 8212647010149566428}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1096093965 stripped
 MonoBehaviour:
@@ -1194,7 +1195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2351470803210316672, guid: 9fe2f1d69a19c5f4ba1a3721c54ba2dd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6513878946834028390, guid: 9fe2f1d69a19c5f4ba1a3721c54ba2dd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1260,7 +1261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318835206316900291, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3642977849042331695, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
       propertyPath: m_Enabled

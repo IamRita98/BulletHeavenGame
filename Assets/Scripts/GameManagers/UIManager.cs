@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
 
+    //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
+    //it's used (and probably fixing the bug of dmg not being applied to beam). Alternatively we could go w/ the idea of
+    //sending an event on levelup to recheck stats. Signal here would let us send other specific info to the abilities
+    //in case we even wanted to do anything w/ that too.
+    ]
     void Start()
     {
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();

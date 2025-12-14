@@ -11,8 +11,13 @@ public class DanielBeamBehaviur : MonoBehaviour
     float timer;
     BoxCollider2D beamBox;
     SpriteRenderer beamRenderer;
+    CombatHandler combatHandler;
 
     public static event System.Action<float, GameObject> OnAttackHit;
+    private void Awake()
+    {
+        combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
+    }
     private void Start()
     {
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
@@ -57,7 +62,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.gameObject.CompareTag("Enemy")) return;
-        OnAttackHit?.Invoke(abilityStats.BaseDamage.StatsValue(), collision.gameObject);
+        if (!collision.CompareTag("Enemy")) return;
+        combatHandler.HandleDamage(abilityStats.BaseDamage.StatsValue(), collision.gameObject);
     }
 }

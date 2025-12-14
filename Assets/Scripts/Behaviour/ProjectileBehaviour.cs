@@ -21,12 +21,16 @@ public class ProjectileBehaviour : MonoBehaviour
     /// </summary>
     /// <param name="dam"></param>
     /// <param name="gObject"></param>
-    public static event System.Action<float, GameObject> OnAttackHit;
+    CombatHandler combatHandler;
 
+    private void Awake()
+    {
+        combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
+        
+    }
     private void Start()
     {
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
-        //bws = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
         baseArea = transform.localScale;
     }
 
@@ -44,7 +48,7 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        OnAttackHit?.Invoke(damage, collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject);
         ReturnToPool();
     }
 

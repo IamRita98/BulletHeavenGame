@@ -40,7 +40,7 @@ public class AbilityManager : MonoBehaviour
     private void Start()
     {
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        //ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         //ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
     }
 
@@ -58,21 +58,21 @@ public class AbilityManager : MonoBehaviour
 
         if (ability2OnCoolDown)
         {
-            ability2Timer += Time.deltaTime;
+            ability2Timer -= Time.deltaTime;
         }
-        if (ability2Timer >= ability2CoolDown)
+        if (ability2Timer <= 0)
         {
-            ability2Timer = 0f;
+            ability2Timer = ability2CoolDown;
             ability2OnCoolDown = false;
         }
 
         if (ability3OnCoolDown)
         {
-            ability3Timer += Time.deltaTime;
+            ability3Timer -= Time.deltaTime;
         }
-        if (ability3Timer >= ability3CoolDown)
+        if (ability3Timer <= 0)
         {
-            ability3Timer = 0f;
+            ability3Timer = ability3CoolDown;
             ability3OnCoolDown = false;
         }
         
@@ -86,10 +86,9 @@ public class AbilityManager : MonoBehaviour
 
     public void Ability2()
     {
-        //if (ability2OnCoolDown) return;
-
-        //ability2.SetActive(true);
-        //ability2OnCoolDown = true;
+        if (ability2OnCoolDown) return;
+        ability2.SetActive(true);
+        ability2OnCoolDown = true;
     }
 
     public void Ability3()

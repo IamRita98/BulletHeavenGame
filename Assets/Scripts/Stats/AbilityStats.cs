@@ -18,7 +18,7 @@ public class AbilityStats : BaseStats
     public Stats Pierce;
     public Stats ProjectileSpeed;
 
-    private void Start()
+    private void Awake()
     {
         MakeStats();
     }

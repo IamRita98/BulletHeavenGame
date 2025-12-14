@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9120650930306449738
+--- !u!1 &2351470803210316672
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,58 +8,58 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 260093664454194956}
-  - component: {fileID: 5634857816219580311}
-  - component: {fileID: -3051653935412281818}
+  - component: {fileID: 6513878946834028390}
+  - component: {fileID: 8012894803608629907}
+  - component: {fileID: -1571422419957343523}
   m_Layer: 0
-  m_Name: Pistol
-  m_TagString: Untagged
+  m_Name: DefaultDanielAbility2
+  m_TagString: Ability2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &260093664454194956
+--- !u!4 &6513878946834028390
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120650930306449738}
+  m_GameObject: {fileID: 2351470803210316672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1364613, y: 3.144938, z: -0.018607574}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5634857816219580311
+--- !u!114 &8012894803608629907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120650930306449738}
+  m_GameObject: {fileID: 2351470803210316672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e9317857afc5354d8a54c5442b626fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 2713d33e0e67f8344be6a3bdaef7d28c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3051653935412281818
+--- !u!114 &-1571422419957343523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120650930306449738}
+  m_GameObject: {fileID: 2351470803210316672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6da3ba015d28b5489a54fa6f6ffa5a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 58d6b6f697cf7ce46880f69d6564bd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterSelected: 0
   health: 0
-  maxHealth: 1
+  maxHealth: 0
   speed: 1
   projectiles: 1
   xp: 0
@@ -70,16 +70,9 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
-  isMelee: 0
-  baseDamage: 2
-  attackRate: 1.5
-  lifeTime: 5
-  weapArea: 1
-  projectileSpeed: 20
+  baseDamage: 0
+  cooldown: 3
+  lifeTime: 0
+  area: 0
   pierce: 0
-  bDamUpgT: 0
-  attackRUpgT: 0
-  weapAreaUpgT: 0
-  ProjSpeedUpgT: 0
-  lifeTimeUpgT: 0
-  pierceUpgT: 0
+  projectileSpeed: 0

@@ -9,7 +9,7 @@ public class ObjectPooling : MonoBehaviour
     public List<GameObject> objectPool = new List<GameObject>();
     public List<GameObject> activePool = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < objectAmount; i++)
         {

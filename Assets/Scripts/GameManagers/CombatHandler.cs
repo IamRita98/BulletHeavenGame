@@ -13,13 +13,11 @@ public class CombatHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        ProjectileBehaviour.OnAttackHit += HandleDamage;
         ContactDamage.OnCollision += CollisionDamage;
     }
 
     private void OnDisable()
     {
-        ProjectileBehaviour.OnAttackHit -= HandleDamage;
         ContactDamage.OnCollision -= CollisionDamage;
     }
 
@@ -30,7 +28,7 @@ public class CombatHandler : MonoBehaviour
         if (invincabilityTimer >= playerInvincibilityDuration) shouldBeInvinc = false;
     }
 
-    void HandleDamage(float dam, GameObject gObject)
+    public void HandleDamage(float dam, GameObject gObject)
     {
         if (gObject.CompareTag("Enemy"))
         {

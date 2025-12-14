@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     //it's used (and probably fixing the bug of dmg not being applied to beam). Alternatively we could go w/ the idea of
     //sending an event on levelup to recheck stats. Signal here would let us send other specific info to the abilities
     //in case we even wanted to do anything w/ that too.
-    ]
+    
     void Start()
     {
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();

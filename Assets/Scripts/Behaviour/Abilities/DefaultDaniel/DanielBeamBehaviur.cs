@@ -17,17 +17,19 @@ public class DanielBeamBehaviur : MonoBehaviour
     private void Awake()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
-    }
-    private void Start()
-    {
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
-        parentGO = gameObject.transform.parent.gameObject;
         abilityStats = GetComponent<AbilityStats>();
-        //gameObject.SetActive(false);
         beamBox = gameObject.GetComponent<BoxCollider2D>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
+        parentGO = gameObject.transform.parent.gameObject;
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
         beamBox.enabled = false;
         beamRenderer.enabled = false;
+        
     }
 
     private void OnDisable()

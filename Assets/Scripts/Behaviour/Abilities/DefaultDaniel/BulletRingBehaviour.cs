@@ -8,41 +8,35 @@ public class BulletRingBehaviour : MonoBehaviour
     GameObject parentGO;
     AbilityStats abilityStats;
     bool foundNearestEnemy;
-    float timer;
     CombatHandler combatHandler;
     BaseWeaponStats baseWeaponStats;
     float spread;
     int baseBulletAmount = 7;
+    public GameObject projectile;
+    float timer;
+    float lifeTime = .2f;
 
     private void Awake()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
-        
         baseWeaponStats = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
+        oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
     }
+
     private void OnEnable()
     {
-        oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
-        timer = baseWeaponStats.LifeTime.StatsValue();
         SpawnRing();
     }
-    private void Start()
-    {
-        
-    }
-    void Update()
+
+    private void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= abilityStats.Cooldown.StatsValue())
-        {
-            timer = 0;
-            gameObject.SetActive(false);
-        }
+        if (timer >= lifeTime) gameObject.SetActive(false);
     }
+
     private void SpawnRing()
     {
-        
         float projectiles = baseBulletAmount + baseWeaponStats.Projectiles.StatsValue();
         spread = 360 / projectiles;//360=circle
         for (int i = 0; i < projectiles; i++)

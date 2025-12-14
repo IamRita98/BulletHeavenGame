@@ -40,8 +40,25 @@ public class UIManager : MonoBehaviour
     {
         playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
-        ability1CD.text = (abilityManager.ability1Timer.ToString("0.##") + "s");
-        ability2CD.text = (abilityManager.ability2Timer + "s");
+
+        if (abilityManager.ability1OnCoolDown)
+        {
+            ability1CD.text = (abilityManager.ability1Timer.ToString("0.##") + "s");
+        }
+        else
+        {
+            ability1CD.text = ("Ability 1 Rdy");
+        }
+
+        if (abilityManager.ability2OnCoolDown)
+        {
+            ability2CD.text = (abilityManager.ability2Timer.ToString("0.##") + "s");
+        }
+        else
+        {
+            ability2CD.text = ("Ability 2 Rdy");
+        }
+
         //ability3CD.text = (abilityManager.ability3Timer + "s");
     }
 

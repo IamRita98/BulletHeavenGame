@@ -18,9 +18,9 @@ public class AbilityManager : MonoBehaviour
     public float ability1CoolDown;
     public float ability2CoolDown;
     public float ability3CoolDown;
-    bool ability1OnCoolDown = false;
-    bool ability2OnCoolDown;
-    bool ability3OnCoolDown;
+    public bool ability1OnCoolDown = false;
+    public bool ability2OnCoolDown = false;
+    public bool ability3OnCoolDown = false;
     public float ability1Timer;
     public float ability2Timer;
     public float ability3Timer;
@@ -42,6 +42,9 @@ public class AbilityManager : MonoBehaviour
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         //ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        ability1Timer = ability1CoolDown;
+        ability2Timer = ability2CoolDown;
+        ability3Timer = ability3CoolDown;
     }
 
     private void Update()
@@ -75,7 +78,6 @@ public class AbilityManager : MonoBehaviour
             ability3Timer = ability3CoolDown;
             ability3OnCoolDown = false;
         }
-        
     }
     public void Ability1()
     {
@@ -94,14 +96,8 @@ public class AbilityManager : MonoBehaviour
     public void Ability3()
     {
         if (ability3OnCoolDown) return;
-
         ability3.SetActive(true);
         ability3OnCoolDown = true;
     }
-
-}
-
-public class DefaultDanielAbilities
-{
 
 }

@@ -9,18 +9,12 @@ public class ProjectileBehaviour : MonoBehaviour
     Transform gunParent;
     ObjectPooling oPool;
     float speed;
-    float lifeTime;
+    public float lifeTime;
     float damage;
     Vector3 baseArea;
     float area;
-    float timer = 0;
+    public float timer = 0;
     //BaseWeaponStats bws;
-
-    /// <summary>
-    /// Pass damage dealt and the object being dealt damage to
-    /// </summary>
-    /// <param name="dam"></param>
-    /// <param name="gObject"></param>
     CombatHandler combatHandler;
 
     private void Awake()

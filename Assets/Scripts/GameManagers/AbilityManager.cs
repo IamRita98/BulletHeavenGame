@@ -18,12 +18,12 @@ public class AbilityManager : MonoBehaviour
     public float ability1CoolDown;
     public float ability2CoolDown;
     public float ability3CoolDown;
-    bool ability1OnCoolDown=false;
+    bool ability1OnCoolDown = false;
     bool ability2OnCoolDown;
     bool ability3OnCoolDown;
-    float ability1Timer;
-    float ability2Timer;
-    float ability3Timer;
+    public float ability1Timer;
+    public float ability2Timer;
+    public float ability3Timer;
 
     private void Awake()
     {
@@ -35,22 +35,29 @@ public class AbilityManager : MonoBehaviour
         ability2 = GameObject.FindGameObjectWithTag("Ability2");
         ability3 = GameObject.FindGameObjectWithTag("Ability3");
         target = GameObject.FindGameObjectWithTag("Target");
+        
+
+    }
+
+    private void Start()
+    {
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         //ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         //ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
     }
+
     private void Update()
     {
-        
         if (ability1OnCoolDown)
         {
-            ability1Timer += Time.deltaTime;
+            ability1Timer -= Time.deltaTime;
         }
-        if (ability1Timer >= ability1CoolDown)
+        if (ability1Timer <= 0)
         {
-            ability1Timer = 0f;
+            ability1Timer = ability1CoolDown;
             ability1OnCoolDown = false;
         }
+
         if (ability2OnCoolDown)
         {
             ability2Timer += Time.deltaTime;
@@ -60,6 +67,7 @@ public class AbilityManager : MonoBehaviour
             ability2Timer = 0f;
             ability2OnCoolDown = false;
         }
+
         if (ability3OnCoolDown)
         {
             ability3Timer += Time.deltaTime;
@@ -69,6 +77,7 @@ public class AbilityManager : MonoBehaviour
             ability3Timer = 0f;
             ability3OnCoolDown = false;
         }
+        
     }
     public void Ability1()
     {

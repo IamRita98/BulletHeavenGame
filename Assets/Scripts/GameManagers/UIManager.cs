@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability1CD;
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
-    int buttonCount = 0;
 
     void Start()
     {
@@ -36,9 +35,9 @@ public class UIManager : MonoBehaviour
     {
         playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
-        ability1CD.text = (abilityManager.ability1CoolDown + "s");
-        //ability2CD.text = (abilityManager.ability2CoolDown + "s");
-        //ability3CD.text = (abilityManager.ability3CoolDown + "s");
+        ability1CD.text = (abilityManager.ability1Timer.ToString("0.##") + "s");
+        //ability2CD.text = (abilityManager.ability2Timer + "s");
+        //ability3CD.text = (abilityManager.ability3Timer + "s");
     }
 
     public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo,int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)

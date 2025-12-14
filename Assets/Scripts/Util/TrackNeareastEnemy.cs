@@ -7,7 +7,6 @@ public class TrackNeareastEnemy : MonoBehaviour
 {
     ObjectPooling oPool;
     private GameObject nearestEnemyV2;
-    float test1 = 0f;
     void Start()
     {
         oPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();

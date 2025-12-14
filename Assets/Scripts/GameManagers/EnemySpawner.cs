@@ -6,10 +6,7 @@ using UnityEngine.UIElements;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public GameObject enemyPrefab;
-    Camera camera;
     float spawnBuffer = 0.2f;
     Vector2 spawnPos;
     ObjectPooling oPool;
@@ -17,10 +14,10 @@ public class EnemySpawner : MonoBehaviour
     float timer = 0;
     int scalingDiff = 0;
     float timeToNextWave = 5;
+
     void Start()
     {
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
-        camera = Camera.main.GetComponent<Camera>(); //(0,0)bot left and (1,1) top right
         
         SpawnFunc();
     }
@@ -33,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
             SpawnFunc();
             timer = 0;
         }
-
     }
 
     void SpawnFunc()
@@ -54,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
                 case 2: y = 0f - spawnBuffer; break;
                 case 3: x = 0f - spawnBuffer; break;
             }
-            spawnPos = camera.ViewportToWorldPoint(new Vector2(x, y));
+            spawnPos = Camera.main.ViewportToWorldPoint(new Vector2(x, y)); //(0,0)bot left and (1,1) top right
 
             GameObject enemySpawned = oPool.objectPool[0];
             EnemyBaseStats eBaseStats = enemySpawned.GetComponent<EnemyBaseStats>();

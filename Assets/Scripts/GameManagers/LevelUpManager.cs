@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelUpManager : MonoBehaviour
 {
-    [SerializeField]float XPThreshold = 10;//base value
+    public float XPThreshold = 10;//base value
     BaseStats playerStats;
     ObjectPooling xpPool;
     BaseWeaponStats bws;
@@ -43,7 +43,6 @@ public class LevelUpManager : MonoBehaviour
 
     void CheckIfLeveled()
     {
-        print(playerStats.XP.StatsValue() + "/" + XPThreshold + "XP");
         if (playerStats.XP.StatsValue() >= XPThreshold)
         {
             print("LevelUp");

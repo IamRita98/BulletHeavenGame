@@ -42,7 +42,6 @@ public class UpgradeManager : MonoBehaviour
             int rolled = UnityEngine.Random.Range(0, upgradeArr.Length);
             while (rolledUpgrades.Contains(rolled)) rolled = UnityEngine.Random.Range(0, upgradeArr.Length);
             rolledUpgrades.Add(rolled);
-            print("rolled: " + rolled);
             GetUpgradeInfo(upgradeArr[rolled], i);
         }
     }

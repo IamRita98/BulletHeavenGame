@@ -16,6 +16,7 @@ public class CombatHandler : MonoBehaviour
         ProjectileBehaviour.OnAttackHit += HandleDamage;
         ContactDamage.OnCollision += CollisionDamage;
     }
+
     private void OnDisable()
     {
         ProjectileBehaviour.OnAttackHit -= HandleDamage;
@@ -35,7 +36,7 @@ public class CombatHandler : MonoBehaviour
         {
             EnemyBaseStats ebs = gObject.GetComponent<EnemyBaseStats>();
             ebs.Health.AddFlatValue(-dam);
-            print(ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue());
+            print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
             if (ebs.Health.StatsValue() <= 0)
             {
                 OnEnemyDeath?.Invoke(gObject);
@@ -54,7 +55,6 @@ public class CombatHandler : MonoBehaviour
         playerInvincibilityDuration = pbs.invincibilityDuration;
         if (shouldBeInvinc) return;
         pbs.Health.AddFlatValue(-damage);
-        print(pbs.Health.StatsValue() + "/" + pbs.MaxHealth.StatsValue() + "Player HP");
         if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
         shouldBeInvinc = true;
     }

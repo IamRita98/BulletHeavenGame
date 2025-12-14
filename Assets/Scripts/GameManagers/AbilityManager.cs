@@ -15,9 +15,9 @@ public class AbilityManager : MonoBehaviour
     TrackNeareastEnemy trackNearestEnemy;
     GameObject nearestEnemy;
     GameObject target;
-    float ability1CoolDown;
-    float ability2CoolDown;
-    float ability3CoolDown;
+    public float ability1CoolDown;
+    public float ability2CoolDown;
+    public float ability3CoolDown;
     bool ability1OnCoolDown=false;
     bool ability2OnCoolDown;
     bool ability3OnCoolDown;
@@ -73,7 +73,6 @@ public class AbilityManager : MonoBehaviour
     public void Ability1()
     {
         if (ability1OnCoolDown) return;
-        print("ability CD: "+ability1CoolDown);
         ability1.SetActive(true);
         ability1OnCoolDown = true;
     }

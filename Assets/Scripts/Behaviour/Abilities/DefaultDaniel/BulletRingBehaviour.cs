@@ -42,7 +42,7 @@ public class BulletRingBehaviour : MonoBehaviour
         for (int i = 0; i < projectiles; i++)
         {
             GameObject projectile = oPool.objectPool[0];
-            projectile.GetComponent<ProjectileBehaviour>().SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue(), baseWeaponStats.ProjectileSpeed.StatsValue());
+            projectile.GetComponent<ProjectileBehaviour>().SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue(), baseWeaponStats.ProjectileSpeed.StatsValue(), baseWeaponStats.Pierce.StatsValue());
             projectile.SetActive(true);
             oPool.activePool.Add(projectile);
             oPool.objectPool.Remove(projectile);

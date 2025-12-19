@@ -247,19 +247,19 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        baseWeaponStats.AttackRate.AddMultiValue(.15f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.85f);
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         baseWeaponStats.attackRUpgT++;
                         break;
                     case 1:
-                        baseWeaponStats.AttackRate.AddMultiValue(.10f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
                         playerBStats.Projectiles.AddFlatValue(1);
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         print("Projectiles " + playerBStats.Projectiles.StatsValue());
                         baseWeaponStats.attackRUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.40f);
                         baseWeaponStats.BaseDamage.AddMultiValue(-.10f);
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());

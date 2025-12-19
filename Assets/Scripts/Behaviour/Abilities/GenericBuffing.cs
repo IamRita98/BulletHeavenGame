@@ -6,7 +6,6 @@ public class GenericBuffing : MonoBehaviour
 {
 
     float buffTime;
-    bool clearBuffs=false;
     float timer;
     GameObject tempGO;
     float tempAmount;

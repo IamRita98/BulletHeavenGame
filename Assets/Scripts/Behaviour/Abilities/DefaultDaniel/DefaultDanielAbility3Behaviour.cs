@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Ability3Behaviour : MonoBehaviour
+public class DefaultDanielAbility3Behaviour : MonoBehaviour
 {
-    float buffAmount;
-    float buffTime;
     GenericBuffing gb;
     GameObject player;
     GameObject weapon;
-    bool isInCircle;
     float lifeTime;
+    BaseWeaponStats bws;
+    float baseFireRate;
+    float newFireRate;
+    float buffValueChanged;
+    float attackSpeedBuffToApply = .5f;
+    float pierceBuffToApply = 10;
+    float projectileBuffToApply = 10;
+
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         weapon = GameObject.FindGameObjectWithTag("Weapon");
+        bws = weapon.GetComponent<BaseWeaponStats>();
         gb = GetComponent<GenericBuffing>();
         
     }
@@ -26,6 +32,7 @@ public class Ability3Behaviour : MonoBehaviour
     }
     private void OnEnable()
     {
+        transform.position = player.transform.position;
         transform.parent = null;
         lifeTime = 0;
     }
@@ -36,25 +43,23 @@ public class Ability3Behaviour : MonoBehaviour
         {
             gameObject.transform.parent = player.transform;
             gameObject.SetActive(false);
-            
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         print("Old Rate: " + weapon.GetComponent<BaseWeaponStats>().AttackRate.StatsValue());
         if (!collision.CompareTag("Player")) return;
-        print("In trigger");
-        gb.BuffStat(weapon, 10f, "weapon", "projectile");
-        gb.BuffStat(weapon, 10f, "weapon", "pierce");
-        gb.BuffStat(weapon, -.5f, "weapon", "rate");
+        gb.BuffStat(weapon, projectileBuffToApply, "weapon", "projectile");
+        gb.BuffStat(weapon, pierceBuffToApply, "weapon", "pierce");
+        gb.BuffStat(weapon, attackSpeedBuffToApply, "weapon", "rate");
         print("New Rate: " + weapon.GetComponent<BaseWeaponStats>().AttackRate.StatsValue());
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
-        print("Out trigger");
-        gb.BuffStat(weapon, -10f, "weapon", "projectile");
-        gb.BuffStat(weapon, -10f, "weapon", "pierce");
-        gb.BuffStat(weapon, .2f, "weapon", "rate");
+        gb.BuffStat(weapon, -projectileBuffToApply, "weapon", "projectile");
+        gb.BuffStat(weapon, -pierceBuffToApply, "weapon", "pierce");
+        bws.AttackRate.AddMultiValue(1/attackSpeedBuffToApply);
+        print("FireRate returned to: " +bws.AttackRate.StatsValue());
     }
 }

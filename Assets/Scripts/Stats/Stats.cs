@@ -22,6 +22,10 @@ public class Stats
 
     public void AddMultiValue(float valueMult)
     {
+        multiplier *= valueMult;
+    }
+    public void AddFlatMultiValue(float valueMult)
+    {
         multiplier += valueMult;
     }
     public Stats(float passedbaseValue)

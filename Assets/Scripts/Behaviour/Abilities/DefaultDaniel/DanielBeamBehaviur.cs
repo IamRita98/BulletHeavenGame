@@ -13,7 +13,6 @@ public class DanielBeamBehaviur : MonoBehaviour
     SpriteRenderer beamRenderer;
     CombatHandler combatHandler;
 
-    public static event System.Action<float, GameObject> OnAttackHit;
     private void Awake()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();

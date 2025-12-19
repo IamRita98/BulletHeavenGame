@@ -14,8 +14,9 @@ public class ProjectileBehaviour : MonoBehaviour
     Vector3 baseArea;
     float area;
     public float timer = 0;
-    //BaseWeaponStats bws;
     CombatHandler combatHandler;
+    int bulletPierce;
+    public List<GameObject> listOfEnemiesHitByThisBullet = new List<GameObject>();
 
     private void Awake()
     {
@@ -42,20 +43,32 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
+        foreach(GameObject enemy in listOfEnemiesHitByThisBullet)
+        {
+            if (collision.gameObject == enemy)
+            {
+                print("Passed");
+                return;
+            }
+        }
+        listOfEnemiesHitByThisBullet.Add(collision.gameObject);
         combatHandler.HandleDamage(damage, collision.gameObject);
-        ReturnToPool();
+        bulletPierce--;
+        if(bulletPierce<0) ReturnToPool();
     }
 
     private void ReturnToPool()
     {
+        listOfEnemiesHitByThisBullet = null;
         oPool.objectPool.Add(gameObject);
         oPool.activePool.Remove(gameObject);
         transform.localScale = baseArea;
         gameObject.SetActive(false);
     }
 
-    public void SetStats(float dam, float size, float lTime, float moveSpeed)
+    public void SetStats(float dam, float size, float lTime, float moveSpeed, float pierce)
     {
+        bulletPierce = ((int)pierce);
         damage = dam;
         lifeTime = lTime;
         area = size;

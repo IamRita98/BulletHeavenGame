@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 3655961653620078618, guid: 28b1e5851f4b7524caf9e1392ed48f69, type: 3}
-  objectAmount: 100
+  objectAmount: 1000
   objectPool: []
   activePool: []
 --- !u!224 &386777989 stripped
@@ -832,6 +832,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -3051653935412281818, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+      propertyPath: projectileSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -3051653935412281818, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
       propertyPath: Projectiles.baseValue
       value: 1
       objectReference: {fileID: 0}
@@ -955,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 7659888470333955816, guid: 2b4d95d5eb900ab40979f8561c7fd1a2, type: 3}
-  objectAmount: 100
+  objectAmount: 1000
   objectPool: []
   activePool: []
 --- !u!4 &1658702280
@@ -1025,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 7448841558521530272, guid: 963c776f98396934e817bcca671ecb3c, type: 3}
-  objectAmount: 100
+  objectAmount: 1000
   objectPool: []
   activePool: []
 --- !u!4 &2061949169

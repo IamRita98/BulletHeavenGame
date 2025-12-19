@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -338868586248066087}
   - component: {fileID: 262969877460355598}
   - component: {fileID: -8002289926570852697}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -62,15 +62,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affb6424666614142851c8edeb66e0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSelected: 0
   health: 10
-  projectiles: 0
+  maxHealth: 0
   speed: 3.5
-  MovementSpeed:
-    baseValue: 0
-  Health:
-    baseValue: 0
-  Projectiles:
-    baseValue: 0
+  projectiles: 0
+  xp: 0
+  pickUpRadius: 0
+  invincibilityDuration: 0
+  globalDamT: 0
+  healthUpgT: 0
+  movementSpUpgT: 0
+  projUpgT: 0
+  XpPickupUpgT: 0
 --- !u!212 &6289887177545696766
 SpriteRenderer:
   m_ObjectHideFlags: 0

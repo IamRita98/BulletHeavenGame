@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 183740933047764612}
   - component: {fileID: 7507917053194037352}
   - component: {fileID: 1939150554407955480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -68,6 +68,7 @@ MonoBehaviour:
   projectiles: 0
   xp: 0
   pickUpRadius: 0
+  invincibilityDuration: 0
   globalDamT: 0
   healthUpgT: 0
   movementSpUpgT: 0

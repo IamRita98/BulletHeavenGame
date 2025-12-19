@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2992829316885050316}
   - component: {fileID: 5922842737814347063}
   - component: {fileID: -5738381140165036707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: XPDrop
   m_TagString: XpPickup
   m_Icon: {fileID: 0}

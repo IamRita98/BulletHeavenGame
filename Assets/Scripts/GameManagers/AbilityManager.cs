@@ -41,7 +41,7 @@ public class AbilityManager : MonoBehaviour
     {
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        //ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability1Timer = ability1CoolDown;
         ability2Timer = ability2CoolDown;
         ability3Timer = ability3CoolDown;
@@ -94,7 +94,7 @@ public class AbilityManager : MonoBehaviour
     }
 
     public void Ability3()
-    {
+     {
         if (ability3OnCoolDown) return;
         ability3.SetActive(true);
         ability3OnCoolDown = true;

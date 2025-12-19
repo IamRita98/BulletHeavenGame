@@ -61,7 +61,15 @@ public class UIManager : MonoBehaviour
             ability2CD.text = ("Ability 2 Rdy");
         }
 
-        //ability3CD.text = (abilityManager.ability3Timer + "s");
+        if (abilityManager.ability3OnCoolDown)
+        {
+            ability3CD.text = (abilityManager.ability3Timer.ToString("0.##") + "s");
+        }
+        else
+        {
+            ability3CD.text = ("Ability 3 Rdy");
+        }
+        
     }
 
     public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo,int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)

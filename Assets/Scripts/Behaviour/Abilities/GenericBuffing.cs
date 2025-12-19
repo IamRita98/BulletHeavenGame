@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class GenericBuffing : MonoBehaviour
 {
+
+    float buffTime;
+    bool clearBuffs=false;
+    float timer;
+    GameObject tempGO;
+    float tempAmount;
+    string tempBuffType;
+    string tempBuff;
+    float tempBuffTImeLimit;//keep in case of debuffing time
     // Start is called before the first frame update
     /// <summary>
     /// generic script to buff a specific stat for specific type
@@ -14,6 +23,10 @@ public class GenericBuffing : MonoBehaviour
     /// <param name="buff">the specific stat to buff</param>
     public void BuffStat(GameObject GO,float amount, string buffType,string buff)
     {
+        tempGO = GO;
+        tempAmount = amount;
+        tempBuffType = buffType;
+        tempBuff = buff;
         if (buffType == "global")
         {
 

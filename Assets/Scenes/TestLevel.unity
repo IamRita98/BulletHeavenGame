@@ -561,9 +561,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4608922149156784016, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5695794501510375941, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
       propertyPath: m_Name
       value: DefaultDaniel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695794501510375941, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6289887177545696766, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
       propertyPath: m_Color.b
@@ -593,6 +601,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3213125667346825657, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7440820252421998264}
+    - targetCorrespondingSourceObject: {fileID: 3213125667346825657, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1766220316}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5695794501510375941, guid: 703df7f70c5bcdf4dbabda392a468d59, type: 3}
       insertIndex: 2
@@ -979,6 +990,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cb9282e5fbe58498c7354d3ad50bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1766220316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
+  m_PrefabInstance: {fileID: 5920398354440588523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2061949167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1049,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 978223754}
     m_Modifications:
     - target: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1053,15 +1069,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1078,6 +1094,10 @@ PrefabInstance:
     - target: {fileID: 9139898658284481220, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
       propertyPath: m_Name
       value: DefaultDanielAbility3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139898658284481220, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1425,4 +1445,3 @@ SceneRoots:
   - {fileID: 2061949169}
   - {fileID: 894349078}
   - {fileID: 1325832064}
-  - {fileID: 5920398354440588523}

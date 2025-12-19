@@ -20,8 +20,9 @@ public class ProjectileWeapon : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= bws.AttackRate.StatsValue())
         {
-            AimWeapon();
             timer = 0f;
+            AimWeapon();
+            
         }
     }
 
@@ -35,6 +36,7 @@ public class ProjectileWeapon : MonoBehaviour
     private void FireProjectiles(Vector2 targetPos)
     {
         float projectiles = bws.Projectiles.StatsValue();
+        print("projectiles: " + bws.Projectiles.StatsValue());
         for (int i = 0; i < projectiles; i++)
         {
             GameObject projGO = oPool.objectPool[0];

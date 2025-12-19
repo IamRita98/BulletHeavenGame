@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 1403512756455689146}
   - component: {fileID: 3736950150450415465}
   - component: {fileID: -7568152608929930386}
-  m_Layer: 0
+  - component: {fileID: -4874185297358021301}
+  - component: {fileID: -7458340182199466163}
+  - component: {fileID: 7033759305045061530}
+  m_Layer: 6
   m_Name: DefaultDanielAbility3
   m_TagString: Ability3
   m_Icon: {fileID: 0}
@@ -97,3 +100,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae7f49fe685cf14aa874648536296fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &-4874185297358021301
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139898658284481220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &-7458340182199466163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139898658284481220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe07243125fb71479fa33ef558065ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7033759305045061530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139898658284481220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d6b6f697cf7ce46880f69d6564bd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSelected: 0
+  health: 0
+  maxHealth: 0
+  speed: 1
+  projectiles: 1
+  xp: 0
+  pickUpRadius: 0
+  invincibilityDuration: 0
+  globalDamT: 0
+  healthUpgT: 0
+  movementSpUpgT: 0
+  projUpgT: 0
+  XpPickupUpgT: 0
+  baseDamage: 0
+  cooldown: 20
+  lifeTime: 10
+  area: 0
+  pierce: 0
+  projectileSpeed: 0

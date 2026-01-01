@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9317857afc5354d8a54c5442b626fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalSpread: 45
+  totalSpread: 30
   isSpread: 1
 --- !u!114 &-3051653935412281818
 MonoBehaviour:
@@ -63,7 +63,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 1
   speed: 1
-  projectiles: 3
+  projectiles: 6
   xp: 0
   pickUpRadius: 0
   invincibilityDuration: 0

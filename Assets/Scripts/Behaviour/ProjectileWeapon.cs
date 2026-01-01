@@ -43,14 +43,14 @@ public class ProjectileWeapon : MonoBehaviour
         {
             for (int i = 0; i < projectiles; i++)//for spread
             {
-                Vector3 spreadPosition=new Vector3(0, 0, spread * i);
+                Vector3 spreadPosition=new Vector3(0, 0, 0);
                 if (i % 2 == 0)
                 {
-                    spreadPosition =new Vector3(0, 0, spread * i);
+                    spreadPosition =new Vector3(0, 0, spread * (i/2));
                 }
                 else
                 {
-                    spreadPosition = new Vector3(0, 0, -spread * i);
+                    spreadPosition = new Vector3(0, 0, spread * i);
                 }
 
                     GameObject projGO = oPool.objectPool[0];

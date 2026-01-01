@@ -62,13 +62,13 @@ public class LevelUpManager : MonoBehaviour
                 playerStats.Health.AddFlatValue(3);
                 //ability damage stat increase here
                 //ability cdr stat increase here
-                bws.BaseDamage.AddMultiValue(.01f);
+                bws.BaseDamage.AddFlatMultiValue(.01f);
                 break;
             case BaseStats.Character.SarahSword:
                 playerStats.MaxHealth.AddFlatValue(4);
                 playerStats.Health.AddFlatValue(4);
                 //ability damage stat increase here
-                bws.BaseDamage.AddMultiValue(.02f);
+                bws.BaseDamage.AddFlatMultiValue(.02f);
                 break;
         }
         um.RollUpgrades();

@@ -174,21 +174,21 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        baseWeaponStats.BaseDamage.AddMultiValue(.15f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
                         print("Weap dmg "  +baseWeaponStats.BaseDamage.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 1:
-                        baseWeaponStats.BaseDamage.AddMultiValue(.10f);
-                        baseWeaponStats.WeapArea.AddMultiValue(.10f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.10f);
+                        baseWeaponStats.WeapArea.AddMultiValue(1.10f);
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
                         print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.BaseDamage.AddMultiValue(.40f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.40f);
                         playerBStats.Projectiles.AddFlatValue(1f);
-                        baseWeaponStats.AttackRate.AddMultiValue(-.10f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
                         print("Projectiles " + playerBStats.Projectiles.StatsValue());
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
@@ -203,17 +203,17 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        baseWeaponStats.WeapArea.AddMultiValue(.10f);
+                        baseWeaponStats.WeapArea.AddMultiValue(1.10f);
                         print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.weapAreaUpgT++;
                         break;
                     case 1:
-                        baseWeaponStats.WeapArea.AddMultiValue(.15f);
+                        baseWeaponStats.WeapArea.AddMultiValue(1.15f);
                         print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.weapAreaUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.WeapArea.AddMultiValue(.20f);
+                        baseWeaponStats.WeapArea.AddMultiValue(1.20f);
                         print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.weapAreaUpgT++;
                         break;
@@ -259,8 +259,8 @@ public class UpgradeManager : MonoBehaviour
                         baseWeaponStats.attackRUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.AttackRate.AddMultiValue(.40f);
-                        baseWeaponStats.BaseDamage.AddMultiValue(-.10f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(.90f);
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
                         baseWeaponStats.attackRUpgT++;

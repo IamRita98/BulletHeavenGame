@@ -9,6 +9,7 @@ public class ProjectileWeapon : MonoBehaviour
     BaseWeaponStats bws;
     float timer;
     public float totalSpread = 45;
+    public bool isSpread;
 
     void Start()
     {
@@ -38,18 +39,37 @@ public class ProjectileWeapon : MonoBehaviour
     {
         float projectiles = bws.Projectiles.StatsValue();
         float spread = totalSpread / projectiles;
-        for (int i = 0; i < projectiles; i++)
+        if (isSpread)
         {
-            Vector3 spreadPosition = new Vector3(0, 0, spread * i);
-            GameObject projGO = oPool.objectPool[0];
-            projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
-            projGO.SetActive(true);
-            oPool.activePool.Add(projGO);
-            oPool.objectPool.Remove(projGO);
-            //projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
-            projGO.transform.up = targetPos;
-            projGO.transform.position = transform.position;
-            projGO.transform.eulerAngles += spreadPosition;
+            for (int i = 0; i < projectiles; i++)//for spread
+            {
+                Vector3 spreadPosition=new Vector3(0, 0, spread * i);
+                if (i % 2 == 0)
+                {
+                    spreadPosition =new Vector3(0, 0, spread * i);
+                }
+                else
+                {
+                    spreadPosition = new Vector3(0, 0, -spread * i);
+                }
+
+                    GameObject projGO = oPool.objectPool[0];
+                projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
+                print("bullet dam: " + bws.BaseDamage.StatsValue());
+                projGO.SetActive(true);
+                oPool.activePool.Add(projGO);
+                oPool.objectPool.Remove(projGO);
+                //projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
+                projGO.transform.up = targetPos;
+                projGO.transform.position = transform.position;
+                projGO.transform.eulerAngles += spreadPosition;
+            }
         }
+        else
+        {//burst mode
+
+        }
+        
+
     }   
 }

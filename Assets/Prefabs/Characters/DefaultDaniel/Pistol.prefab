@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9317857afc5354d8a54c5442b626fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalSpread: 45
+  isSpread: 1
 --- !u!114 &-3051653935412281818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +63,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 1
   speed: 1
-  projectiles: 1
+  projectiles: 3
   xp: 0
   pickUpRadius: 0
   invincibilityDuration: 0
@@ -76,7 +78,7 @@ MonoBehaviour:
   lifeTime: 5
   weapArea: 1
   projectileSpeed: 20
-  pierce: 0
+  pierce: 3
   bDamUpgT: 0
   attackRUpgT: 0
   weapAreaUpgT: 0

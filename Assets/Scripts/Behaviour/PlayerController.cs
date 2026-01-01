@@ -20,6 +20,15 @@ public class PlayerController : MonoBehaviour
         gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
     }
 
+    private void OnEnable()
+    {
+        CombatHandler.OnPlayerDeath += KillPlayer;
+    }
+    private void OnDisable()
+    {
+        CombatHandler.OnPlayerDeath -= KillPlayer;
+    }
+
     private void FixedUpdate()
     {
         rb.velocity = dir * moveSpeed;
@@ -39,5 +48,10 @@ public class PlayerController : MonoBehaviour
         dir.x = Input.GetAxisRaw("Horizontal");
         dir.y = Input.GetAxisRaw("Vertical");
         dir.Normalize();
+    }
+
+    void KillPlayer()
+    {
+        //Prob check for revives or something idk yet
     }
 }

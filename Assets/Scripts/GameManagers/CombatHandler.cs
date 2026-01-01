@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class CombatHandler : MonoBehaviour
 {
+    GameStateManager gameStateManager;
+
     public static event System.Action<GameObject> OnEnemyDeath;
     public static event System.Action OnPlayerDeath;
 
     float playerInvincibilityDuration;
     bool shouldBeInvinc = false;
     float invincabilityTimer;
+
+    private void Awake()
+    {
+        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+    }
 
     private void OnEnable()
     {
@@ -44,6 +51,7 @@ public class CombatHandler : MonoBehaviour
         else if (gObject.CompareTag("Player"))
         {
             //player stats calcs
+            //if (pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
         }
     }
 

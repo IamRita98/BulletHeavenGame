@@ -6,6 +6,15 @@ public class GameStateManager : MonoBehaviour
 {
     public bool gameIsPaused = false;
 
+    private void OnEnable()
+    {
+        CombatHandler.OnPlayerDeath += PauseGame;
+    }
+    private void OnDisable()
+    {
+        CombatHandler.OnPlayerDeath -= PauseGame;
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0f;

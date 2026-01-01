@@ -22,12 +22,22 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability1CD;
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
+    public GameObject GameOverUI;
 
     //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
     //it's used (and probably fixing the bug of dmg not being applied to beam). Alternatively we could go w/ the idea of
     //sending an event on levelup to recheck stats. Signal here would let us send other specific info to the abilities
     //in case we even wanted to do anything w/ that too.
-    
+
+    private void OnEnable()
+    {
+        CombatHandler.OnPlayerDeath += PlayerDeathUI;
+    }
+    private void OnDisable()
+    {
+        CombatHandler.OnPlayerDeath -= PlayerDeathUI;
+    }
+
     void Start()
     {
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
@@ -93,5 +103,10 @@ public class UIManager : MonoBehaviour
             btn.gameObject.SetActive(false);
         }
         gameStateManager.UnPauseGame();
+    }
+
+    void PlayerDeathUI()
+    {
+        GameOverUI.SetActive(true);
     }
 }

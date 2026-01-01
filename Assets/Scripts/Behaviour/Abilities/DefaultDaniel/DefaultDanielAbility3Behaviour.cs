@@ -47,12 +47,10 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("Old Rate: " + weapon.GetComponent<BaseWeaponStats>().AttackRate.StatsValue());
         if (!collision.CompareTag("Player")) return;
         gb.BuffStat(weapon, projectileBuffToApply, "weapon", "projectile");
         gb.BuffStat(weapon, pierceBuffToApply, "weapon", "pierce");
         gb.BuffStat(weapon, attackSpeedBuffToApply, "weapon", "rate");
-        print("New Rate: " + weapon.GetComponent<BaseWeaponStats>().AttackRate.StatsValue());
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -60,6 +58,5 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         gb.BuffStat(weapon, -projectileBuffToApply, "weapon", "projectile");
         gb.BuffStat(weapon, -pierceBuffToApply, "weapon", "pierce");
         bws.AttackRate.AddMultiValue(1/attackSpeedBuffToApply);
-        print("FireRate returned to: " +bws.AttackRate.StatsValue());
     }
 }

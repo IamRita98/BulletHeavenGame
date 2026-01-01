@@ -23,7 +23,6 @@ public class Stats
     public void AddMultiValue(float valueMult)
     {
         multiplier *= valueMult;
-        Debug.Log("value mult: " + valueMult);
     }
     public void AddFlatMultiValue(float valueMult)
     {

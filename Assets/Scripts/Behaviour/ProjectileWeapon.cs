@@ -24,7 +24,7 @@ public class ProjectileWeapon : MonoBehaviour
         {
             timer = 0f;
             AimWeapon();
-            
+
         }
     }
 
@@ -38,38 +38,45 @@ public class ProjectileWeapon : MonoBehaviour
     private void FireProjectiles(Vector2 targetPos)
     {
         float projectiles = bws.Projectiles.StatsValue();
-        float spread = totalSpread / projectiles;
+        //float spread = totalSpread / projectiles;
         if (isSpread)
         {
             for (int i = 0; i < projectiles; i++)//for spread
             {
-                Vector3 spreadPosition=new Vector3(0, 0, 0);
-                if (i % 2 == 0)
+                Vector3 spreadPosition = Vector3.zero;
+                if (i != 0)
                 {
-                    spreadPosition =new Vector3(0, 0, spread * (i/2));
-                }
-                else
-                {
-                    spreadPosition = new Vector3(0, 0, spread * i);
+                    float randomSpread = Random.Range(-totalSpread, totalSpread);
+                    spreadPosition = new Vector3(0, 0, randomSpread);
                 }
 
-                    GameObject projGO = oPool.objectPool[0];
-                projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
-                print("bullet dam: " + bws.BaseDamage.StatsValue());
-                projGO.SetActive(true);
-                oPool.activePool.Add(projGO);
-                oPool.objectPool.Remove(projGO);
-                //projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.Area.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue());
-                projGO.transform.up = targetPos;
-                projGO.transform.position = transform.position;
-                projGO.transform.eulerAngles += spreadPosition;
+                GameObject spawnedBullet = SpawnBullet();
+                GiveBulletDirection(spawnedBullet, targetPos, spreadPosition);
             }
         }
         else
         {//burst mode
 
         }
-        
 
-    }   
+
+    }
+
+    GameObject SpawnBullet()
+    {
+        GameObject projGO = oPool.objectPool[0];
+        projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
+        print("bullet dam: " + bws.BaseDamage.StatsValue());
+        projGO.SetActive(true);
+        oPool.activePool.Add(projGO);
+        oPool.objectPool.Remove(projGO);
+        return projGO;
+    }
+    
+    void GiveBulletDirection(GameObject spawnedBullet, Vector2 targetPos, Vector3 spreadPosition)
+    {
+        spawnedBullet.transform.up = targetPos;
+        spawnedBullet.transform.position = transform.position;
+        spawnedBullet.transform.eulerAngles += spreadPosition;
+    }
 }

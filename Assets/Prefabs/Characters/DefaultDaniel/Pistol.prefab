@@ -63,7 +63,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 1
   speed: 1
-  projectiles: 6
+  projectiles: 1
   xp: 0
   pickUpRadius: 0
   invincibilityDuration: 0

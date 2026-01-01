@@ -832,6 +832,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -3051653935412281818, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+      propertyPath: projectiles
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -3051653935412281818, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
       propertyPath: projectileSpeed
       value: 15
       objectReference: {fileID: 0}
@@ -878,6 +882,10 @@ PrefabInstance:
     - target: {fileID: 260093664454194956, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634857816219580311, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+      propertyPath: totalSpread
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9120650930306449738, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
       propertyPath: m_Name

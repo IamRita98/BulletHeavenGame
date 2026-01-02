@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
-using UnityEngine.SceneManagement;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -26,17 +25,8 @@ public class AbilityManager : MonoBehaviour
     public float ability2Timer;
     public float ability3Timer;
 
-    private void OnEnable()
+    private void Awake()
     {
-        SceneManagerScript.LevelLoaded += GetReferences;
-    }
-    private void OnDisable()
-    {
-        SceneManagerScript.LevelLoaded -= GetReferences;
-    }
-    void GetReferences(Scene scene)
-    {
-        if (SceneManager.GetActiveScene().name == "MainMenu") return;
         player = GameObject.FindGameObjectWithTag("Player");
         bStats = player.GetComponent<BaseStats>();
         trackNearestEnemy = player.GetComponent<TrackNeareastEnemy>();
@@ -45,18 +35,16 @@ public class AbilityManager : MonoBehaviour
         ability2 = GameObject.FindGameObjectWithTag("Ability2");
         ability3 = GameObject.FindGameObjectWithTag("Ability3");
         target = GameObject.FindGameObjectWithTag("Target");
+    }
 
+    private void Start()
+    {
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability1Timer = ability1CoolDown;
         ability2Timer = ability2CoolDown;
         ability3Timer = ability3CoolDown;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void Update()

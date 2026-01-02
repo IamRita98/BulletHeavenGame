@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEngine.GraphicsBuffer;
 
 public class CombatHandler : MonoBehaviour
 {
@@ -15,8 +13,7 @@ public class CombatHandler : MonoBehaviour
     bool shouldBeInvinc = false;
     float invincabilityTimer;
 
-
-    void GetReferences(Scene scene)
+    private void Awake()
     {
         gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
     }
@@ -24,13 +21,11 @@ public class CombatHandler : MonoBehaviour
     private void OnEnable()
     {
         ContactDamage.OnCollision += CollisionDamage;
-        SceneManagerScript.LevelLoaded += GetReferences;
     }
 
     private void OnDisable()
     {
         ContactDamage.OnCollision -= CollisionDamage;
-        SceneManagerScript.LevelLoaded -= GetReferences;
     }
 
     private void Update()

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelUpManager : MonoBehaviour
 {
@@ -11,8 +10,7 @@ public class LevelUpManager : MonoBehaviour
     BaseWeaponStats bws;
     UpgradeManager um;
 
-   
-    private void GetReferences(Scene scene)
+    private void Awake()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
@@ -24,14 +22,12 @@ public class LevelUpManager : MonoBehaviour
     {
         PickupBehavior.OnXPPickup += HandleXPPickup;
         CombatHandler.OnEnemyDeath += DropXpOnEnemyDeath;
-        SceneManagerScript.LevelLoaded += GetReferences;
     }
 
     private void OnDisable()
     {
         PickupBehavior.OnXPPickup -= HandleXPPickup;
         CombatHandler.OnEnemyDeath -= DropXpOnEnemyDeath;
-        SceneManagerScript.LevelLoaded -= GetReferences;
     }
 
     void HandleXPPickup(GameObject XpGO)

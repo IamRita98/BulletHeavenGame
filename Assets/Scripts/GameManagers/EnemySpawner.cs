@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         oPool = gameObject.GetComponentInParent<ObjectPooling>();
+        
         SpawnFunc();
     }
 

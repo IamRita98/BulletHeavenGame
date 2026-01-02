@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UIManager;
-using UnityEngine.SceneManagement;
 public class UpgradeManager : MonoBehaviour
 {
     public Button WeapDamageButton;
@@ -25,15 +24,8 @@ public class UpgradeManager : MonoBehaviour
         globalDam,
     }
 
-    private void OnEnable()
-    {
-        SceneManagerScript.LevelLoaded += GetReferences;
-    }
-    private void OnDisable()
-    {
-        SceneManagerScript.LevelLoaded -= GetReferences;
-    }
-    private void GetReferences(Scene scene)
+
+    private void Awake()
     {
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();

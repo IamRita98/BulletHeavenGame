@@ -6,7 +6,9 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,33 +25,41 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
     public GameObject GameOverUI;
+    public GameObject MainMenu;
+    public GameObject CharacterSelect;
 
     //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
     //it's used (and probably fixing the bug of dmg not being applied to beam). Alternatively we could go w/ the idea of
     //sending an event on levelup to recheck stats. Signal here would let us send other specific info to the abilities
     //in case we even wanted to do anything w/ that too.
+ 
 
     private void OnEnable()
     {
         CombatHandler.OnPlayerDeath += PlayerDeathUI;
+        SceneManagerScript.LevelLoaded += GetReferences;
     }
     private void OnDisable()
     {
         CombatHandler.OnPlayerDeath -= PlayerDeathUI;
+        SceneManagerScript.LevelLoaded -= GetReferences;
     }
 
-    void Start()
+    void GetReferences(Scene scene)
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
         abilityManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AbilityManager>();
         gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
         playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
 
@@ -108,5 +118,10 @@ public class UIManager : MonoBehaviour
     void PlayerDeathUI()
     {
         GameOverUI.SetActive(true);
+    }
+    public void HideMainMenu()
+    {
+        MainMenu.SetActive(false);
+        CharacterSelect.SetActive(true);
     }
 }

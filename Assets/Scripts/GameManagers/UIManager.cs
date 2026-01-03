@@ -22,7 +22,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability1CD;
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
-    public GameObject GameOverUI;
+    public GameObject gameOverUI;
+
 
     //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
     //it's used (and probably fixing the bug of dmg not being applied to beam). Alternatively we could go w/ the idea of
@@ -44,15 +45,24 @@ public class UIManager : MonoBehaviour
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
-        abilityManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AbilityManager>();
-        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
+        gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
     }
 
     private void Update()
     {
+        ShowPlayerHPAndXP();
+        ShowPlayerCooldowns();
+    }
+
+    void ShowPlayerHPAndXP()
+    {
         playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
+    }
 
+    void ShowPlayerCooldowns()
+    {
         if (abilityManager.ability1OnCoolDown)
         {
             ability1CD.text = (abilityManager.ability1Timer.ToString("0.##") + "s");
@@ -79,7 +89,6 @@ public class UIManager : MonoBehaviour
         {
             ability3CD.text = ("Ability 3 Rdy");
         }
-        
     }
 
     public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo,int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)
@@ -107,6 +116,6 @@ public class UIManager : MonoBehaviour
 
     void PlayerDeathUI()
     {
-        GameOverUI.SetActive(true);
+        gameOverUI.SetActive(true);
     }
 }

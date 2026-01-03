@@ -9,4 +9,9 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene("TestLevel");
     }
+
+    public void LoadTestLevel()
+    {
+        SceneManager.LoadScene("TestLevel");
+    }
 }

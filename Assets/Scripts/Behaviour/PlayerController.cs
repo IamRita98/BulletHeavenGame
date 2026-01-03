@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+        
         bStats = gameObject.GetComponent<BaseStats>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         moveSpeed = bStats.MovementSpeed.StatsValue();
-        abilityManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AbilityManager>();
-        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
+        gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
     }
 
     private void OnEnable()

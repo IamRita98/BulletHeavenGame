@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProjectileWeapon : MonoBehaviour
 {
@@ -10,21 +11,34 @@ public class ProjectileWeapon : MonoBehaviour
     float timer;
     public float totalSpread = 45;
     public bool isSpread;
+    bool inCombat = false;
 
-    void Start()
+    private void OnEnable()
     {
+        SceneManager.activeSceneChanged += GetReferences;
+        if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+    }
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= GetReferences;
+    }
+
+    void GetReferences(Scene oldScene, Scene newScene)
+    {
+        if (newScene.name == "MainMenu") return;
+        inCombat = true;
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         bws = gameObject.GetComponent<BaseWeaponStats>();
     }
 
     void Update()
     {
+        if (!inCombat) return;
         timer += Time.deltaTime;
         if (timer >= bws.AttackRate.StatsValue())
         {
             timer = 0f;
             AimWeapon();
-
         }
     }
 

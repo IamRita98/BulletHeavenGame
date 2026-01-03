@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class DanielBeamBehaviur : MonoBehaviour
 {
@@ -13,27 +16,30 @@ public class DanielBeamBehaviur : MonoBehaviour
     SpriteRenderer beamRenderer;
     CombatHandler combatHandler;
 
-    private void Awake()
+    private void OnEnable()
     {
+        SceneManager.activeSceneChanged += GetReferences;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= GetReferences;
+        foundNearestEnemy = false;
+    }
+
+    void GetReferences(Scene oldScene, Scene newScene)
+    {
+        if (newScene.name == "MainMenu") return;
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
         abilityStats = GetComponent<AbilityStats>();
         beamBox = gameObject.GetComponent<BoxCollider2D>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
         parentGO = gameObject.transform.parent.gameObject;
-    }
 
-    private void Start()
-    {
         gameObject.SetActive(false);
         beamBox.enabled = false;
         beamRenderer.enabled = false;
-        
-    }
-
-    private void OnDisable()
-    {
-        foundNearestEnemy = false;
     }
 
     private void Update()

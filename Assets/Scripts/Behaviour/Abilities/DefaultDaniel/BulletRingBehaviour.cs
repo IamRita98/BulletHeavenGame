@@ -26,6 +26,7 @@ public class BulletRingBehaviour : MonoBehaviour
         }
     }
 
+
     void GetReferences()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();

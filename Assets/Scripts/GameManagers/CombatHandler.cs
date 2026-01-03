@@ -15,7 +15,7 @@ public class CombatHandler : MonoBehaviour
 
     private void Awake()
     {
-        gameStateManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
     }
 
     private void OnEnable()

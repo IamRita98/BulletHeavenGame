@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletRingBehaviour : MonoBehaviour
 {
@@ -16,17 +17,22 @@ public class BulletRingBehaviour : MonoBehaviour
     float timer;
     float lifeTime = .2f;
 
-    private void Awake()
+    private void OnEnable()
+    {
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            GetReferences();
+            SpawnRing();
+        }
+    }
+
+
+    void GetReferences()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
-    }
-
-    private void OnEnable()
-    {
-        SpawnRing();
     }
 
     private void Update()

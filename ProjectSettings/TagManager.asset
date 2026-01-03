@@ -16,6 +16,7 @@ TagManager:
   - Ability2
   - Ability3
   - Target
+  - PersistentManager
   layers:
   - Default
   - TransparentFX

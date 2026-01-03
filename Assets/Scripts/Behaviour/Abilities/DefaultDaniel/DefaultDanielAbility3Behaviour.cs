@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class DefaultDanielAbility3Behaviour : MonoBehaviour
 {
@@ -32,10 +34,13 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
         transform.position = player.transform.position;
         transform.parent = null;
         lifeTime = 0;
     }
+
+
     private void Update()
     {
         lifeTime += Time.deltaTime;

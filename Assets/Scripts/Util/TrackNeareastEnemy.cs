@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class TrackNeareastEnemy : MonoBehaviour
 {
     ObjectPooling oPool;
     private GameObject nearestEnemyV2;
-    void Start()
+
+    private void OnEnable()
     {
+        SceneManager.activeSceneChanged += GetReferences;
+        if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+}
+
+    void GetReferences(Scene oldScene, Scene newScene)
+    {
+        if (newScene.name == "MainMenu") return;
         oPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }
 

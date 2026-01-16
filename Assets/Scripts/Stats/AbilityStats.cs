@@ -17,6 +17,7 @@ public class AbilityStats : BaseStats
     public Stats Area;
     public Stats Pierce;
     public Stats ProjectileSpeed;
+    public int upgradeTier = 0;
 
     private void Awake()
     {

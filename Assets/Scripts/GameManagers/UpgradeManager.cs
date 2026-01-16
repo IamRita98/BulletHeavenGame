@@ -10,18 +10,32 @@ public class UpgradeManager : MonoBehaviour
     public Button WeapDamageButton;
     BaseStats playerBStats;
     BaseWeaponStats baseWeaponStats;
+    AbilityStats ability1;
+    AbilityStats ability2;
+    AbilityStats ability3;
     int possibleChoices = 3;
-    string[] upgradeArr = { "weaponDam", "globalDam", "fireRate", "health", "projectile", "weapArea" };
+    List<string> upgradeArr = new List<string>{ "weaponDam", "globalDam", "fireRate", "health", "projectile", "weapArea" };
+    List<string> defaultDaniel = new List<string>{"DDability1", "DDability2", "DDability3" };
+
     UIManager uIManager;
 
     public enum UpgradeTypes
-    {
+    {   //global upgrades
         weapDam,
         weapFireRate,
         weapArea,
         health,
         projectiles,
         globalDam,
+        
+        //character specific upgrades
+        //defaultDaniel
+        defaultDanielAbility1,
+        defaultDanielAbility2,
+        defaultDanielAbility3,
+
+        //sarahSword
+        sarahSwordAbility1,
     }
 
 
@@ -30,17 +44,33 @@ public class UpgradeManager : MonoBehaviour
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
+        ability1 = GameObject.FindGameObjectWithTag("Ability1").GetComponent<AbilityStats>();
+        ability2 = GameObject.FindGameObjectWithTag("Ability2").GetComponent<AbilityStats>();
+        ability3 = GameObject.FindGameObjectWithTag("Ability3").GetComponent<AbilityStats>();
         InitializeUpgrades();
     }
+    private void Start()
+    {
+        
+        switch (playerBStats.characterSelected)
+        {
+            case BaseStats.Character.DefaultDaniel:
+                upgradeArr.AddRange(defaultDaniel);
+                break;
+            case BaseStats.Character.SarahSword:
 
+                break;
+        }
+
+    }
     public void RollUpgrades()
     {
         //string[] rolledUpg=new string[possibleChoices];
         List<int> rolledUpgrades = new List<int>();
         for (int i = 0; i < possibleChoices; i++)
         {
-            int rolled = UnityEngine.Random.Range(0, upgradeArr.Length);
-            while (rolledUpgrades.Contains(rolled)) rolled = UnityEngine.Random.Range(0, upgradeArr.Length);
+            int rolled = UnityEngine.Random.Range(0, upgradeArr.Count);
+            while (rolledUpgrades.Contains(rolled)) rolled = UnityEngine.Random.Range(0, upgradeArr.Count);
             rolledUpgrades.Add(rolled);
             GetUpgradeInfo(upgradeArr[rolled], i);
         }
@@ -54,6 +84,7 @@ public class UpgradeManager : MonoBehaviour
     private Dictionary<UpgradeTypes, UpgradeInfo> upgrades;
     private void InitializeUpgrades()
     {
+
         upgrades = new Dictionary<UpgradeTypes, UpgradeInfo>
         {
             {
@@ -138,6 +169,48 @@ public class UpgradeManager : MonoBehaviour
                     }
                 }
             },
+            {
+                UpgradeTypes.defaultDanielAbility1,
+                new UpgradeInfo
+                {
+                    GetTier = () => ability1.upgradeTier,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"Beam does +5 damage"},
+                        {1,"+Beam now splits into two" },
+                        {2,"etc..." },
+                        {3, "+30 HP" }
+                    }
+                }
+            },
+            {
+                UpgradeTypes.defaultDanielAbility2,
+                new UpgradeInfo
+                {
+                    GetTier = () => ability2.upgradeTier,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"Place holder"},
+                        {1,"projectiles return" },
+                        {2,"etc..." },
+                        {3, "+30 HP" }
+                    }
+                }
+            },
+            {
+                UpgradeTypes.defaultDanielAbility3,
+                new UpgradeInfo
+                {
+                    GetTier = () => ability3.upgradeTier,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"longer duration"},
+                        {1,"stronger buffs" },
+                        {2,"etc..." },
+                        {3, "+30 HP" }
+                    }
+                }
+            },
             //add more here
         };
     }
@@ -162,6 +235,15 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case "weapArea":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton, UpgradeTypes.weapArea);
+                break;
+            case "DDability1":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility1], upgradeButton, UpgradeTypes.defaultDanielAbility1);
+                break;
+            case "DDability2":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility2], upgradeButton, UpgradeTypes.defaultDanielAbility2);
+                break;
+            case "DDability3":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility3], upgradeButton, UpgradeTypes.defaultDanielAbility3);
                 break;
         }
     }
@@ -299,6 +381,72 @@ public class UpgradeManager : MonoBehaviour
                         playerBStats.Health.AddFlatValue(30);
                         playerBStats.MaxHealth.AddFlatValue(30);
                         print("Max HP " + playerBStats.MaxHealth.StatsValue());
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.defaultDanielAbility1:
+                switch (tier)
+                {
+                    case 0:
+                        ability1.BaseDamage.AddFlatValue(5);
+                        print("Max Dam ability1 " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
+                        break;
+                    case 1:
+                        ability1.BaseDamage.AddFlatValue(5);//split
+                        print("Max Dam " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
+                        break;
+                    case 2:
+                        ability1.BaseDamage.AddFlatValue(5);//burn
+                        print("Max Dam " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.defaultDanielAbility2:
+                switch (tier)
+                {
+                    case 0:
+                        ability2.BaseDamage.AddFlatValue(5);
+                        print("Max Dam ability 2 " + ability2.BaseDamage.StatsValue());
+                        ability2.upgradeTier++;
+                        break;
+                    case 1:
+                        ability2.BaseDamage.AddFlatValue(5);//split
+                        print("Max Dam " + ability2.BaseDamage.StatsValue());
+                        ability2.upgradeTier++;
+                        break;
+                    case 2:
+                        ability2.BaseDamage.AddFlatValue(5);//burn
+                        print("Max Dam " + ability2.BaseDamage.StatsValue());
+                        ability2.upgradeTier++;
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.defaultDanielAbility3:
+                switch (tier)
+                {
+                    case 0:
+                        ability3.BaseDamage.AddFlatValue(5);
+                        print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
+                        ability3.upgradeTier++;
+                        break;
+                    case 1:
+                        ability3.BaseDamage.AddFlatValue(5);//stronger buffs or something
+                        print("Max Dam " + ability3.BaseDamage.StatsValue());
+                        ability3.upgradeTier++;
+                        break;
+                    case 2:
+                        ability3.BaseDamage.AddFlatValue(5);//burn
+                        print("Max Dam " + ability3.BaseDamage.StatsValue());
+                        ability3.upgradeTier++;
                         break;
                     case 3:
                         break;

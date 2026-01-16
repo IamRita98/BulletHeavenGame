@@ -10,6 +10,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     GenericBuffing gb;
     GameObject player;
     GameObject weapon;
+    bool once=false;
     float lifeTime;
     BaseWeaponStats bws;
     float baseFireRate;
@@ -18,6 +19,8 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     float attackSpeedBuffToApply = .5f;
     float pierceBuffToApply = 10;
     float projectileBuffToApply = 10;
+    SpriteRenderer ability3Renderer;
+    CircleCollider2D ability3Circle;
 
 
     void Awake()
@@ -26,10 +29,14 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         weapon = GameObject.FindGameObjectWithTag("Weapon");
         bws = weapon.GetComponent<BaseWeaponStats>();
         gb = GetComponent<GenericBuffing>();
-        
+        ability3Renderer = gameObject.GetComponent<SpriteRenderer>();
+        ability3Circle = gameObject.GetComponent<CircleCollider2D>();
+        ability3Circle.enabled = false;
+        ability3Renderer.enabled = false;
     }
     private void Start()
     {
+
         gameObject.SetActive(false);
     }
     private void OnEnable()
@@ -38,11 +45,13 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         transform.position = player.transform.position;
         transform.parent = null;
         lifeTime = 0;
+        ability3Circle.enabled = true;
+        ability3Renderer.enabled = true;
     }
 
 
     private void Update()
-    {
+    {   
         lifeTime += Time.deltaTime;
         if (lifeTime >= gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue())
         {

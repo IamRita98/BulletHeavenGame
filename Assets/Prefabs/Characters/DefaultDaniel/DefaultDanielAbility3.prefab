@@ -178,3 +178,4 @@ MonoBehaviour:
   area: 0
   pierce: 0
   projectileSpeed: 0
+  upgradeTier: 0

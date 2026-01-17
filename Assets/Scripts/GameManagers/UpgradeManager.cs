@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 using static UIManager;
 public class UpgradeManager : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class UpgradeManager : MonoBehaviour
     int possibleChoices = 3;
     List<string> upgradeArr = new List<string>{ "weaponDam", "globalDam", "fireRate", "health", "projectile", "weapArea" };
     List<string> defaultDaniel = new List<string>{"DDability1", "DDability2", "DDability3" };
+    GameObject playerCharacter;
+    AbilityStats[] abilities;
 
     UIManager uIManager;
 
@@ -44,14 +48,17 @@ public class UpgradeManager : MonoBehaviour
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
-        ability1 = GameObject.FindGameObjectWithTag("Ability1").GetComponent<AbilityStats>();
-        ability2 = GameObject.FindGameObjectWithTag("Ability2").GetComponent<AbilityStats>();
-        ability3 = GameObject.FindGameObjectWithTag("Ability3").GetComponent<AbilityStats>();
+        GetPlayerCharacterAndAbilities();
+
         InitializeUpgrades();
     }
     private void Start()
     {
-        
+
+    }
+
+    void GetPlayerCharacterAndAbilities()
+    {
         switch (playerBStats.characterSelected)
         {
             case BaseStats.Character.DefaultDaniel:
@@ -61,8 +68,17 @@ public class UpgradeManager : MonoBehaviour
 
                 break;
         }
-
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        abilities = playerCharacter.transform.GetComponentsInChildren<AbilityStats>(true);
+        ability1 = abilities[0];
+        ability2 = abilities[1];
+        ability3 = abilities[2];
     }
+/*    private void OnEnable()
+    {
+        SceneManager.activeSceneChanged +=
+    }*/
+
     public void RollUpgrades()
     {
         //string[] rolledUpg=new string[possibleChoices];

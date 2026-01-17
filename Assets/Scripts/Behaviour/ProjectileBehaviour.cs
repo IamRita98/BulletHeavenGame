@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
@@ -20,13 +21,27 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
-        
+
     }
     private void Start()
     {
-        oPool = gameObject.GetComponentInParent<ObjectPooling>();
+        oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         baseArea = transform.localScale;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.activeSceneChanged += GetReferences;
+        if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+    }
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= GetReferences;
+    }
+
+    void GetReferences(Scene oldScene, Scene newScene)
+    {
+        combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
     }
 
     private void Update()

@@ -60,7 +60,7 @@ public class MeleeWeapon : MonoBehaviour
     GameObject SpawnMeleeAttack()
     {
         GameObject meleeGO = oPool.objectPool[0];
-        meleeGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
+        meleeGO.GetComponentInChildren<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
         print("Attack dam: " + bws.BaseDamage.StatsValue());
         meleeGO.SetActive(true);
         oPool.activePool.Add(meleeGO);
@@ -69,9 +69,9 @@ public class MeleeWeapon : MonoBehaviour
     }
     void GiveWeaponDirection(GameObject cleave, Vector2 targetPos)
     {
+
         cleave.transform.up = targetPos;
         cleave.transform.position = transform.position;
-        transform.rotation = new quaternion(transform.rotation.x, transform.rotation.y, 180, transform.rotation.w);
     }
 }
 

@@ -30,9 +30,9 @@ public class CombatHandler : MonoBehaviour
 
     private void Update()
     {
-        if (!shouldBeInvinc) return;
-        invincabilityTimer += Time.deltaTime;
-        if (invincabilityTimer >= playerInvincibilityDuration) shouldBeInvinc = false;
+        //if (!shouldBeInvinc) return;
+        //invincabilityTimer += Time.deltaTime;
+        //if (invincabilityTimer >= playerInvincibilityDuration) shouldBeInvinc = false;
     }
 
     public void HandleDamage(float dam, GameObject gObject)
@@ -60,8 +60,14 @@ public class CombatHandler : MonoBehaviour
         BaseStats pbs = GO.GetComponent<BaseStats>();
         playerInvincibilityDuration = pbs.invincibilityDuration;
         if (shouldBeInvinc) return;
+        StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
         pbs.Health.AddFlatValue(-damage);
         if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
+    }
+    public IEnumerator InvincibilityWindow(float duration)
+    {
         shouldBeInvinc = true;
+        yield return new WaitForSeconds(duration);
+        shouldBeInvinc = false;
     }
 }

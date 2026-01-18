@@ -61,7 +61,7 @@ MonoBehaviour:
   isMelee: 0
   baseDamage: 10
   attackRate: 1.5
-  lifeTime: 1
+  lifeTime: 0.3
   weapArea: 1
   projectileSpeed: 0
   pierce: 999

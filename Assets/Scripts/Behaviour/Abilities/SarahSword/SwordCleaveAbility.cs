@@ -1,20 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
-public class DanielBeamBehaviur : MonoBehaviour
+public class SwordCleaveAbility : DanielBeamBehaviur
 {
-    public GameObject parentGO;
-    public TrackNeareastEnemy trackNearestEnemy;
-    public AbilityStats abilityStats;
-    public bool foundNearestEnemy;
-    public float timer;
-    public PolygonCollider2D polygonCollider;
-    public SpriteRenderer beamRenderer;
-    public CombatHandler combatHandler;
+    
 
     private void OnEnable()
     {
@@ -30,7 +21,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     void GetReferences(Scene oldScene, Scene newScene)
     {
         if (newScene.name == "MainMenu") return;
-        
+
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
         abilityStats = GetComponent<AbilityStats>();
@@ -60,10 +51,10 @@ public class DanielBeamBehaviur : MonoBehaviour
         }
     }
 
-    public virtual void FindNearestEnemy()
+    public override void FindNearestEnemy()
     {
         Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
-        parentGO.transform.right = targetPos;
+        parentGO.transform.up = targetPos;
         polygonCollider.enabled = true;
         beamRenderer.enabled = true;
     }

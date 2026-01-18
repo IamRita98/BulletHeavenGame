@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7807051063967819764}
   - component: {fileID: 525506798426719718}
   - component: {fileID: 3642977849042331695}
-  - component: {fileID: 4044139389667832201}
+  - component: {fileID: 7300238745338610763}
   m_Layer: 0
   m_Name: DanielBeam
   m_TagString: Ability1
@@ -98,6 +98,7 @@ MonoBehaviour:
   area: 1
   pierce: 99
   projectileSpeed: 0
+  upgradeTier: 0
 --- !u!114 &525506798426719718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa3ffdce562d8c4cb6dc4850fd92216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSquareCollider: 0
 --- !u!212 &3642977849042331695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,8 +164,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4044139389667832201
-BoxCollider2D:
+--- !u!60 &7300238745338610763
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,6 +206,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
+  m_UseDelaunayMesh: 0

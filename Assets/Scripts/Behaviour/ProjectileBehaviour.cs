@@ -19,10 +19,6 @@ public class ProjectileBehaviour : MonoBehaviour
     int bulletPierce;
     public List<GameObject> listOfEnemiesHitByThisBullet = new List<GameObject>();
 
-    private void Awake()
-    {
-
-    }
     private void Start()
     {
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();

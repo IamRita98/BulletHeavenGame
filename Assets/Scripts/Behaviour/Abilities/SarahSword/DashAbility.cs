@@ -34,8 +34,7 @@ public class DashAbility : MonoBehaviour
         print("target pos is: " + targetPos);
         duration = abilityStats.LifeTime.StatsValue();
         if (!firstTimeChecked) return;
-        combatHandler.shouldBeInvinc = true;
-        StartCoroutine(combatHandler.InvincibilityWindow(duration));
+        combatHandler.InvincibilityDuration(duration);
     }
     private void OnDisable()
     {

@@ -390,6 +390,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3213125667346825657}
     m_Modifications:
+    - target: {fileID: 841095040308893558, guid: f7c7aa33d31bc094bbf737dbe8e8eddd, type: 3}
+      propertyPath: cooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 841095040308893558, guid: f7c7aa33d31bc094bbf737dbe8e8eddd, type: 3}
+      propertyPath: lifeTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4321475124514511565, guid: f7c7aa33d31bc094bbf737dbe8e8eddd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

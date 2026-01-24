@@ -10,8 +10,11 @@ public class CombatHandler : MonoBehaviour
     public static event System.Action OnPlayerDeath;
 
     float playerInvincibilityDuration;
+    public bool shortInvinc = false;
+    public bool isShortInvinc = false;
+    public bool isLongInvinc = false;
     public bool shouldBeInvinc = false;
-    float invincabilityTimer;
+    float invincibilityTimer;
 
     private void Awake()
     {
@@ -30,9 +33,14 @@ public class CombatHandler : MonoBehaviour
 
     private void Update()
     {
-        //if (!shouldBeInvinc) return;
-        //invincabilityTimer += Time.deltaTime;
-        //if (invincabilityTimer >= playerInvincibilityDuration) shouldBeInvinc = false;
+        //handling invincibility
+        if (!shouldBeInvinc) return;
+        invincibilityTimer += Time.deltaTime;
+        if (invincibilityTimer >= playerInvincibilityDuration)
+        {
+            shouldBeInvinc = false;
+            invincibilityTimer = 0;
+        }
     }
 
     public void HandleDamage(float dam, GameObject gObject)
@@ -54,20 +62,41 @@ public class CombatHandler : MonoBehaviour
             //if (pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
         }
     }
+    public void InvincibilityDuration(float newInvincDuration)//checking to see if we need to update to a longer window
+    {
+        if (playerInvincibilityDuration <= newInvincDuration)
+        {
+            playerInvincibilityDuration = newInvincDuration;
+            shouldBeInvinc = true;
+            invincibilityTimer = 0;
+        }
+        
+    }
 
     void CollisionDamage(float damage, GameObject GO)
     {
-        if (shouldBeInvinc) return;
+        if (shouldBeInvinc)return;
         BaseStats pbs = GO.GetComponent<BaseStats>();
         playerInvincibilityDuration = pbs.invincibilityDuration; 
         pbs.Health.AddFlatValue(-damage);
-        shouldBeInvinc = true;
-        StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
+        InvincibilityDuration(playerInvincibilityDuration);
+        //StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
         if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
     }
-    public IEnumerator InvincibilityWindow(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        shouldBeInvinc = false;
-    }
+    //public IEnumerator InvincibilityWindow(float duration)
+    //{
+    //    print("Im frustrated");
+    //    yield return new WaitForSeconds(duration);
+    //    if (isShortInvinc)
+    //    {
+    //        shortInvinc = false;
+    //        isShortInvinc = false;
+    //    }
+    //    if (isLongInvinc)
+    //    {
+    //        shouldBeInvinc = false;
+    //        isLongInvinc = false;
+    //    }
+        
+    //}
 }

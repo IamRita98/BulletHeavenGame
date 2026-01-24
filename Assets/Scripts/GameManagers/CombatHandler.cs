@@ -10,7 +10,7 @@ public class CombatHandler : MonoBehaviour
     public static event System.Action OnPlayerDeath;
 
     float playerInvincibilityDuration;
-    bool shouldBeInvinc = false;
+    public bool shouldBeInvinc = false;
     float invincabilityTimer;
 
     private void Awake()
@@ -57,16 +57,16 @@ public class CombatHandler : MonoBehaviour
 
     void CollisionDamage(float damage, GameObject GO)
     {
-        BaseStats pbs = GO.GetComponent<BaseStats>();
-        playerInvincibilityDuration = pbs.invincibilityDuration;
         if (shouldBeInvinc) return;
-        StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
+        BaseStats pbs = GO.GetComponent<BaseStats>();
+        playerInvincibilityDuration = pbs.invincibilityDuration; 
         pbs.Health.AddFlatValue(-damage);
+        shouldBeInvinc = true;
+        StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
         if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
     }
     public IEnumerator InvincibilityWindow(float duration)
     {
-        shouldBeInvinc = true;
         yield return new WaitForSeconds(duration);
         shouldBeInvinc = false;
     }

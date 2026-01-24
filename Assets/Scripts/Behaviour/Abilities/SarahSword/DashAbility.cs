@@ -11,28 +11,31 @@ public class DashAbility : MonoBehaviour
     float duration;
     Vector2 targetPos;
     Vector2 mousePos;
-    float time=0;
+    float timer = 0;
+    bool firstTimeChecked = false;
     private void Awake()
     {
         abilityStats = gameObject.GetComponent<AbilityStats>();
     }
     private void Update()
     {
-        if (time >= duration)
+        if (timer >= duration)
         {
+            firstTimeChecked = true;
             gameObject.SetActive(false);
-            time = 0;
+            timer = 0;
         }
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
     }
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        targetPos = new Vector2(mousePos.x, mousePos.y);
+        targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         print("target pos is: " + targetPos);
         duration = abilityStats.LifeTime.StatsValue();
-        combatHandler.StartCoroutine(combatHandler.InvincibilityWindow(duration));
+        if (!firstTimeChecked) return;
+        combatHandler.shouldBeInvinc = true;
+        StartCoroutine(combatHandler.InvincibilityWindow(duration));
     }
     private void OnDisable()
     {

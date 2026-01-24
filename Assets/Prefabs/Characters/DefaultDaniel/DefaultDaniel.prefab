@@ -76,7 +76,7 @@ MonoBehaviour:
   projectiles: 1
   xp: 0
   pickUpRadius: 0
-  invincibilityDuration: 0
+  invincibilityDuration: 0.5
   globalDamT: 0
   healthUpgT: 0
   movementSpUpgT: 0

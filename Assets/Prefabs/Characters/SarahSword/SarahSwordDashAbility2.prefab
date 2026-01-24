@@ -59,8 +59,8 @@ MonoBehaviour:
   projUpgT: 0
   XpPickupUpgT: 0
   baseDamage: 0
-  cooldown: 4
-  lifeTime: 1.5
+  cooldown: 5
+  lifeTime: 4
   area: 0
   pierce: 0
   projectileSpeed: 0

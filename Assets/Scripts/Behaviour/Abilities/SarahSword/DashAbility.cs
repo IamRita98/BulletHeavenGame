@@ -41,7 +41,7 @@ public class DashAbility : MonoBehaviour
     void GetReferences(Scene oldScene, Scene newScene)
     {
         if (newScene.name == "MainMenu") return;
-        combatHandler = gameObject.GetComponentInParent<CombatHandler>();
+        combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         
     }
 }

@@ -172,7 +172,7 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
-  baseDamage: 0
+  baseDamage: 1
   cooldown: 20
   lifeTime: 10
   area: 0

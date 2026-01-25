@@ -53,9 +53,32 @@ public class GenericBuffing : MonoBehaviour
                 GO.GetComponent<BaseWeaponStats>().LifeTime.AddMultiValue(amount);
             }
         }
-        else//always will be abilities
+        else if(buffType=="ability")//always will be abilities
         {
-
+            if (buff.Contains("damage"))
+            {
+                GO.GetComponent<AbilityStats>().BaseDamage.AddMultiValue(amount);
+            }
+            else if (buff.Contains("projectile"))
+            {
+                GO.GetComponent<AbilityStats>().Projectiles.AddFlatValue(amount);
+            }
+            else if (buff.Contains("pierce"))
+            {
+                GO.GetComponent<AbilityStats>().Pierce.AddFlatValue(amount);
+            }
+            else if (buff.Contains("rate"))
+            {
+                GO.GetComponent<AbilityStats>().Cooldown.AddMultiValue(amount);
+            }
+            else if (buff.Contains("area"))
+            {
+                GO.GetComponent<AbilityStats>().Area.AddMultiValue(amount);
+            }
+            else
+            {
+                GO.GetComponent<AbilityStats>().LifeTime.AddMultiValue(amount);
+            }
         }
     }
 }

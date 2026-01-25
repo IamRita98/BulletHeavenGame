@@ -48,7 +48,7 @@ MonoBehaviour:
   characterSelected: 1
   health: 0
   maxHealth: 0
-  speed: 1
+  speed: 0
   projectiles: 0
   xp: 0
   pickUpRadius: 0
@@ -60,10 +60,10 @@ MonoBehaviour:
   XpPickupUpgT: 0
   baseDamage: 0
   cooldown: 5
-  lifeTime: 4
+  lifeTime: 0.5
   area: 0
   pierce: 0
-  projectileSpeed: 0
+  projectileSpeed: 15
   upgradeTier: 0
 --- !u!114 &4616466679205318046
 MonoBehaviour:

@@ -10,22 +10,50 @@ public class DashAbility : MonoBehaviour
     AbilityStats abilityStats;
     float duration;
     Vector2 targetPos;
-    Vector2 mousePos;
     float timer = 0;
-    bool firstTimeChecked = false;
+    bool gotReferences = false;
+    Rigidbody2D rb;
+    Vector2 dir;
+    bool isDashing = false;
+    bool reachedDestination = false;
+    CapsuleCollider2D playerCollider;
+
     private void Awake()
     {
         abilityStats = gameObject.GetComponent<AbilityStats>();
+        rb = gameObject.GetComponentInParent<Rigidbody2D>();
+        playerCollider = gameObject.GetComponentInParent<CapsuleCollider2D>();
     }
     private void Update()
     {
+        if (isDashing)
+        {
+            dir = new Vector2(targetPos.x - transform.position.x, targetPos.y - transform.position.y).normalized;
+            isDashing = false;
+        }
+        if (Vector3.Distance(transform.position, targetPos) < .25f)
+        {
+            rb.velocity = Vector3.zero;
+            reachedDestination = true;
+            playerCollider.enabled = true;
+        }
         if (timer >= duration)
         {
-            firstTimeChecked = true;
+            rb.velocity = Vector2.zero;
             gameObject.SetActive(false);
+            isDashing = false;
+            reachedDestination = false;
+            playerCollider.enabled = true;
             timer = 0;
         }
         timer += Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        if (reachedDestination) return;
+        playerCollider.enabled = false;
+        rb.velocity = (abilityStats.ProjectileSpeed.StatsValue() * dir);
     }
     private void OnEnable()
     {
@@ -33,8 +61,8 @@ public class DashAbility : MonoBehaviour
         targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         print("target pos is: " + targetPos);
         duration = abilityStats.LifeTime.StatsValue();
-        if (!firstTimeChecked) return;
-        combatHandler.InvincibilityDuration(duration);
+        isDashing = true;
+        if(gotReferences) combatHandler.InvincibilityDuration(duration);
     }
     private void OnDisable()
     {
@@ -44,6 +72,8 @@ public class DashAbility : MonoBehaviour
     {
         if (newScene.name == "MainMenu") return;
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
+        gotReferences = true;
+        gameObject.SetActive(false);
         
     }
 }

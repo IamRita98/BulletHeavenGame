@@ -19,6 +19,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     float attackSpeedBuffToApply = .5f;
     float pierceBuffToApply = 10;
     float projectileBuffToApply = 10;
+    float abilityStrength=1;//implement a way to scale the buff (upgrade system)
     SpriteRenderer ability3Renderer;
     CircleCollider2D ability3Circle;
 
@@ -42,6 +43,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     private void OnEnable()
     {
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        //abilityStrength;
         transform.position = player.transform.position;
         transform.parent = null;
         lifeTime = 0;

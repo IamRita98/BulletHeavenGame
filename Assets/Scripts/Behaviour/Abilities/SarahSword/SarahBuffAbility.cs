@@ -48,13 +48,6 @@ public class SarahBuffAbility : MonoBehaviour
     {
         SceneManager.activeSceneChanged += SceneChangeCheck;
         if (SceneManager.GetActiveScene().name != "TestLevel") return;
-        if (!firstTimeCheck)
-        {
-            firstTimeCheck = true;
-            gameObject.SetActive(false);
-            return;
-        }
-
 
         print("checking!!");
         buffDuration = gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue();

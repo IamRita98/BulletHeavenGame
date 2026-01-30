@@ -44,8 +44,8 @@ public class SarahBuffAbility : MonoBehaviour
     }
     private void RemoveBuffs()
     {
-        genericBuffing.BuffStat(weaponSword, buffAmount/2, buffType, buffStat);//damage buff to autoattacks
-        genericBuffing.BuffStat(ability1, buffAmount/2, abilityBuff, buffStat);//damage buff to ability1
+        genericBuffing.BuffStat(weaponSword, 1/buffAmount, buffType, buffStat);//damage buff to autoattacks
+        genericBuffing.BuffStat(ability1, 1/buffAmount, abilityBuff, buffStat);//damage buff to ability1
         gameObject.SetActive(false);
     }
     // Update is called once per frame

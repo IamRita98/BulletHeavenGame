@@ -5,9 +5,13 @@ using UnityEngine;
 public class DebugTools : MonoBehaviour
 {
     AbilityManager abilityManager;
+    BaseStats baseStats;
+    LevelUpManager levelUpManager;
     private void Awake()
     {
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
+        baseStats = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityStats>();
+        levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
     }
 
     private void Update()
@@ -35,11 +39,11 @@ public class DebugTools : MonoBehaviour
 
     void ResetToMaxHP()
     {
-
+        baseStats.Health.StatOverwrite(baseStats.MaxHealth.StatsValue());
     }
 
     void LevelUp()
     {
-
+        levelUpManager.LevelUp();
     }
 }

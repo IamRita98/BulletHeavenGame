@@ -728,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260872379370987648, guid: fecfe413920aea2429b35d77061cd5b4, type: 3}
       propertyPath: attackRate
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6260872379370987648, guid: fecfe413920aea2429b35d77061cd5b4, type: 3}
       propertyPath: baseDamage

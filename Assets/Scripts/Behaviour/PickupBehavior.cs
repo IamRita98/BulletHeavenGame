@@ -23,7 +23,6 @@ public class PickupBehavior : MonoBehaviour
 
     IEnumerator PullObjectsToPlayer(GameObject objectToPull)
     {
-        print("Cum");
         Vector2 startingPos = objectToPull.transform.position;
         
         float t = 0f;

@@ -63,8 +63,8 @@ public class MeleeWeapon : MonoBehaviour
         meleeGO.GetComponentInChildren<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
         print("Attack dam: " + bws.BaseDamage.StatsValue());
         meleeGO.SetActive(true);
-        oPool.activePool.Add(meleeGO);
-        oPool.objectPool.Remove(meleeGO);
+        oPool.activePool.Add(meleeGO.GetComponentInChildren<Transform>().gameObject);
+        oPool.objectPool.Remove(meleeGO.GetComponentInChildren<Transform>().gameObject);
         return meleeGO;
     }
     void GiveWeaponDirection(GameObject cleave, Vector2 targetPos)

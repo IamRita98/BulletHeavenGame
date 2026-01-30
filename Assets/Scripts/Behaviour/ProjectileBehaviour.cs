@@ -18,6 +18,7 @@ public class ProjectileBehaviour : MonoBehaviour
     CombatHandler combatHandler;
     int bulletPierce;
     public List<GameObject> listOfEnemiesHitByThisBullet = new List<GameObject>();
+    [SerializeField] bool returnParent = false;
 
     private void Start()
     {
@@ -71,8 +72,17 @@ public class ProjectileBehaviour : MonoBehaviour
     private void ReturnToPool()
     {
         listOfEnemiesHitByThisBullet = null;
-        oPool.objectPool.Add(gameObject);
-        oPool.activePool.Remove(gameObject);
+        if (returnParent)
+        {
+            oPool.objectPool.Add(transform.parent.gameObject);
+            oPool.activePool.Remove(transform.parent.gameObject);
+        }
+        else if (!returnParent)
+        {
+            oPool.objectPool.Add(gameObject);
+            oPool.activePool.Remove(gameObject);
+        }
+
         transform.localScale = baseArea;
         gameObject.SetActive(false);
     }

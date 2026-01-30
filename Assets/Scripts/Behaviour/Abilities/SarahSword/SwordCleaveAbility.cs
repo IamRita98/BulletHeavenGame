@@ -39,7 +39,8 @@ public class SwordCleaveAbility : DanielBeamBehaviur
         if (!foundNearestEnemy)
         {
             foundNearestEnemy = true;
-            FindNearestEnemy();
+            TargetMousePosition();
+            //FindNearestEnemy();
         }
 
         if (timer >= abilityStats.LifeTime.StatsValue())
@@ -51,13 +52,21 @@ public class SwordCleaveAbility : DanielBeamBehaviur
         }
     }
 
-    public override void FindNearestEnemy()
+    void TargetMousePosition()
+    {
+        Vector2 targetPos =  Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.parent.position;
+        parentGO.transform.up = targetPos;
+        polygonCollider.enabled = true;
+        beamRenderer.enabled = true;
+    }
+
+    /*public override void FindNearestEnemy()
     {
         Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
         parentGO.transform.up = targetPos;
         polygonCollider.enabled = true;
         beamRenderer.enabled = true;
-    }
+    }*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;

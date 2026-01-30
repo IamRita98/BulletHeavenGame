@@ -24,7 +24,7 @@ public class SwordCleaveAbility : DanielBeamBehaviur
 
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
-        abilityStats = GetComponent<AbilityStats>();
+        abilityStats = gameObject.GetComponent<AbilityStats>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
         parentGO = gameObject.transform.parent.gameObject;
         polygonCollider = gameObject.GetComponent<PolygonCollider2D>();

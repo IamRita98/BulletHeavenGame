@@ -76,15 +76,16 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             oPool.objectPool.Add(transform.parent.gameObject);
             oPool.activePool.Remove(transform.parent.gameObject);
+            transform.localScale = baseArea;
+            transform.parent.gameObject.SetActive(false);
         }
         else if (!returnParent)
         {
             oPool.objectPool.Add(gameObject);
             oPool.activePool.Remove(gameObject);
+            transform.localScale = baseArea;
+            gameObject.SetActive(false);
         }
-
-        transform.localScale = baseArea;
-        gameObject.SetActive(false);
     }
 
     public void SetStats(float dam, float size, float lTime, float moveSpeed, float pierce)

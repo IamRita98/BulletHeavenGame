@@ -50,7 +50,7 @@ public class LevelUpManager : MonoBehaviour
         }
     }
 
-    void LevelUp()
+   public void LevelUp()
     {
         //other things
         playerStats.XP.AddFlatValue(-XPThreshold);//subtract level up xp from current avoid overwriting

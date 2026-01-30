@@ -564,6 +564,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.28866667
       objectReference: {fileID: 0}
+    - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+      propertyPath: baseDamage
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+      propertyPath: characterSelected
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4044139389667832201, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
     - {fileID: 525506798426719718, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}

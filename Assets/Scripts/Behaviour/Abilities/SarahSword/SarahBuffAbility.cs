@@ -17,7 +17,8 @@ public class SarahBuffAbility : MonoBehaviour
     string abilityBuff = "ability";
     float buffDuration;
     float timer=0;
-    bool isBuffed;
+    bool firstTimeCheck = false;
+    bool isBuffed = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,10 +28,36 @@ public class SarahBuffAbility : MonoBehaviour
         ability2 = GameObject.FindGameObjectWithTag("Ability2");
         genericBuffing = gameObject.GetComponent<GenericBuffing>();
         bws = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
+        buffDuration = gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue();
+    }
+    void SceneChangeCheck(Scene oldScene, Scene newScene)
+    {
+        if (newScene.name == "MainMenu") return;
+        if (!firstTimeCheck)
+        {
+            firstTimeCheck = true;
+            gameObject.SetActive(false);
+            return;
+        }
+    }
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= SceneChangeCheck;
     }
     private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        SceneManager.activeSceneChanged += SceneChangeCheck;
+        if (SceneManager.GetActiveScene().name != "TestLevel") return;
+        if (!firstTimeCheck)
+        {
+            firstTimeCheck = true;
+            gameObject.SetActive(false);
+            return;
+        }
+
+
+        print("checking!!");
+        buffDuration = gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue();
         timer = 0;
         isBuffed = true;
         ApplyBuffs();
@@ -52,7 +79,7 @@ public class SarahBuffAbility : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= buffDuration)//&&isBuffed put back in if buggy
+        if (timer >= buffDuration&&isBuffed)//&&isBuffed put back in if buggy
         {
             isBuffed = false;
             RemoveBuffs();

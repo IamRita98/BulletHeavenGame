@@ -10,6 +10,9 @@ using static UIManager;
 public class UpgradeManager : MonoBehaviour
 {
     public Button WeapDamageButton;
+    GameObject ability1GO;
+    GameObject ability2GO;
+    GameObject ability3GO;
     BaseStats playerBStats;
     BaseWeaponStats baseWeaponStats;
     AbilityStats ability1;
@@ -34,7 +37,9 @@ public class UpgradeManager : MonoBehaviour
         
         //character specific upgrades
         //defaultDaniel
-        defaultDanielAbility1,
+        defaultDanielAbility1Path1,
+        defaultDanielAbility1Path2,
+        defaultDanielAbility1Path3,
         defaultDanielAbility2,
         defaultDanielAbility3,
 
@@ -73,6 +78,9 @@ public class UpgradeManager : MonoBehaviour
         ability1 = abilities[0];
         ability2 = abilities[1];
         ability3 = abilities[2];
+        ability1GO = GameObject.FindGameObjectWithTag("Ability1");
+        ability2GO = GameObject.FindGameObjectWithTag("Ability2");
+        ability3GO = GameObject.FindGameObjectWithTag("Ability3");
     }
 /*    private void OnEnable()
     {
@@ -186,16 +194,15 @@ public class UpgradeManager : MonoBehaviour
                 }
             },
             {
-                UpgradeTypes.defaultDanielAbility1,
+                UpgradeTypes.defaultDanielAbility1Path1,
                 new UpgradeInfo
                 {
                     GetTier = () => ability1.upgradeTier,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"Beam does +5 damage"},
-                        {1,"+Beam now splits into two" },
-                        {2,"etc..." },
-                        {3, "+30 HP" }
+                        {0,"Beam is mirrored"},
+                        {1,"Two more beams" },
+                        {2,"Beams rotate around you"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
                     }
                 }
             },
@@ -253,7 +260,7 @@ public class UpgradeManager : MonoBehaviour
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton, UpgradeTypes.weapArea);
                 break;
             case "DDability1":
-                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility1], upgradeButton, UpgradeTypes.defaultDanielAbility1);
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility1Path1], upgradeButton, UpgradeTypes.defaultDanielAbility1Path1);
                 break;
             case "DDability2":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility2], upgradeButton, UpgradeTypes.defaultDanielAbility2);
@@ -402,7 +409,7 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
-            case UpgradeManager.UpgradeTypes.defaultDanielAbility1:
+            case UpgradeManager.UpgradeTypes.defaultDanielAbility1Path1:
                 switch (tier)
                 {
                     case 0:

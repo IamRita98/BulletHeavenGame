@@ -12,7 +12,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     SpriteRenderer beamRenderer;
     PolygonCollider2D beamAOE;
     CircleCollider2D circleAOE;
-    string circlePath = "Assets\\Sprites\\Circle.png";
+    //string circlePath = "Assets\\Sprites\\Circle.png";
     CombatHandler combatHandler;
     void Awake()
     {
@@ -21,11 +21,14 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         //destroying old sprite renderer/polygon collider
         beamAOE= gameObject.GetComponent<PolygonCollider2D>();
         Destroy(beamAOE);
+
         //adding new components
         gameObject.transform.localScale = new Vector3(7, 7, 0);
-        beamRenderer.sprite = Resources.Load<Sprite>(circlePath);
+        //beamRenderer.sprite = Resources.Load<Sprite>(circlePath);
         circleAOE = gameObject.AddComponent<CircleCollider2D>();
-        beamRenderer.color = new Vector4(9, 65, 204, 255);//color rgb values
+        //beamRenderer.color = new Vector4(9, 65, 204, 255); //color rgb values
+        circleAOE.isTrigger = true;
+        circleAOE.transform.position = Vector3.zero;
 
 
         parentGO = gameObject.transform.parent.gameObject;

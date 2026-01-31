@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using static UIManager;
 public class UpgradeManager : MonoBehaviour
 {
+    public SpritesReferenceSO spriteReferences;
     public Button WeapDamageButton;
     GameObject ability1GO;
     GameObject ability2GO;
@@ -26,7 +27,6 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats[] abilities;
 
     UIManager uIManager;
-
     public enum UpgradeTypes
     {   //global upgrades
         weapDam,
@@ -565,6 +565,8 @@ public class UpgradeManager : MonoBehaviour
                         DanielBeamBehaviur danielBeam = ability1GO.GetComponent<DanielBeamBehaviur>();
                         Destroy(danielBeam);
                         ability1GO.AddComponent<AltBeamCircleBehaviour>();
+                        SpriteRenderer ability1Sprite = ability1GO.GetComponent<SpriteRenderer>();
+                        ability1Sprite.sprite = spriteReferences.beamCircleSprite;
                         break;
                     case 1:
                         ability1.BaseDamage.AddFlatValue(5);//stronger buffs or something

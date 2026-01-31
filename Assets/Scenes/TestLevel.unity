@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4179128941672808318, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
+      propertyPath: spriteReferences
+      value: 
+      objectReference: {fileID: 11400000, guid: e36e531f1c2976b42b7ab2db0feac83c, type: 2}
     - target: {fileID: 7828207858967276293, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.373627

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 9610e1937a9b5af41a8060bc144276a0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - beamCircleSprite: {fileID: 21300000, guid: bcf2bf77299d14b489c1037d28f6ef5f, type: 3}
+  - beamRectangleSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

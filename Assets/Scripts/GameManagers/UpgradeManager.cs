@@ -214,7 +214,7 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => ability1.upgradeTier,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"Beam is mirrored"},
+                        {0,"Beam is buhh"},
                         {1,"Two more beams" },
                         {2,"Beams rotate around you"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
                     }
@@ -227,7 +227,7 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => ability1.upgradeTier,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"Beam is mirrored"},
+                        {0,"Beam is now an AOE"},
                         {1,"Two more beams" },
                         {2,"Beams rotate around you"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
                     }
@@ -515,17 +515,17 @@ public class UpgradeManager : MonoBehaviour
                 {
                     case 0:
                         ability1.BaseDamage.AddFlatValue(5);
-                        print("Max Dam ability1 " + ability1.BaseDamage.StatsValue());
+                        print("Beam is mirrored " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         break;
                     case 1:
                         ability1.BaseDamage.AddFlatValue(5);//split
-                        print("Max Dam " + ability1.BaseDamage.StatsValue());
+                        print("asdw" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         break;
                     case 2:
                         ability1.BaseDamage.AddFlatValue(5);//burn
-                        print("Max Dam " + ability1.BaseDamage.StatsValue());
+                        print("wwwww" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         break;
                     case 3:
@@ -537,7 +537,7 @@ public class UpgradeManager : MonoBehaviour
                 {
                     case 0:
                         ability2.BaseDamage.AddFlatValue(5);
-                        print("Max Dam ability 2 " + ability2.BaseDamage.StatsValue());
+                        print("Beam is stronger " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
                         break;
                     case 1:
@@ -558,13 +558,17 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        ability3.BaseDamage.AddFlatValue(5);
-                        print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        ability1.BaseDamage.AddFlatValue(5);
+                        print("Beam is now an AOE around you" + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
+                        ability1.LifeTime.AddFlatValue(1);
+                        DanielBeamBehaviur danielBeam = ability1GO.GetComponent<DanielBeamBehaviur>();
+                        Destroy(danielBeam);
+                        ability1GO.AddComponent<AltBeamCircleBehaviour>();
                         break;
                     case 1:
-                        ability3.BaseDamage.AddFlatValue(5);//stronger buffs or something
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
+                        ability1.BaseDamage.AddFlatValue(5);//stronger buffs or something
+                        print("Max Dam " + ability1.BaseDamage.StatsValue());
                         ability3.upgradeTier++;
                         break;
                     case 2:

@@ -4,59 +4,77 @@ using UnityEngine;
 
 public class AltBeamCircleBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    GameObject parentGO;
     AbilityStats abilityStats;
     float timer;
     public Sprite circleSprite;
     SpriteRenderer beamRenderer;
-    PolygonCollider2D beamAOE;
     CircleCollider2D circleAOE;
-    //string circlePath = "Assets\\Sprites\\Circle.png";
     CombatHandler combatHandler;
+    float defaultRadiusSize = 5f;
+    float duration;
+    float damage;
+    Vector3 size;
+
     void Awake()
+    {
+        GetReferences();
+        SwitchOldBeamForNewCircle();
+        TurnOffBeam();
+    }
+
+    void GetReferences()
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
-        //destroying old sprite renderer/polygon collider
-        beamAOE= gameObject.GetComponent<PolygonCollider2D>();
-        Destroy(beamAOE);
+        beamRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
 
-        //adding new components
-        gameObject.transform.localScale = new Vector3(7, 7, 0);
-        //beamRenderer.sprite = Resources.Load<Sprite>(circlePath);
+    void SwitchOldBeamForNewCircle()
+    {
+        Destroy(gameObject.GetComponent<PolygonCollider2D>());
+        gameObject.transform.localScale = new Vector3(defaultRadiusSize, defaultRadiusSize, 0) * abilityStats.Area.StatsValue();
+
         circleAOE = gameObject.AddComponent<CircleCollider2D>();
-        //beamRenderer.color = new Vector4(9, 65, 204, 255); //color rgb values
         circleAOE.isTrigger = true;
-        circleAOE.transform.position = Vector3.zero;
+        circleAOE.transform.localPosition = Vector3.zero;
+    }
 
-
-        parentGO = gameObject.transform.parent.gameObject;
-        gameObject.SetActive(false);
+    void TurnOffBeam()
+    {
         circleAOE.enabled = false;
         beamRenderer.enabled = false;
     }
+
     private void OnEnable()
     {
         circleAOE.enabled = true;
         beamRenderer.enabled = true;
+        ScaleWithStats();
     }
 
-    // Update is called once per frame
+    void ScaleWithStats()
+    {
+        size = new Vector3(defaultRadiusSize, defaultRadiusSize, 0) * abilityStats.Area.StatsValue();
+        gameObject.transform.localScale = size;
+        duration = abilityStats.LifeTime.StatsValue();
+        damage = abilityStats.BaseDamage.StatsValue();
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= abilityStats.LifeTime.StatsValue())
+        if (timer >= duration)
         {
             timer = 0;
-            circleAOE.enabled = false;
-            beamRenderer.enabled = false;
+            transform.localScale = new Vector3(defaultRadiusSize, defaultRadiusSize, 0);
+            TurnOffBeam();
             gameObject.SetActive(false);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(abilityStats.BaseDamage.StatsValue(), collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject);
     }
 }

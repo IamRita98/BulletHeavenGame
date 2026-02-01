@@ -30,7 +30,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
-        chill = GetComponent<ChillElement>();
+        chill = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ChillElement>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 

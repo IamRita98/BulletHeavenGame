@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AltBeamCircleBehaviour : MonoBehaviour
 {
+    ChillElement chill;
     AbilityStats abilityStats;
     float timer;
     public Sprite circleSprite;
@@ -13,7 +14,10 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     float defaultRadiusSize = 5f;
     float duration;
     float damage;
+    float baseSlowStrength=.1f;
+    float baseSlowDuration=2f;
     Vector3 size;
+    public bool tier2;
 
     void Awake()
     {
@@ -26,6 +30,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
+        chill = GetComponent<ChillElement>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -76,5 +81,9 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     {
         if (!collision.CompareTag("Enemy")) return;
         combatHandler.HandleDamage(damage, collision.gameObject);
+        if (tier2)
+        {
+            chill.ApplyDebuffs(collision.gameObject, baseSlowStrength, baseSlowDuration);
+        }
     }
 }

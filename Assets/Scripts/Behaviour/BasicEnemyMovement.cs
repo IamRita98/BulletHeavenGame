@@ -28,6 +28,7 @@ public class BasicEnemyMovement : MonoBehaviour
         targetPos = getPlayerPos.playerPos;
         dir = targetPos - currentPos;
         dir.Normalize();
+        speed = eBaseStats.MovementSpeed.StatsValue();
     }
 
     private void FixedUpdate()

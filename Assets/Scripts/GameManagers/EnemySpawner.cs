@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     float spawnBuffer = 0.2f;
     Vector2 spawnPos;
     ObjectPooling oPool;
-    [SerializeField] int enemiesToSpawn = 10;
+    [SerializeField] int enemiesToSpawn = 2;
     float timer = 0;
     int scalingDiff = 0;
     float timeToNextWave = 5;

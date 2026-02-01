@@ -228,8 +228,8 @@ public class UpgradeManager : MonoBehaviour
                     descriptions= new Dictionary<int, string>
                     {
                         {0,"Beam is now an AOE"},
-                        {1,"Two more beams" },
-                        {2,"Beams rotate around you"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
+                        {1,"Slow enemies" },
+                        {2,"AOE is persistent"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
                     }
                 }
             },
@@ -558,7 +558,7 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        ability1.BaseDamage.AddFlatValue(5);
+                        ability1.BaseDamage.AddFlatValue(1);
                         print("Beam is now an AOE around you" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         ability1.LifeTime.AddFlatValue(1);
@@ -569,14 +569,16 @@ public class UpgradeManager : MonoBehaviour
                         ability1Sprite.sprite = spriteReferences.beamCircleSprite;
                         break;
                     case 1:
-                        ability1.BaseDamage.AddFlatValue(5);//stronger buffs or something
-                        print("Max Dam " + ability1.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        ability1.BaseDamage.AddFlatValue(1);//stronger buffs or something
+                        print("Slow Enemies" + ability1.BaseDamage.StatsValue());
+                        AltBeamCircleBehaviour altBeam = ability1GO.GetComponent<AltBeamCircleBehaviour>();
+                        altBeam.tier2 = true;
+                        ability1.upgradeTier++;
                         break;
                     case 2:
                         ability3.BaseDamage.AddFlatValue(5);//burn
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        print("AOE is persistent " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
                         break;
                     case 3:
                         break;

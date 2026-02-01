@@ -380,11 +380,35 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+      propertyPath: baseDamage
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5853350142767089970, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9108090084110793096}
   m_SourcePrefab: {fileID: 100100000, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+--- !u!1 &7693081995146606415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5853350142767089970, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+  m_PrefabInstance: {fileID: 4321229826363489917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9108090084110793096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693081995146606415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f76216d2571134f8434d629bb79034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8503392637119956052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5618813574647577129, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}

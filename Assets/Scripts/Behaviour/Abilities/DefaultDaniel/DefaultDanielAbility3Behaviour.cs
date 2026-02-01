@@ -61,6 +61,8 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    //Maybe apply an ability Strength effect onto the buffs, we'll need to work out how to apply it though w/ something like buffToApply * Abilitystrenght * .8 or something
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;

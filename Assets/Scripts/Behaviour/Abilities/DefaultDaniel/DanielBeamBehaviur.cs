@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
+using System.Drawing;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DanielBeamBehaviur : MonoBehaviour
 {
@@ -15,16 +16,31 @@ public class DanielBeamBehaviur : MonoBehaviour
     public PolygonCollider2D polygonCollider;
     public SpriteRenderer beamRenderer;
     public CombatHandler combatHandler;
+    Vector3 defaultSize;
+    float duration;
+    float damage;
+
+    private void Awake()
+    {
+        defaultSize = transform.localScale;
+    }
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
+        ScaleStats();
     }
 
     private void OnDisable()
     {
         SceneManager.activeSceneChanged -= GetReferences;
         foundNearestEnemy = false;
+    }
+
+    void ScaleStats()
+    {
+        duration = abilityStats.LifeTime.StatsValue();
+        damage = abilityStats.BaseDamage.StatsValue();
     }
 
     void GetReferences(Scene oldScene, Scene newScene)
@@ -47,13 +63,15 @@ public class DanielBeamBehaviur : MonoBehaviour
         timer += Time.deltaTime;
         if (!foundNearestEnemy)
         {
+            gameObject.transform.localScale = defaultSize * abilityStats.Area.StatsValue();
             foundNearestEnemy = true;
             FindNearestEnemy();
         }
 
-        if (timer >= abilityStats.LifeTime.StatsValue())
+        if (timer >= duration)
         {
             timer = 0;
+            transform.localScale = defaultSize;
             polygonCollider.enabled = false;
             beamRenderer.enabled = false;
             gameObject.SetActive(false);
@@ -70,6 +88,6 @@ public class DanielBeamBehaviur : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(abilityStats.BaseDamage.StatsValue(), collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject);
     }
 }

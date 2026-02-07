@@ -17,7 +17,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     float baseSlowStrength=.4f;
     float baseSlowDuration= .5f;
     float tickTimer =.3f;
-    float damageTimer;
+    float damageTimer=0f;
     Vector3 size;
     public bool tier2 = false;
     public bool tier3 = false;
@@ -69,7 +69,6 @@ public class AltBeamCircleBehaviour : MonoBehaviour
 
     void Update()
     {
-        damageTimer += Time.deltaTime;
         timer += Time.deltaTime;
         if (timer >= duration)
         {
@@ -83,7 +82,19 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (!collision.CompareTag("Enemy")) return;
+    //    if (tier2)
+    //    {
+    //        chill = collision.gameObject.GetComponent<ChillElement>();
+    //        chill.enabled = true;
+    //        chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
+    //    }
+    //    combatHandler.HandleDamage(damage, collision.gameObject);
+    //}
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
         if (tier2)
@@ -92,21 +103,9 @@ public class AltBeamCircleBehaviour : MonoBehaviour
             chill.enabled = true;
             chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
         }
-        combatHandler.HandleDamage(damage, collision.gameObject);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Enemy")) return;
         damageTimer += Time.deltaTime;
         if (damageTimer >= tickTimer)
         {
-            if (tier2)
-            {
-                chill = collision.gameObject.GetComponent<ChillElement>();
-                chill.enabled = true;
-                chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
-            }
             combatHandler.HandleDamage(damage, collision.gameObject);
             damageTimer = 0;
         }

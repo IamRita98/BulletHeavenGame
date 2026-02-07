@@ -555,10 +555,12 @@ public class UpgradeManager : MonoBehaviour
                 }
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility1Path3:
+                AltBeamCircleBehaviour altBeam = ability1GO.GetComponent<AltBeamCircleBehaviour>();
+                float damageReductionToBeam = -9f;
                 switch (tier)
                 {
                     case 0:
-                        ability1.BaseDamage.AddFlatValue(1);
+                        ability1.BaseDamage.AddFlatValue(damageReductionToBeam);
                         print("Beam is now an AOE around you" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         ability1.LifeTime.AddFlatValue(1);
@@ -569,15 +571,14 @@ public class UpgradeManager : MonoBehaviour
                         ability1Sprite.sprite = spriteReferences.beamCircleSprite;
                         break;
                     case 1:
-                        ability1.BaseDamage.AddFlatValue(1);//stronger buffs or something
                         print("Slow Enemies" + ability1.BaseDamage.StatsValue());
-                        AltBeamCircleBehaviour altBeam = ability1GO.GetComponent<AltBeamCircleBehaviour>();
                         altBeam.tier2 = true;
                         ability1.upgradeTier++;
                         break;
                     case 2:
-                        ability3.BaseDamage.AddFlatValue(5);//burn
                         print("AOE is persistent " + ability1.BaseDamage.StatsValue());
+                        altBeam.tier3 = true;
+                        altBeam.gameObject.SetActive(true);
                         ability1.upgradeTier++;
                         break;
                     case 3:

@@ -14,10 +14,13 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     float defaultRadiusSize = 5f;
     float duration;
     float damage;
-    float baseSlowStrength=.1f;
-    float baseSlowDuration=2f;
+    float baseSlowStrength=.4f;
+    float baseSlowDuration= .5f;
+    float tickTimer =.3f;
+    float damageTimer;
     Vector3 size;
-    public bool tier2;
+    public bool tier2 = false;
+    public bool tier3 = false;
 
     void Awake()
     {
@@ -66,25 +69,46 @@ public class AltBeamCircleBehaviour : MonoBehaviour
 
     void Update()
     {
+        damageTimer += Time.deltaTime;
         timer += Time.deltaTime;
         if (timer >= duration)
         {
             timer = 0;
-            transform.localScale = new Vector3(defaultRadiusSize, defaultRadiusSize, 0);
-            TurnOffBeam();
-            gameObject.SetActive(false);
+            if (!tier3)
+            {
+                transform.localScale = new Vector3(defaultRadiusSize, defaultRadiusSize, 0);
+                TurnOffBeam();
+                gameObject.SetActive(false);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(damage, collision.gameObject);
         if (tier2)
         {
             chill = collision.gameObject.GetComponent<ChillElement>();
             chill.enabled = true;
             chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
+        }
+        combatHandler.HandleDamage(damage, collision.gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Enemy")) return;
+        damageTimer += Time.deltaTime;
+        if (damageTimer >= tickTimer)
+        {
+            if (tier2)
+            {
+                chill = collision.gameObject.GetComponent<ChillElement>();
+                chill.enabled = true;
+                chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
+            }
+            combatHandler.HandleDamage(damage, collision.gameObject);
+            damageTimer = 0;
         }
     }
 }

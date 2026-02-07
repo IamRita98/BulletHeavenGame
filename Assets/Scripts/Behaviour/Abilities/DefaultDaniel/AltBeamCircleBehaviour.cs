@@ -30,7 +30,6 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
-        chill = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ChillElement>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -83,7 +82,9 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         combatHandler.HandleDamage(damage, collision.gameObject);
         if (tier2)
         {
-            chill.ApplyDebuffs(collision.gameObject, baseSlowStrength, baseSlowDuration);
+            chill = collision.gameObject.GetComponent<ChillElement>();
+            chill.enabled = true;
+            chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
         }
     }
 }

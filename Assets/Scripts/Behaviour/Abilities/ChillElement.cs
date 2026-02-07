@@ -10,6 +10,7 @@ public class ChillElement : MonoBehaviour
     float strength;
     bool isSlowed = false;
     float timer = 0;
+    bool currentlyDebuffed;
 
     void Awake()
     {
@@ -22,6 +23,8 @@ public class ChillElement : MonoBehaviour
     /// <param name="slowDuration">Duration of debuff</param>
     public void SetDebuffs(float strengthOfSlow, float slowDur)
     {
+        if (timer < slowDur) timer = 0;
+        else return;
         strength = strengthOfSlow;
         slowDuration = slowDur;
         isSlowed = true;
@@ -29,26 +32,32 @@ public class ChillElement : MonoBehaviour
     }
     void Update()
     {
+        if (currentlyDebuffed)
+        {
+            if (timer >= slowDuration)
+            {
+                RemoveSlow();
+                isSlowed = false;
+            }
+        }
         if (isSlowed)
         {
             ApplyDebuff();
             isSlowed = false;
-        }
-        if (timer >= slowDuration)
-        {
-            RemoveSlow();
         }
         timer += Time.deltaTime;
     }
     void ApplyDebuff()
     {
         ebs.MovementSpeed.AddMultiValue(strength);
+        currentlyDebuffed = true;
     }
     void RemoveSlow()
     {
         timer = 0;
         isSlowed = false;
         ebs.MovementSpeed.AddMultiValue(1 / strength);
+        currentlyDebuffed = false;
         TurnOff();
     }
     private void TurnOff()

@@ -514,6 +514,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability1Path2");
+                        upgradeArr.Remove("DDability1Path3");
                         ability1.BaseDamage.AddFlatValue(5);
                         print("Beam is mirrored " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
@@ -536,6 +538,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability1Path1");
+                        upgradeArr.Remove("DDability1Path3");
                         ability2.BaseDamage.AddFlatValue(5);
                         print("Beam is stronger " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
@@ -560,6 +564,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability1Path2");
+                        upgradeArr.Remove("DDability1Path1");
                         ability1.BaseDamage.AddFlatValue(damageReductionToBeam);
                         print("Beam is now an AOE around you" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
@@ -589,6 +595,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability2Path2");
+                        upgradeArr.Remove("DDability2Path3");
                         ability1.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability1 " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
@@ -611,6 +619,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability2Path1");
+                        upgradeArr.Remove("DDability2Path3");
                         ability2.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability 2 " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
@@ -633,6 +643,8 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability2Path2");
+                        upgradeArr.Remove("DDability2Path1");
                         ability3.BaseDamage.AddFlatValue(5);
                         print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
                         ability3.upgradeTier++;
@@ -655,6 +667,13 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability3Path2");
+                        upgradeArr.Remove("DDability3Path3");
+                        foreach(string str in upgradeArr)
+                        {
+                            print(str);
+                        }
+                        print(upgradeArr);
                         ability1.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability1 " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
@@ -677,6 +696,12 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability3Path1");
+                        upgradeArr.Remove("DDability3Path3");
+                        foreach (string str in upgradeArr)
+                        {
+                            print(str);
+                        }
                         ability2.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability 2 " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
@@ -699,6 +724,12 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        upgradeArr.Remove("DDability3Path1");
+                        upgradeArr.Remove("DDability3Path2");
+                        foreach (string str in upgradeArr)
+                        {
+                            print(str);
+                        }
                         ability3.BaseDamage.AddFlatValue(5);
                         print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
                         ability3.upgradeTier++;

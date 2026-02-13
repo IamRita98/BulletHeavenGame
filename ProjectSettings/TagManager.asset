@@ -17,6 +17,7 @@ TagManager:
   - Ability3
   - Target
   - PersistentManager
+  - PlayerSprite
   layers:
   - Default
   - TransparentFX

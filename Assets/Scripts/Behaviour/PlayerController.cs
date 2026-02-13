@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     float moveSpeed;
     AbilityManager abilityManager;
     GameStateManager gameStateManager;
+    bool spriteIsFlipped = false;
+    SpriteRenderer sRend;
+    Animator anim;
 
     private void Start()
     {
@@ -20,6 +23,8 @@ public class PlayerController : MonoBehaviour
         moveSpeed = bStats.MovementSpeed.StatsValue();
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
+        sRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
+        anim = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -38,11 +43,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (gameStateManager.gameIsPaused) return;
         Movement();
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !gameStateManager.gameIsPaused) abilityManager.Ability1();
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !gameStateManager.gameIsPaused) abilityManager.Ability2();
-        if (Input.GetKeyDown(KeyCode.Space) && !gameStateManager.gameIsPaused) abilityManager.Ability3();
+        CheckForSpriteFlip();
+        Animations();
+        if (Input.GetKeyDown(KeyCode.Mouse0)) abilityManager.Ability1();
+        if (Input.GetKeyDown(KeyCode.Mouse1)) abilityManager.Ability2();
+        if (Input.GetKeyDown(KeyCode.Space)) abilityManager.Ability3();
     }
 
     void Movement()
@@ -50,6 +57,26 @@ public class PlayerController : MonoBehaviour
         dir.x = Input.GetAxisRaw("Horizontal");
         dir.y = Input.GetAxisRaw("Vertical");
         dir.Normalize();
+    }
+
+    void CheckForSpriteFlip()
+    {
+        if (!spriteIsFlipped && dir.x < 0)
+        {
+            sRend.flipX = true;
+            spriteIsFlipped = true;
+        }
+        if(spriteIsFlipped && dir.x > 0)
+        {
+            sRend.flipX = false;
+            spriteIsFlipped = false;
+        }
+    }
+
+    void Animations()
+    {
+        if (dir.x != 0 || dir.y != 0) anim.SetBool("isMoving", true);
+        else anim.SetBool("isMoving", false);
     }
 
     void KillPlayer()

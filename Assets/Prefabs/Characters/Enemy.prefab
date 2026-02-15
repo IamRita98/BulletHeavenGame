@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 1994327083268724457}
   - component: {fileID: -8819010685745275723}
   - component: {fileID: -4559813156497836592}
+  - component: {fileID: 392209134045876913}
+  - component: {fileID: -2182556798612450140}
   - component: {fileID: 183740933047764612}
   - component: {fileID: 7507917053194037352}
   - component: {fileID: 1939150554407955480}
-  - component: {fileID: 392209134045876913}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -63,8 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSelected: 0
-  health: 0
-  maxHealth: 10
+  health: 15
+  maxHealth: 15
   speed: 4
   projectiles: 0
   xp: 0
@@ -90,6 +91,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {x: 0, y: 0}
+--- !u!114 &392209134045876913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655961653620078618}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f76216d2571134f8434d629bb79034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2182556798612450140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655961653620078618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcaff90016f47e4192c15768ee37441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dType: 0
 --- !u!212 &183740933047764612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -204,15 +230,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &392209134045876913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3655961653620078618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f76216d2571134f8434d629bb79034, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

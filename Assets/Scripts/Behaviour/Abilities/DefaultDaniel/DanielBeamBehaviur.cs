@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class DanielBeamBehaviur : MonoBehaviour
 {
+    ObjectPooling xpPool;
     public GameObject parentGO;
     public TrackNeareastEnemy trackNearestEnemy;
     public AbilityStats abilityStats;
@@ -19,10 +20,18 @@ public class DanielBeamBehaviur : MonoBehaviour
     Vector3 defaultSize;
     float duration;
     float damage;
+    public bool path2Tier2 = false;
+    float flatYScalingOfBigBeam = 1f;
+    public bool path2Tier3 = false;
+    float burnDamage = 1f;
+    float burnDuration = 3f;
+    float beamDefaultXpos;
+    
 
     private void Awake()
     {
         defaultSize = transform.localScale;
+        beamDefaultXpos = transform.localPosition.x;
     }
 
     private void OnEnable()
@@ -41,6 +50,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         duration = abilityStats.LifeTime.StatsValue();
         damage = abilityStats.BaseDamage.StatsValue();
+        transform.localPosition = new Vector3(beamDefaultXpos * abilityStats.Area.StatsValue(), transform.localPosition.y, transform.localPosition.z);
     }
 
     void GetReferences(Scene oldScene, Scene newScene)
@@ -56,6 +66,7 @@ public class DanielBeamBehaviur : MonoBehaviour
         gameObject.SetActive(false);
         polygonCollider.enabled = false;
         beamRenderer.enabled = false;
+        xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
     }
 
     private void Update()
@@ -63,7 +74,12 @@ public class DanielBeamBehaviur : MonoBehaviour
         timer += Time.deltaTime;
         if (!foundNearestEnemy)
         {
-            gameObject.transform.localScale = defaultSize * abilityStats.Area.StatsValue();
+            Vector3 beamScale = defaultSize * abilityStats.Area.StatsValue();
+            if (path2Tier2)
+            {
+                beamScale = new Vector3(beamScale.x, beamScale.y + flatYScalingOfBigBeam, beamScale.z);
+            }
+            gameObject.transform.localScale = beamScale;
             foundNearestEnemy = true;
             FindNearestEnemy();
         }
@@ -89,5 +105,23 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         if (!collision.CompareTag("Enemy")) return;
         combatHandler.HandleDamage(damage, collision.gameObject);
+        if (path2Tier3)
+        {
+            if (collision.gameObject.activeInHierarchy)
+            {
+                DamageOverTime burn = collision.GetComponent<DamageOverTime>();
+                burn.ApplyDamageOverTimeEffect(burnDamage, burnDuration, DamageOverTime.DoTType.burn);
+            }
+            else if(!collision.gameObject.activeInHierarchy)
+            {
+                GameObject gemToSpawn = xpPool.objectPool[0];
+                gemToSpawn.SetActive(true);
+                xpPool.activePool.Add(gemToSpawn);
+                xpPool.objectPool.RemoveAt(0);
+                gemToSpawn.transform.position = collision.transform.position;
+                gemToSpawn.transform.rotation = new Quaternion(0,0,90,0);
+
+            }
+        }
     }
 }

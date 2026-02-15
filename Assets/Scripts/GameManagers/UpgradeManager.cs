@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 using static UIManager;
 public class UpgradeManager : MonoBehaviour
 {
+    /// <summary>
+    /// Event Called on Levelup to Update values
+    /// </summary>
+    public static event System.Action OnLevelUp;
+
     public SpritesReferenceSO spriteReferences;
     public Button WeapDamageButton;
     GameObject ability1GO;
@@ -215,8 +220,8 @@ public class UpgradeManager : MonoBehaviour
                     descriptions= new Dictionary<int, string>
                     {
                         {0,"Beam is buhh"},
-                        {1,"Two more beams" },
-                        {2,"Beams rotate around you"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
+                        {1,"Beam is even bigger but has increased CD" },
+                        {2,"Beam burns enemies, killed enemies drop extra XP"}//if upgrades are buggy remember -> (we removed the "alt" tier 3)
                     }
                 }
             },
@@ -529,30 +534,37 @@ public class UpgradeManager : MonoBehaviour
                         ability1.BaseDamage.AddFlatValue(5);//burn
                         print("wwwww" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
+                        upgradeArr.Remove("DDability1Path1");
                         break;
                     case 3:
                         break;
                 }
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility1Path2:
+                DanielBeamBehaviur ability1Behaviour = ability1GO.GetComponent<DanielBeamBehaviur>();
                 switch (tier)
                 {
                     case 0:
                         upgradeArr.Remove("DDability1Path1");
                         upgradeArr.Remove("DDability1Path3");
-                        ability2.BaseDamage.AddFlatValue(5);
-                        print("Beam is stronger " + ability2.BaseDamage.StatsValue());
-                        ability2.upgradeTier++;
+                        ability1.BaseDamage.AddFlatValue(5);
+                        ability1.Area.AddMultiValue(1.2f);
+                        print("Beam is stronger " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
                         break;
                     case 1:
-                        ability2.BaseDamage.AddFlatValue(5);//split
-                        print("Max Dam " + ability2.BaseDamage.StatsValue());
-                        ability2.upgradeTier++;
+                        ability1.BaseDamage.AddFlatValue(10);
+                        ability1.Area.AddMultiValue(1.3f);
+                        ability1.Cooldown.AddFlatValue(3);
+                        ability1Behaviour.path2Tier2 = true;
+                        print("Beam is much stronger but has a higher cd " + ability1.BaseDamage.StatsValue());
+                        ability1.upgradeTier++;
                         break;
                     case 2:
-                        ability2.BaseDamage.AddFlatValue(5);//burn
-                        print("Max Dam " + ability2.BaseDamage.StatsValue());
-                        ability2.upgradeTier++;
+                        print("Enemies hit by beam burn-enemies killed by beam drop bonus XP " + ability1.BaseDamage.StatsValue());
+                        ability1Behaviour.path2Tier3 = true;
+                        ability1.upgradeTier++;
+                        upgradeArr.Remove("DDability1Path2");
                         break;
                     case 3:
                         break;
@@ -586,6 +598,7 @@ public class UpgradeManager : MonoBehaviour
                         altBeam.tier3 = true;
                         altBeam.gameObject.SetActive(true);
                         ability1.upgradeTier++;
+                        upgradeArr.Remove("DDability1Path3");
                         break;
                     case 3:
                         break;
@@ -750,5 +763,6 @@ public class UpgradeManager : MonoBehaviour
                 break;
         }
         uIManager.HideUpgrades();
+        OnLevelUp?.Invoke();
     }
 }

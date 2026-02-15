@@ -32,7 +32,6 @@ public class ChillElement : MonoBehaviour
             isSlowed = true;
             timer = 0;
         }
-            
     }
     void Update()
     {

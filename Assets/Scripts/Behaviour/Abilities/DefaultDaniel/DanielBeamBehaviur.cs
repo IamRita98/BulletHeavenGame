@@ -168,16 +168,8 @@ public class DanielBeamBehaviur : MonoBehaviour
 
     public virtual void FindNearestEnemy()
     {
-        if (trackNearestEnemy.NearestEnemy() == null)
-        {
-            parentGO.transform.right = new Vector2(0,0);
-        }
-        else
-        {
-            Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
-            parentGO.transform.right = targetPos;
-        }
-            
+        Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
+        parentGO.transform.right = targetPos;
         polygonCollider.enabled = true;
         beamRenderer.enabled = true;
     }

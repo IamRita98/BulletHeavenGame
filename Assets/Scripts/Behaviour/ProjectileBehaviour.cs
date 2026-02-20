@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    Transform gunParent;
     ObjectPooling oPool;
     float speed;
     public float lifeTime;
@@ -16,14 +15,18 @@ public class ProjectileBehaviour : MonoBehaviour
     float area;
     public float timer = 0;
     CombatHandler combatHandler;
-    int bulletPierce;
+    public int bulletPierce;
     public List<GameObject> listOfEnemiesHitByThisBullet = new List<GameObject>();
     [SerializeField] bool returnParent = false;
+    public bool shouldChain = false;
+    TrackNeareastEnemy nearestEnemy;
+    public float timesToChain = 0;
 
     private void Start()
     {
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         baseArea = transform.localScale;
+        nearestEnemy = gameObject.GetComponent<TrackNeareastEnemy>();
     }
 
     private void OnEnable()
@@ -65,8 +68,16 @@ public class ProjectileBehaviour : MonoBehaviour
         }
         listOfEnemiesHitByThisBullet.Add(collision.gameObject);
         combatHandler.HandleDamage(damage, collision.gameObject);
-        bulletPierce--;
-        if(bulletPierce<0) ReturnToPool();
+        if (shouldChain && timesToChain > 0)
+        {
+            ChainTowardsNextTarget();
+            //SpawnSplitProjectile();
+            timesToChain--;
+        }
+        else if (shouldChain && timesToChain == 0) ReturnToPool();
+        else bulletPierce--;
+            
+        if(bulletPierce < 0) ReturnToPool();
     }
 
     private void ReturnToPool()
@@ -77,6 +88,8 @@ public class ProjectileBehaviour : MonoBehaviour
             oPool.objectPool.Add(transform.parent.gameObject);
             oPool.activePool.Remove(transform.parent.gameObject);
             transform.localScale = baseArea;
+            timesToChain = 0;
+            shouldChain = false;
             transform.parent.gameObject.SetActive(false);
         }
         else if (!returnParent)
@@ -84,8 +97,11 @@ public class ProjectileBehaviour : MonoBehaviour
             oPool.objectPool.Add(gameObject);
             oPool.activePool.Remove(gameObject);
             transform.localScale = baseArea;
+            timesToChain = 0;
+            shouldChain = false;
             gameObject.SetActive(false);
         }
+        
     }
 
     public void SetStats(float dam, float size, float lTime, float moveSpeed, float pierce)
@@ -96,5 +112,12 @@ public class ProjectileBehaviour : MonoBehaviour
         area = size;
         speed = moveSpeed;
         transform.localScale *= area;
+    }
+
+    void ChainTowardsNextTarget()
+    {
+        GameObject nextNearestEnemy = nearestEnemy.NearestEnemy(listOfEnemiesHitByThisBullet);
+        Vector2 targetPos = nextNearestEnemy.transform.position - transform.position;
+        transform.up = targetPos;
     }
 }

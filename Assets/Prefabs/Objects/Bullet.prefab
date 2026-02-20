@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5703724257620477304}
   - component: {fileID: 9320486918581909}
+  - component: {fileID: -423450195229342219}
   - component: {fileID: 2408476054809727021}
   - component: {fileID: 6911994010413253844}
   m_Layer: 0
@@ -46,7 +47,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1ba70427269234aa29b52c51a5ad08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  lifeTime: 0
+  timer: 0
+  listOfEnemiesHitByThisBullet: []
+  returnParent: 0
+  shouldChain: 0
+--- !u!114 &-423450195229342219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659888470333955816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01bc130735f5334ab5b2bbc9bac6f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2408476054809727021
 SpriteRenderer:
   m_ObjectHideFlags: 0

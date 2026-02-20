@@ -28,6 +28,14 @@ public class DebugTools : MonoBehaviour
         {
             LevelUp();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SlowDownGame();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SpeedUpGame();
+        }
     }
 
     void ResetCooldowns()
@@ -36,7 +44,14 @@ public class DebugTools : MonoBehaviour
         abilityManager.ability2Timer = 0;
         abilityManager.ability3Timer = 0;
     }
-
+    void SlowDownGame()
+    {
+        Time.timeScale = .2f;
+    }
+    void SpeedUpGame()
+    {
+        Time.timeScale = 1f;
+    }
     void ResetToMaxHP()
     {
         baseStats.Health.StatOverwrite(baseStats.MaxHealth.StatsValue());

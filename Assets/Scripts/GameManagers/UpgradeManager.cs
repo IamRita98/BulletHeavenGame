@@ -516,23 +516,27 @@ public class UpgradeManager : MonoBehaviour
                 }
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility1Path1:
+                DanielBeamBehaviur ability1Behav= ability1GO.GetComponent<DanielBeamBehaviur>();
                 switch (tier)
                 {
                     case 0:
                         upgradeArr.Remove("DDability1Path2");
                         upgradeArr.Remove("DDability1Path3");
                         ability1.BaseDamage.AddFlatValue(5);
+                        ability1Behav.p1Tier1 = true;
                         print("Beam is mirrored " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         break;
                     case 1:
-                        ability1.BaseDamage.AddFlatValue(5);//split
-                        print("asdw" + ability1.BaseDamage.StatsValue());
+                        ability1.BaseDamage.AddFlatValue(5);//2 more beams + shaped
+                        ability1Behav.p1Tier2 = true;
+                        print("2 more beams" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         break;
                     case 2:
-                        ability1.BaseDamage.AddFlatValue(5);//burn
-                        print("wwwww" + ability1.BaseDamage.StatsValue());
+                        ability1.BaseDamage.AddFlatValue(5);//beams spin
+                        ability1Behav.p1Tier3 = true;
+                        print("Beams rotate" + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
                         upgradeArr.Remove("DDability1Path1");
                         break;

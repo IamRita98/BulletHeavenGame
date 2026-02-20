@@ -8,6 +8,25 @@ using UnityEngine.SceneManagement;
 
 public class DanielBeamBehaviur : MonoBehaviour
 {
+    [Header("Assignments for Path 1 upgrades")]
+    [Tooltip("Beam GO")]
+    [SerializeField] GameObject beam1;
+    [Tooltip("Beam GO")]
+    [SerializeField] GameObject beam2;
+    [Tooltip("Beam GO")]
+    [SerializeField] GameObject beam3;
+
+    [Tooltip("Beam Script")]
+    [SerializeField] DDSupportBeams beam1Script;
+    [Tooltip("Beam Script")]
+    [SerializeField] DDSupportBeams beam2Script;
+    [Tooltip("Beam Script")]
+    [SerializeField] DDSupportBeams beam3Script;
+    //Path1 variables more lasers/rotation
+    public bool p1Tier1 = false;
+    public bool p1Tier2 = false;
+    public bool p1Tier3 = false;
+    //end Path 1 variables
     ObjectPooling xpPool;
     public GameObject parentGO;
     public TrackNeareastEnemy trackNearestEnemy;
@@ -20,6 +39,12 @@ public class DanielBeamBehaviur : MonoBehaviour
     Vector3 defaultSize;
     float duration;
     float damage;
+    const float baseSpeed=100;
+    float speed=baseSpeed;
+
+    
+
+    //Path2 variables burn/XP
     public bool path2Tier2 = false;
     float flatYScalingOfBigBeam = 1f;
     public bool path2Tier3 = false;
@@ -32,12 +57,58 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         defaultSize = transform.localScale;
         beamDefaultXpos = transform.localPosition.x;
+
+        //if for whatever reason they are not assigned in inspector (backup assignement)
+        GameObject[] supportBeams = GameObject.FindGameObjectsWithTag("DDMirroredBeams");
+        if (beam1 == null) beam1 = supportBeams[0];
+        if (beam2 == null) beam2 = supportBeams[1];
+        if (beam3 == null) beam3 = supportBeams[2];
     }
 
+    private void TurnOnSupportBeams()
+    {
+        if (p1Tier2)
+        {
+            beam2Script = beam2.GetComponent<DDSupportBeams>();
+            beam2Script.UpdateInfo(damage);
+            beam2.SetActive(true);
+           
+            beam3Script = beam3.GetComponent<DDSupportBeams>();
+            beam3Script.UpdateInfo(damage);
+            beam3.SetActive(true);
+        }
+        if (p1Tier3)
+        {
+            //tell parent to rotate for x duration at y speed
+        }
+        beam1Script = beam1.GetComponent<DDSupportBeams>();
+        beam1Script.UpdateInfo(damage);
+        beam1.SetActive(true);
+    }
+    private void TurnOffSupportBeams()
+    {
+        if (beam1)
+        {
+            beam1.SetActive(false);
+        }
+        if (beam2)
+        {
+            beam2.SetActive(false);
+        }
+        if (beam3)
+        {
+            beam3.SetActive(false);
+        }
+    }
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
         ScaleStats();
+        if (p1Tier1)
+        {
+            TurnOnSupportBeams();
+        }
+        
     }
 
     private void OnDisable()
@@ -51,6 +122,7 @@ public class DanielBeamBehaviur : MonoBehaviour
         duration = abilityStats.LifeTime.StatsValue();
         damage = abilityStats.BaseDamage.StatsValue();
         transform.localPosition = new Vector3(beamDefaultXpos * abilityStats.Area.StatsValue(), transform.localPosition.y, transform.localPosition.z);
+        speed += abilityStats.ProjectileSpeed.StatsValue();
     }
 
     void GetReferences(Scene oldScene, Scene newScene)
@@ -90,7 +162,15 @@ public class DanielBeamBehaviur : MonoBehaviour
             transform.localScale = defaultSize;
             polygonCollider.enabled = false;
             beamRenderer.enabled = false;
+            TurnOffSupportBeams();
+            speed = baseSpeed;
             gameObject.SetActive(false);
+            
+        }
+        if (p1Tier3)
+        {
+            parentGO.transform.Rotate(0, 0, speed * Time.deltaTime,Space.Self);
+            //parentGO.transform.rotation = new Quaternion(0, 0, (parentGO.transform.rotation.z+speed) * Time.deltaTime,0);
         }
     }
 

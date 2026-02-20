@@ -247,8 +247,7 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"Place holder"},
                         {1,"projectiles return" },
-                        {2,"etc..." },
-                        {3, "+30 HP" }
+                        {2,"etc..." }
                     }
                 }
             },
@@ -261,8 +260,7 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"Place holder"},
                         {1,"projectiles return" },
-                        {2,"etc..." },
-                        {3, "+30 HP" }
+                        {2,"etc..." }
                     }
                 }
             },
@@ -273,10 +271,9 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => ability2.upgradeTier,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"Place holder"},
-                        {1,"projectiles return" },
-                        {2,"etc..." },
-                        {3, "+30 HP" }
+                        {0,"Bullets from ring now chain to 1 enemy instead of piercing"},
+                        {1,"Number of Chains now scales with pierce" },
+                        {2,"Bullets that chain also split into smaller bullets" }
                     }
                 }
             },
@@ -657,24 +654,22 @@ public class UpgradeManager : MonoBehaviour
                 }
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility2Path3:
+                BulletRingBehaviour ability2Behav = ability2GO.GetComponent<BulletRingBehaviour>();
                 switch (tier)
                 {
                     case 0:
                         upgradeArr.Remove("DDability2Path2");
                         upgradeArr.Remove("DDability2Path1");
-                        ability3.BaseDamage.AddFlatValue(5);
-                        print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        ability2Behav.path2Tier1 = true;
+                        ability2.upgradeTier++;
                         break;
                     case 1:
-                        ability3.BaseDamage.AddFlatValue(5);//stronger buffs or something
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        ability2Behav.path2Tier2 = true;
+                        ability2.upgradeTier++;
                         break;
                     case 2:
-                        ability3.BaseDamage.AddFlatValue(5);//burn
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
-                        ability3.upgradeTier++;
+                        ability2.upgradeTier++;
+                        upgradeArr.Remove("DDability2Path3");
                         break;
                     case 3:
                         break;

@@ -16,6 +16,8 @@ public class BulletRingBehaviour : MonoBehaviour
     public GameObject projectile;
     float timer;
     float lifeTime = .2f;
+    public bool path2Tier1 = false;
+    public bool path2Tier2 = false;
 
     private void OnEnable()
     {
@@ -48,7 +50,16 @@ public class BulletRingBehaviour : MonoBehaviour
         for (int i = 0; i < projectiles; i++)
         {
             GameObject projectile = oPool.objectPool[0];
-            projectile.GetComponent<ProjectileBehaviour>().SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue(), baseWeaponStats.ProjectileSpeed.StatsValue(), baseWeaponStats.Pierce.StatsValue());
+            ProjectileBehaviour pBehaviour = projectile.GetComponent<ProjectileBehaviour>();
+            pBehaviour.SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue(), baseWeaponStats.ProjectileSpeed.StatsValue(), baseWeaponStats.Pierce.StatsValue());
+
+            if (path2Tier1)
+            {
+                pBehaviour.timesToChain = 1;
+                pBehaviour.shouldChain = true;
+                if(path2Tier2) pBehaviour.timesToChain = baseWeaponStats.Pierce.StatsValue();
+            }
+
             projectile.SetActive(true);
             oPool.activePool.Add(projectile);
             oPool.objectPool.Remove(projectile);

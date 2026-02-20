@@ -18,6 +18,7 @@ TagManager:
   - Target
   - PersistentManager
   - PlayerSprite
+  - DDMirroredBeams
   layers:
   - Default
   - TransparentFX

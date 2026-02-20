@@ -77,10 +77,6 @@ public class DanielBeamBehaviur : MonoBehaviour
             beam3Script.UpdateInfo(damage);
             beam3.SetActive(true);
         }
-        if (p1Tier3)
-        {
-            //tell parent to rotate for x duration at y speed
-        }
         beam1Script = beam1.GetComponent<DDSupportBeams>();
         beam1Script.UpdateInfo(damage);
         beam1.SetActive(true);
@@ -104,6 +100,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         SceneManager.activeSceneChanged += GetReferences;
         ScaleStats();
+        FindNearestEnemy();
         if (p1Tier1)
         {
             TurnOnSupportBeams();
@@ -123,6 +120,12 @@ public class DanielBeamBehaviur : MonoBehaviour
         damage = abilityStats.BaseDamage.StatsValue();
         transform.localPosition = new Vector3(beamDefaultXpos * abilityStats.Area.StatsValue(), transform.localPosition.y, transform.localPosition.z);
         speed += abilityStats.ProjectileSpeed.StatsValue();
+        Vector3 beamScale = defaultSize * abilityStats.Area.StatsValue();
+        if (path2Tier2)
+        {
+            beamScale = new Vector3(beamScale.x, beamScale.y + flatYScalingOfBigBeam, beamScale.z);
+        }
+        gameObject.transform.localScale = beamScale;
     }
 
     void GetReferences(Scene oldScene, Scene newScene)
@@ -144,17 +147,6 @@ public class DanielBeamBehaviur : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (!foundNearestEnemy)
-        {
-            Vector3 beamScale = defaultSize * abilityStats.Area.StatsValue();
-            if (path2Tier2)
-            {
-                beamScale = new Vector3(beamScale.x, beamScale.y + flatYScalingOfBigBeam, beamScale.z);
-            }
-            gameObject.transform.localScale = beamScale;
-            foundNearestEnemy = true;
-            FindNearestEnemy();
-        }
 
         if (timer >= duration)
         {
@@ -176,8 +168,16 @@ public class DanielBeamBehaviur : MonoBehaviour
 
     public virtual void FindNearestEnemy()
     {
-        Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
-        parentGO.transform.right = targetPos;
+        if (trackNearestEnemy.NearestEnemy() == null)
+        {
+            parentGO.transform.right = new Vector2(0,0);
+        }
+        else
+        {
+            Vector2 targetPos = trackNearestEnemy.NearestEnemy().transform.position - gameObject.transform.parent.position;
+            parentGO.transform.right = targetPos;
+        }
+            
         polygonCollider.enabled = true;
         beamRenderer.enabled = true;
     }

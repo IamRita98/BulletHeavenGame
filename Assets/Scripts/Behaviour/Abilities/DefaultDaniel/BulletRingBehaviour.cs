@@ -18,6 +18,7 @@ public class BulletRingBehaviour : MonoBehaviour
     float lifeTime = .2f;
     public bool path2Tier1 = false;
     public bool path2Tier2 = false;
+    public bool path2Tier3 = false;
 
     private void OnEnable()
     {
@@ -58,6 +59,7 @@ public class BulletRingBehaviour : MonoBehaviour
                 pBehaviour.timesToChain = 1;
                 pBehaviour.shouldChain = true;
                 if(path2Tier2) pBehaviour.timesToChain = baseWeaponStats.Pierce.StatsValue();
+                if (path2Tier3) pBehaviour.shouldSplit = true ;
             }
 
             projectile.SetActive(true);

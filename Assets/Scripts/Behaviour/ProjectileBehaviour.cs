@@ -21,6 +21,9 @@ public class ProjectileBehaviour : MonoBehaviour
     public bool shouldChain = false;
     TrackNeareastEnemy nearestEnemy;
     public float timesToChain = 0;
+    float spread = 20;
+    int chainCounter = 0;
+    public bool shouldSplit=false;
 
     private void Start()
     {
@@ -70,8 +73,10 @@ public class ProjectileBehaviour : MonoBehaviour
         combatHandler.HandleDamage(damage, collision.gameObject);
         if (shouldChain && timesToChain > 0)
         {
+            if (shouldSplit && chainCounter >= 1) SpawnSplitProjectile();
             ChainTowardsNextTarget();
-            //SpawnSplitProjectile();
+            
+            chainCounter++;
             timesToChain--;
         }
         else if (shouldChain && timesToChain == 0) ReturnToPool();
@@ -114,6 +119,34 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.localScale *= area;
     }
 
+    void SpawnSplitProjectile()
+    {
+        for (int i = 0;i < 2; i ++){
+            GameObject projectile = oPool.objectPool[0];
+            ProjectileBehaviour pBehaviour = projectile.GetComponent<ProjectileBehaviour>();
+            BaseWeaponStats baseWeaponStats = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BaseWeaponStats>();
+            pBehaviour.SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue()/4, baseWeaponStats.ProjectileSpeed.StatsValue()/4, baseWeaponStats.Pierce.StatsValue());
+
+            projectile.SetActive(true);
+            oPool.activePool.Add(projectile);
+            oPool.objectPool.Remove(projectile);
+            projectile.transform.position = gameObject.transform.position;
+            projectile.transform.up = this.transform.up;
+            Vector3 spreadPosition;
+            if (i != 0)
+            {
+                spreadPosition = new Vector3(0, 0, -spread);
+
+            }
+            else
+            {
+                spreadPosition = new Vector3(0, 0, spread);//spread*i+desired spread
+            }
+                
+            projectile.transform.eulerAngles += spreadPosition;
+        }
+        
+    }
     void ChainTowardsNextTarget()
     {
         GameObject nextNearestEnemy = nearestEnemy.NearestEnemy(listOfEnemiesHitByThisBullet);

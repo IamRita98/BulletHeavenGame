@@ -669,6 +669,7 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case 2:
                         ability2.upgradeTier++;
+                        ability2Behav.path2Tier3=true;
                         upgradeArr.Remove("DDability2Path3");
                         break;
                     case 3:

@@ -68,7 +68,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         if (lifeTime >= gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue())
         {
             UnapplyBuff();
-            if (!path3Tier1) gameObject.transform.parent = player.transform;
+            gameObject.transform.parent = player.transform;
             gameObject.SetActive(false);
         }
     }

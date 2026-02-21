@@ -44,6 +44,7 @@ public class BulletRingBehaviour : MonoBehaviour
         if (timer >= lifeTime) gameObject.SetActive(false);
     }
 
+
     private void SpawnRing()
     {
         float projectiles = baseBulletAmount + baseWeaponStats.Projectiles.StatsValue();

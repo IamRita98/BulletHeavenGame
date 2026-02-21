@@ -312,10 +312,9 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => ability3.upgradeTier,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"longer duration"},
-                        {1,"stronger buffs" },
-                        {2,"etc..." },
-                        {3, "+30 HP" }
+                        {0,"Buff area now moves with you"},
+                        {1,"Buff lasts 50% longer" },
+                        {2,"Buff occasionally shoots a wave at nearby enemies" }
                     }
                 }
             },
@@ -682,10 +681,6 @@ public class UpgradeManager : MonoBehaviour
                     case 0:
                         upgradeArr.Remove("DDability3Path2");
                         upgradeArr.Remove("DDability3Path3");
-                        foreach(string str in upgradeArr)
-                        {
-                            print(str);
-                        }
                         print(upgradeArr);
                         ability1.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability1 " + ability1.BaseDamage.StatsValue());
@@ -711,10 +706,6 @@ public class UpgradeManager : MonoBehaviour
                     case 0:
                         upgradeArr.Remove("DDability3Path1");
                         upgradeArr.Remove("DDability3Path3");
-                        foreach (string str in upgradeArr)
-                        {
-                            print(str);
-                        }
                         ability2.BaseDamage.AddFlatValue(5);
                         print("Max Dam ability 2 " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
@@ -734,30 +725,22 @@ public class UpgradeManager : MonoBehaviour
                 }
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility3Path3:
+                DefaultDanielAbility3Behaviour ability3Behav = ability3GO.GetComponent<DefaultDanielAbility3Behaviour>();
                 switch (tier)
                 {
                     case 0:
                         upgradeArr.Remove("DDability3Path1");
                         upgradeArr.Remove("DDability3Path2");
-                        foreach (string str in upgradeArr)
-                        {
-                            print(str);
-                        }
-                        ability3.BaseDamage.AddFlatValue(5);
-                        print("Max Dam for ability 3" + ability3.BaseDamage.StatsValue());
+                        ability3Behav.path3Tier1 = true;
                         ability3.upgradeTier++;
                         break;
                     case 1:
-                        ability3.BaseDamage.AddFlatValue(5);//stronger buffs or something
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
                         ability3.upgradeTier++;
+                        ability3.LifeTime.AddMultiValue(1.5f);
                         break;
                     case 2:
-                        ability3.BaseDamage.AddFlatValue(5);//burn
-                        print("Max Dam " + ability3.BaseDamage.StatsValue());
+                        upgradeArr.Remove("DDability3Path3");
                         ability3.upgradeTier++;
-                        break;
-                    case 3:
                         break;
                 }
                 break;

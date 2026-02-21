@@ -22,6 +22,8 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     float abilityStrength=1;//implement a way to scale the buff (upgrade system)
     SpriteRenderer ability3Renderer;
     CircleCollider2D ability3Circle;
+    public bool path3Tier1 = false;
+    bool buffIsApplied = false;
 
 
     void Awake()
@@ -35,28 +37,37 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         ability3Circle.enabled = false;
         ability3Renderer.enabled = false;
     }
-    private void Start()
-    {
 
-        gameObject.SetActive(false);
-    }
     private void OnEnable()
     {
+        SceneManager.activeSceneChanged += Deactivate;
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
         //abilityStrength;
         transform.position = player.transform.position;
-        transform.parent = null;
+        if (path3Tier1) ApplyBuff(); 
+        else transform.parent = null;
         lifeTime = 0;
         ability3Circle.enabled = true;
         ability3Renderer.enabled = true;
     }
 
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= Deactivate;
+    }
+
+    void Deactivate(Scene oldScene, Scene newScene)
+    {
+        if(newScene.name == "MainMenu") return;
+        gameObject.SetActive(false);
+    }
 
     private void Update()
     {   
         lifeTime += Time.deltaTime;
         if (lifeTime >= gameObject.GetComponent<AbilityStats>().LifeTime.StatsValue())
         {
+            UnapplyBuff();
             gameObject.transform.parent = player.transform;
             gameObject.SetActive(false);
         }
@@ -66,15 +77,31 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
-        gb.BuffStat(weapon, projectileBuffToApply, "weapon", "projectile");
-        gb.BuffStat(weapon, pierceBuffToApply, "weapon", "pierce");
-        gb.BuffStat(weapon, attackSpeedBuffToApply, "weapon", "rate");
+        ApplyBuff();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        UnapplyBuff();
+    }
+
+    void ApplyBuff()
+    {
+        if (buffIsApplied) return;
+        buffIsApplied = true;
+        print("Gained Buff");
+        gb.BuffStat(weapon, projectileBuffToApply, "weapon", "projectile");
+        gb.BuffStat(weapon, pierceBuffToApply, "weapon", "pierce");
+        gb.BuffStat(weapon, attackSpeedBuffToApply, "weapon", "rate");
+    }
+     void UnapplyBuff()
+    {
+        if (!buffIsApplied) return;
+        buffIsApplied = false;
+        print("Lost Buff");
         gb.BuffStat(weapon, -projectileBuffToApply, "weapon", "projectile");
         gb.BuffStat(weapon, -pierceBuffToApply, "weapon", "pierce");
-        bws.AttackRate.AddMultiValue(1/attackSpeedBuffToApply);
+        bws.AttackRate.AddMultiValue(1 / attackSpeedBuffToApply);
     }
+
 }

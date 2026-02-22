@@ -726,6 +726,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility3Path3:
                 DefaultDanielAbility3Behaviour ability3Behav = ability3GO.GetComponent<DefaultDanielAbility3Behaviour>();
+                DDAbility3SupportFire supportFire = ability3GO.GetComponent<DDAbility3SupportFire>();
                 switch (tier)
                 {
                     case 0:
@@ -739,6 +740,8 @@ public class UpgradeManager : MonoBehaviour
                         ability3.LifeTime.AddMultiValue(1.5f);
                         break;
                     case 2:
+                        ability3Behav.path3Tier3 = true;
+                        supportFire.isUpgraded=true;
                         upgradeArr.Remove("DDability3Path3");
                         ability3.upgradeTier++;
                         break;

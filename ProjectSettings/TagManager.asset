@@ -19,6 +19,7 @@ TagManager:
   - PersistentManager
   - PlayerSprite
   - DDMirroredBeams
+  - DDAbility3ProjPool
   layers:
   - Default
   - TransparentFX

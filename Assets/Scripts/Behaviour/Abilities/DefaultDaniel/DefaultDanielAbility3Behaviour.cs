@@ -10,6 +10,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     GenericBuffing gb;
     GameObject player;
     GameObject weapon;
+    DDAbility3SupportFire ability3SupportFire;
     bool once=false;
     float lifeTime;
     BaseWeaponStats bws;
@@ -23,6 +24,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     SpriteRenderer ability3Renderer;
     CircleCollider2D ability3Circle;
     public bool path3Tier1 = false;
+    public bool path3Tier3 = false;
     bool buffIsApplied = false;
 
 
@@ -36,6 +38,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         ability3Circle = gameObject.GetComponent<CircleCollider2D>();
         ability3Circle.enabled = false;
         ability3Renderer.enabled = false;
+        ability3SupportFire = gameObject.GetComponent<DDAbility3SupportFire>();
     }
 
     private void OnEnable()
@@ -44,7 +47,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
         //abilityStrength;
         transform.position = player.transform.position;
-        if (path3Tier1) ApplyBuff(); 
+        if (path3Tier1) ApplyBuff();
         else transform.parent = null;
         lifeTime = 0;
         ability3Circle.enabled = true;

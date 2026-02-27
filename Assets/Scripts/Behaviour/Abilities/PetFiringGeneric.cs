@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DDAbility3SupportFire : MonoBehaviour
+public class PetFiringGeneric : MonoBehaviour
 {
     ObjectPooling oPool;
     AbilityStats abilityStats;
     float timer;
     public float totalSpread = 45;
-    public bool spread = true;
+    public bool activate = false;
     public float abilityAttackRate = .25f;
     bool inCombat = false;
     public bool isUpgraded = false;
@@ -20,7 +19,7 @@ public class DDAbility3SupportFire : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
         if (isUpgraded)
         {
-            spread = true;
+            activate = true;
         }
         else
         {
@@ -35,14 +34,13 @@ public class DDAbility3SupportFire : MonoBehaviour
     void GetReferences(Scene oldScene, Scene newScene)
     {
         if (newScene.name == "MainMenu") return;
-        inCombat = true;
-        oPool = GameObject.FindGameObjectWithTag("DDAbility3ProjPool").GetComponent<ObjectPooling>();
+        oPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
         abilityStats = gameObject.GetComponent<AbilityStats>();
     }
     // Update is called once per frame
     void Update()
     {
-       
+
         timer += Time.deltaTime;
         if (timer >= abilityAttackRate)
         {
@@ -52,16 +50,15 @@ public class DDAbility3SupportFire : MonoBehaviour
     }
     private void AimWeapon()
     {
-        Debug.Log("Firing proj");
         GameObject tne = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>().NearestEnemy();
         Vector2 targetPos = tne.transform.position - transform.position;
         FireProjectiles(targetPos);
     }
     private void FireProjectiles(Vector2 targetPos)
     {
-        float projectiles = abilityStats.Projectiles.StatsValue()+1;
+        float projectiles = abilityStats.Projectiles.StatsValue() + 1;
         //float spread = totalSpread / projectiles;
-        if (spread)
+        if (activate)
         {
             for (int i = 0; i < projectiles; i++)//for spread
             {
@@ -79,17 +76,13 @@ public class DDAbility3SupportFire : MonoBehaviour
                 GiveBulletDirection(spawnedBullet, targetPos, spreadPosition);
             }
         }
-        else
-        {//burst mode
-
-        }
 
 
     }
     GameObject SpawnBullet()
     {
         GameObject projGO = oPool.objectPool[0];
-        projGO.GetComponent<ProjectileBehaviour>().SetStats(abilityStats.BaseDamage.StatsValue(), abilityStats.Area.StatsValue(), abilityStats.LifeTime.StatsValue(), abilityStats.ProjectileSpeed.StatsValue()+9f, abilityStats.Pierce.StatsValue());
+        projGO.GetComponent<ProjectileBehaviour>().SetStats(abilityStats.BaseDamage.StatsValue(), abilityStats.Area.StatsValue(), abilityStats.LifeTime.StatsValue(), abilityStats.ProjectileSpeed.StatsValue() + 9f, abilityStats.Pierce.StatsValue());
         print("Spawned ability proj: ");
         projGO.SetActive(true);
         oPool.activePool.Add(projGO);

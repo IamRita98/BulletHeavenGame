@@ -726,12 +726,17 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case UpgradeManager.UpgradeTypes.defaultDanielAbility3Path3:
                 DefaultDanielAbility3Behaviour ability3Behav = ability3GO.GetComponent<DefaultDanielAbility3Behaviour>();
-                DDAbility3SupportFire supportFire = ability3GO.GetComponent<DDAbility3SupportFire>();
+                PetFiringGeneric supportFire = ability3GO.GetComponent<PetFiringGeneric>();
                 switch (tier)
                 {
                     case 0:
                         upgradeArr.Remove("DDability3Path1");
                         upgradeArr.Remove("DDability3Path2");
+                        if (ability3Behav.isActive)
+                        {
+                            ability3GO.transform.parent = playerCharacter.transform;
+                            ability3GO.transform.localPosition= Vector3.zero;
+                        }
                         ability3Behav.path3Tier1 = true;
                         ability3.upgradeTier++;
                         break;
@@ -740,6 +745,7 @@ public class UpgradeManager : MonoBehaviour
                         ability3.LifeTime.AddMultiValue(1.5f);
                         break;
                     case 2:
+                        supportFire.activate = true;
                         ability3Behav.path3Tier3 = true;
                         supportFire.isUpgraded=true;
                         upgradeArr.Remove("DDability3Path3");

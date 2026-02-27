@@ -56,7 +56,7 @@ public class CombatHandler : MonoBehaviour
             {
                 if (shouldExplode)
                 {
-                    ShouldExplode(gObject,dam);
+                    StartCoroutine(ShouldExplode(gObject, dam));
                 }
                 OnEnemyDeath?.Invoke(gObject);
                 ebs.ReturnToPool();
@@ -68,20 +68,23 @@ public class CombatHandler : MonoBehaviour
             //if (pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
         }
     }
-    void ShouldExplode(GameObject gObject,float dam)
+
+    IEnumerator ShouldExplode(GameObject gObject, float dam)
     {
         int roll = HandleRoll();
+        GameObject explodeCircle = oPool.objectPool[0];
         if (roll >= 75)
         {
-            GameObject explodeCircle = oPool.objectPool[0];
             oPool.activePool.Add(explodeCircle);
             oPool.objectPool.Remove(explodeCircle);
             explodeCircle.transform.position = gObject.transform.position;
-            GenericOnEnterDam genDam = gameObject.GetComponent<GenericOnEnterDam>();
+            GenericOnEnterDam genDam = explodeCircle.GetComponent<GenericOnEnterDam>();
             genDam.damage = dam * .3f;
             explodeCircle.SetActive(true);
+            yield return new WaitForSeconds(.4f);
+            explodeCircle.SetActive(false);
         }
-        
+
     }
     int HandleRoll()
     {

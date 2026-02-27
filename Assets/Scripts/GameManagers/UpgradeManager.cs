@@ -15,6 +15,7 @@ public class UpgradeManager : MonoBehaviour
     public static event System.Action OnLevelUp;
 
     public SpritesReferenceSO spriteReferences;
+    CombatHandler cHandler;
     public Button WeapDamageButton;
     GameObject ability1GO;
     GameObject ability2GO;
@@ -63,8 +64,8 @@ public class UpgradeManager : MonoBehaviour
         playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
+        cHandler = gameObject.GetComponent<CombatHandler>();
         GetPlayerCharacterAndAbilities();
-
         InitializeUpgrades();
     }
 
@@ -136,10 +137,9 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => playerBStats.globalDamT,
                     descriptions = new Dictionary<int, string>
                     {
-                        {0,"+10% Global Damage"},
-                        {1,"+15% Global Damage" },
-                        {2,"+40% Global Damage" },
-                        {3,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
+                        {0,"+15% to Global Damage"},
+                        {1,"+40% Global Damage, +10% Area, -20% Attackrate" },
+                        {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                     }
                 }
             },
@@ -485,6 +485,7 @@ public class UpgradeManager : MonoBehaviour
                             ability.BaseDamage.AddMultiValue(1.15f);
                         }
                         baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
+                        playerBStats.globalDamT++;
                         break;
                     case 1:
                         foreach (var ability in abilities)
@@ -493,10 +494,11 @@ public class UpgradeManager : MonoBehaviour
                         }
                         baseWeaponStats.BaseDamage.AddMultiValue(1.4f);
                         baseWeaponStats.AttackRate.AddFlatMultiValue(-.2f);
+                        playerBStats.globalDamT++;
                         break;
                     case 2:
-                        break;
-                    case 3:
+                        upgradeArr.Remove("globalDam");
+                        cHandler.shouldExplode = true;
                         break;
                 }
                 break;

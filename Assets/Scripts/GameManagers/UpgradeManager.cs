@@ -480,8 +480,19 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
+                        foreach (var ability in abilities)
+                        {
+                            ability.BaseDamage.AddMultiValue(1.15f);
+                        }
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
                         break;
                     case 1:
+                        foreach (var ability in abilities)
+                        {
+                            ability.BaseDamage.AddMultiValue(1.4f);
+                        }
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.4f);
+                        baseWeaponStats.AttackRate.AddFlatMultiValue(-.2f);
                         break;
                     case 2:
                         break;

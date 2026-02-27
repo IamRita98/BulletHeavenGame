@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6253128725195602159}
   - component: {fileID: 4179128941672808318}
   - component: {fileID: 882833941755458029}
+  - component: {fileID: 3215002357353382402}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: GameManager
@@ -47,6 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aea061a86b60af469c72195bcd48e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shortInvinc: 0
+  isShortInvinc: 0
+  isLongInvinc: 0
+  shouldBeInvinc: 0
+  shouldExplode: 0
 --- !u!114 &6253128725195602159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41bb9e0e5dd9de478660aa96ce0563e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteReferences: {fileID: 0}
   WeapDamageButton: {fileID: 0}
 --- !u!114 &882833941755458029
 MonoBehaviour:
@@ -97,3 +104,19 @@ MonoBehaviour:
   ability2CD: {fileID: 0}
   ability3CD: {fileID: 0}
   gameOverUI: {fileID: 0}
+--- !u!114 &3215002357353382402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901098990790263427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf3e93dcbf7d5941a22b32bbc3ed1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 1742505442549630360, guid: 3420209b63745bb46a73c877fd8ee01b, type: 3}
+  objectAmount: 500
+  objectPool: []
+  activePool: []

@@ -833,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4685926335296228611, guid: cec36c75946fca64eb93ae4f9e89d611, type: 3}
       propertyPath: m_TagString
-      value: DDAbility3ProjPool
+      value: PetProjPool
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

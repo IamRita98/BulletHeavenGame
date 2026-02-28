@@ -20,6 +20,7 @@ TagManager:
   - PlayerSprite
   - DDMirroredBeams
   - PetProjPool
+  - FloatingDamageNumbersPool
   layers:
   - Default
   - TransparentFX

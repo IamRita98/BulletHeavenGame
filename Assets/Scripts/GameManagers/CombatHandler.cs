@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CombatHandler : MonoBehaviour
 {
     GameStateManager gameStateManager;
-
+    FloatingDamageBehaviour fDB;
     public static event System.Action<GameObject> OnEnemyDeath;
     public static event System.Action OnPlayerDeath;
     ObjectPooling oPool;
+    ObjectPooling oPoolText;
     SpriteRenderer playerSRend;
     FireRateStackingUpgrade fireRateStackingUpgrade;
     DamageTakenVFX damageTakenVFX;
@@ -26,6 +28,7 @@ public class CombatHandler : MonoBehaviour
     {
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
         oPool = gameObject.GetComponent<ObjectPooling>();
+        oPoolText = GameObject.FindGameObjectWithTag("FloatingDamageNumbersPool").GetComponent<ObjectPooling>();
         fireRateStackingUpgrade = gameObject.GetComponent<FireRateStackingUpgrade>();
         playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
     }
@@ -51,7 +54,7 @@ public class CombatHandler : MonoBehaviour
             invincibilityTimer = 0;
         }
     }
-
+   
     /// <summary>
     /// Pass Damage taken and GO being hit
     /// </summary>
@@ -61,6 +64,7 @@ public class CombatHandler : MonoBehaviour
     {
         if (gObject.CompareTag("Enemy"))
         {
+            FloatingTextNum(dam, gObject);
             EnemyBaseStats ebs = gObject.GetComponent<EnemyBaseStats>();
             ebs.Health.AddFlatValue(-dam);
             print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
@@ -94,6 +98,7 @@ public class CombatHandler : MonoBehaviour
         else if (gObject.CompareTag("Player"))
         {
             if (shouldBeInvinc) return;
+            FloatingTextNum(dam, gObject);
             BaseStats pbs = gObject.GetComponent<BaseStats>();
             playerInvincibilityDuration = pbs.invincibilityDuration;
             pbs.Health.AddFlatValue(-dam);
@@ -107,7 +112,19 @@ public class CombatHandler : MonoBehaviour
             damageTakenVFX.DamageTaken(gObject);
         }
     }
-
+    void FloatingTextNum(float dam, GameObject gObject)
+    {
+        GameObject textGO = oPoolText.objectPool[0];
+        oPoolText.activePool.Add(textGO);
+        oPoolText.objectPool.Remove(textGO);
+        textGO.SetActive(true);
+        TMP_Text text = textGO.GetComponent<TMP_Text>();
+        dam = (int)dam;
+        text.text = dam.ToString();
+        text.transform.SetParent(gObject.transform);
+        text.transform.position = gObject.transform.position;
+        text.transform.position=new Vector2(text.transform.position.x,text.transform.position.y+1);
+    }
     IEnumerator ShouldExplode(GameObject gObject, float dam)
     {
         int roll = HandleRoll();

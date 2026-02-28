@@ -17,7 +17,7 @@ public class ObjectPooling : MonoBehaviour
         {
             GameObject spawnedGO = Instantiate(poolObject);
             objectPool.Add(spawnedGO);
-            spawnedGO.transform.parent = gameObject.transform;
+            spawnedGO.transform.SetParent(gameObject.transform);
             spawnedGO.SetActive(false);
         }    
     }

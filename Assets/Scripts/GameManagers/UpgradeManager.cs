@@ -151,9 +151,8 @@ public class UpgradeManager : MonoBehaviour
                     descriptions= new Dictionary<int, string>
                     {
                         {0,"+15% Firerate" },
-                        {1,"+1 projectile, +10% Firerate" },
-                        {2,"+60% Firerate, -10% Damage" },
-                        {3, "+1 Projectile, +10% Firerate, each subsequent hit on an enemy adds +1 damage(max 50 stacks)" }
+                        {1,"+40% Firerate, -10% Weapon Damage" },
+                        {2, "+1 Projectile, +10% Firerate, each subsequent hit on an enemy adds +1 damage(max 35 stacks)" }
                     }
                 }
             },
@@ -455,22 +454,19 @@ public class UpgradeManager : MonoBehaviour
                 {
                     case 0:
                         baseWeaponStats.AttackRate.AddMultiValue(.85f);
-                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         baseWeaponStats.attackRUpgT++;
                         break;
                     case 1:
-                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
-                        playerBStats.Projectiles.AddFlatValue(1);
-                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
-                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
+                        baseWeaponStats.BaseDamage.AddFlatMultiValue(-.1f);
                         baseWeaponStats.attackRUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
-                        baseWeaponStats.BaseDamage.AddMultiValue(.90f);
-                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        baseWeaponStats.Projectiles.AddFlatValue(1);
+                        baseWeaponStats.AttackRate.AddMultiValue(0.9f);
+                        cHandler.fireRateTier3 = true;
                         baseWeaponStats.attackRUpgT++;
+                        upgradeArr.Remove("fireRate");
                         break;
                     case 3:
                         break;

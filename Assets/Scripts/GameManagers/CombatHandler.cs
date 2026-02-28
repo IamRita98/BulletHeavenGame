@@ -9,18 +9,22 @@ public class CombatHandler : MonoBehaviour
     public static event System.Action<GameObject> OnEnemyDeath;
     public static event System.Action OnPlayerDeath;
     ObjectPooling oPool;
+    FireRateStackingUpgrade fireRateStackingUpgrade;
     float playerInvincibilityDuration;
     public bool shortInvinc = false;
     public bool isShortInvinc = false;
     public bool isLongInvinc = false;
     public bool shouldBeInvinc = false;
     public bool shouldExplode = false;
+    public bool fireRateTier3 = false;
+    int fireRateStackAmount = 1;
     float invincibilityTimer;
 
     private void Awake()
     {
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
         oPool = gameObject.GetComponent<ObjectPooling>();
+        fireRateStackingUpgrade = gameObject.GetComponent<FireRateStackingUpgrade>();
     }
 
     private void OnEnable()
@@ -60,6 +64,19 @@ public class CombatHandler : MonoBehaviour
                 }
                 OnEnemyDeath?.Invoke(gObject);
                 ebs.ReturnToPool();
+            }
+            else if (fireRateTier3)
+            {
+                if (fireRateStackingUpgrade.enemyDamageStacks.ContainsKey(gObject))
+                {
+                    ebs.Health.AddFlatValue(-fireRateStackingUpgrade.enemyDamageStacks[gObject]);
+                    fireRateStackingUpgrade.IncrementValue(gObject, fireRateStackAmount);
+                }
+                else
+                {
+                    fireRateStackingUpgrade.enemyDamageStacks.Add(gObject, fireRateStackAmount);
+                }
+                print("Stacking firerate dmg: " + fireRateStackingUpgrade.enemyDamageStacks[gObject]);
             }
         }
         else if (gObject.CompareTag("Player"))

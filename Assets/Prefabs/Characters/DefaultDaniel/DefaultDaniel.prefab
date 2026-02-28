@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 8034530739508542813}
   - component: {fileID: 596241785752561956}
   - component: {fileID: 7006029865858178205}
+  - component: {fileID: 4775123019899940044}
   m_Layer: 7
   m_Name: DanielSprite
   m_TagString: PlayerSprite
@@ -255,6 +256,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4775123019899940044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757973756265364465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9653a0b2f7d30749860b1f6b17e0667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2764253624398147791
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +430,6 @@ GameObject:
   - component: {fileID: -5518224994411204026}
   - component: {fileID: -7559953969165350205}
   - component: {fileID: -4047059303583794901}
-  - component: {fileID: 6289887177545696766}
   - component: {fileID: -338868586248066087}
   - component: {fileID: 262969877460355598}
   m_Layer: 7
@@ -512,58 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cb9282e5fbe58498c7354d3ad50bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &6289887177545696766
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5695794501510375941}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!50 &-338868586248066087
 Rigidbody2D:
   serializedVersion: 4

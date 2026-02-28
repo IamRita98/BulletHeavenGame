@@ -9,7 +9,9 @@ public class CombatHandler : MonoBehaviour
     public static event System.Action<GameObject> OnEnemyDeath;
     public static event System.Action OnPlayerDeath;
     ObjectPooling oPool;
+    SpriteRenderer playerSRend;
     FireRateStackingUpgrade fireRateStackingUpgrade;
+    DamageTakenVFX damageTakenVFX;
     float playerInvincibilityDuration;
     public bool shortInvinc = false;
     public bool isShortInvinc = false;
@@ -25,6 +27,7 @@ public class CombatHandler : MonoBehaviour
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
         oPool = gameObject.GetComponent<ObjectPooling>();
         fireRateStackingUpgrade = gameObject.GetComponent<FireRateStackingUpgrade>();
+        playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -49,6 +52,11 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pass Damage taken and GO being hit
+    /// </summary>
+    /// <param name="dam"></param>
+    /// <param name="gObject"></param>
     public void HandleDamage(float dam, GameObject gObject)
     {
         if (gObject.CompareTag("Enemy"))
@@ -64,6 +72,7 @@ public class CombatHandler : MonoBehaviour
                 }
                 OnEnemyDeath?.Invoke(gObject);
                 ebs.ReturnToPool();
+                return;
             }
             else if (fireRateTier3)
             {
@@ -78,11 +87,24 @@ public class CombatHandler : MonoBehaviour
                 }
                 print("Stacking firerate dmg: " + fireRateStackingUpgrade.enemyDamageStacks[gObject]);
             }
+            damageTakenVFX = gObject.GetComponentInChildren<DamageTakenVFX>();
+            damageTakenVFX.DamageTaken(gObject);
         }
+
         else if (gObject.CompareTag("Player"))
         {
-            //player stats calcs
-            //if (pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
+            if (shouldBeInvinc) return;
+            BaseStats pbs = gObject.GetComponent<BaseStats>();
+            playerInvincibilityDuration = pbs.invincibilityDuration;
+            pbs.Health.AddFlatValue(-dam);
+            InvincibilityDuration(playerInvincibilityDuration);
+            if (pbs.Health.StatsValue() <= 0)
+            {
+                OnPlayerDeath?.Invoke();
+                return;
+            }
+            damageTakenVFX = playerSRend.GetComponent<DamageTakenVFX>();
+            damageTakenVFX.DamageTaken(gObject);
         }
     }
 
@@ -121,13 +143,7 @@ public class CombatHandler : MonoBehaviour
 
     void CollisionDamage(float damage, GameObject GO)
     {
-        if (shouldBeInvinc)return;
-        BaseStats pbs = GO.GetComponent<BaseStats>();
-        playerInvincibilityDuration = pbs.invincibilityDuration; 
-        pbs.Health.AddFlatValue(-damage);
-        InvincibilityDuration(playerInvincibilityDuration);
-        //StartCoroutine(InvincibilityWindow(playerInvincibilityDuration));
-        if(pbs.Health.StatsValue() <= 0) OnPlayerDeath?.Invoke();
+        
     }
     //public IEnumerator InvincibilityWindow(float duration)
     //{

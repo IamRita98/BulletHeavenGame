@@ -44,7 +44,7 @@ public class DDSupportBeams : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(damage, collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject,CombatHandler.DamageType.Light);
     }
     public void UpdateInfo(float passedDamage)
     {

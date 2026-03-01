@@ -70,6 +70,6 @@ public class SwordCleaveAbility : DanielBeamBehaviur
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(abilityStats.BaseDamage.StatsValue(), collision.gameObject);
+        combatHandler.HandleDamage(abilityStats.BaseDamage.StatsValue(), collision.gameObject,CombatHandler.DamageType.Physical);
     }
 }

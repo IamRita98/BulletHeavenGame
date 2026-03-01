@@ -176,7 +176,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
-        combatHandler.HandleDamage(damage, collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject,CombatHandler.DamageType.Light);
         if (path2Tier3)
         {
             if (collision.gameObject.activeInHierarchy)

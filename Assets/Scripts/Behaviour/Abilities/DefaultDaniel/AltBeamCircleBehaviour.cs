@@ -16,7 +16,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     float damage;
     float baseSlowStrength=.4f;
     float baseSlowDuration= .5f;
-    float tickTimer =.3f;
+    float tickTimer =1/3f;
     float damageTimer=0f;
     Vector3 size;
     public bool tier2 = false;
@@ -106,7 +106,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         damageTimer += Time.deltaTime;
         if (damageTimer >= tickTimer)
         {
-            combatHandler.HandleDamage(damage, collision.gameObject);
+            combatHandler.HandleDamage(damage, collision.gameObject, CombatHandler.DamageType.Light);
             damageTimer = 0;
         }
     }

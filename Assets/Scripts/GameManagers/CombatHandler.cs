@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CombatHandler : MonoBehaviour
 {
+    public enum DamageType
+    {
+        Physical,
+        Poison,
+        Fire,
+        Light,
+        Untyped,
+    }
+    public DamageType dType;
     GameStateManager gameStateManager;
     FloatingDamageBehaviour fDB;
     public static event System.Action<GameObject> OnEnemyDeath;
@@ -24,6 +34,7 @@ public class CombatHandler : MonoBehaviour
     int fireRateStackAmount = 1;
     float invincibilityTimer;
 
+   
     private void Awake()
     {
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
@@ -60,8 +71,9 @@ public class CombatHandler : MonoBehaviour
     /// </summary>
     /// <param name="dam"></param>
     /// <param name="gObject"></param>
-    public void HandleDamage(float dam, GameObject gObject)
+    public void HandleDamage(float dam, GameObject gObject,DamageType type)
     {
+        dType = type;
         if (gObject.CompareTag("Enemy"))
         {
             FloatingTextNum(dam, gObject);
@@ -90,6 +102,8 @@ public class CombatHandler : MonoBehaviour
                     fireRateStackingUpgrade.enemyDamageStacks.Add(gObject, fireRateStackAmount);
                 }
                 print("Stacking firerate dmg: " + fireRateStackingUpgrade.enemyDamageStacks[gObject]);
+                dType = DamageType.Untyped;
+                FloatingTextNum(dam, gObject);
             }
             damageTakenVFX = gObject.GetComponentInChildren<DamageTakenVFX>();
             damageTakenVFX.DamageTaken(gObject);
@@ -117,13 +131,13 @@ public class CombatHandler : MonoBehaviour
         GameObject textGO = oPoolText.objectPool[0];
         oPoolText.activePool.Add(textGO);
         oPoolText.objectPool.Remove(textGO);
-        textGO.SetActive(true);
         TMP_Text text = textGO.GetComponent<TMP_Text>();
         dam = (int)dam;
         text.text = dam.ToString();
         text.transform.SetParent(gObject.transform);
         text.transform.position = gObject.transform.position;
         text.transform.position=new Vector2(text.transform.position.x,text.transform.position.y+1);
+        textGO.SetActive(true);
     }
     IEnumerator ShouldExplode(GameObject gObject, float dam)
     {

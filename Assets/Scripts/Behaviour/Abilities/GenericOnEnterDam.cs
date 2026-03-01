@@ -12,7 +12,7 @@ public class GenericOnEnterDam : MonoBehaviour
     public float damage;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        cH.HandleDamage(damage, collision.gameObject);
+        cH.HandleDamage(damage, collision.gameObject,CombatHandler.DamageType.Untyped);
         print("Generic dam: " + damage);
     }
 }

@@ -8,7 +8,7 @@ public class DamageOverTime : MonoBehaviour
 {
     CombatHandler combatHandler;
     EnemyBaseStats ebs;
-    float defaultProcTimer = 1f / 5f;
+    float defaultProcTimer = 1f / 3f;
     float timer;
     float procTimer;
     bool currentlyDebuffed;
@@ -82,8 +82,16 @@ public class DamageOverTime : MonoBehaviour
 
     void ApplyDoT()
     {
-        print("Burn Dmg: " + damage);
-        combatHandler.HandleDamage(damage, gameObject);
+        if (dType == DoTType.poison)
+        {
+            combatHandler.HandleDamage(damage, gameObject, CombatHandler.DamageType.Poison);
+        }
+        else if (dType == DoTType.burn)
+        {
+            print("Burn Dmg: " + damage);
+            combatHandler.HandleDamage(damage, gameObject, CombatHandler.DamageType.Fire);
+        }
+            
     }
 
     void RemoveDoT() 

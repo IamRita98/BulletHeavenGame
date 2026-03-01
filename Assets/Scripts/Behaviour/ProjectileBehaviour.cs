@@ -70,7 +70,7 @@ public class ProjectileBehaviour : MonoBehaviour
             }
         }
         listOfEnemiesHitByThisBullet.Add(collision.gameObject);
-        combatHandler.HandleDamage(damage, collision.gameObject);
+        combatHandler.HandleDamage(damage, collision.gameObject,CombatHandler.DamageType.Physical);
         if (shouldChain && timesToChain > 0)
         {
             if (shouldSplit && chainCounter >= 1) SpawnSplitProjectile();
@@ -87,7 +87,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void ReturnToPool()
     {
-        listOfEnemiesHitByThisBullet = null;
+        listOfEnemiesHitByThisBullet.Clear();
         if (returnParent)
         {
             oPool.objectPool.Add(transform.parent.gameObject);

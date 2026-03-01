@@ -23,7 +23,7 @@ public class ContactDamage : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Enemy")) return;
         EnemyBaseStats ebs = collision.gameObject.GetComponent<EnemyBaseStats>();
-        combatHandler.HandleDamage(ebs.ContactDamage.StatsValue(), gameObject);
+        combatHandler.HandleDamage(ebs.ContactDamage.StatsValue(), gameObject,CombatHandler.DamageType.Physical);
         //OnCollision?.Invoke(damage, gameObject);
     }
 }

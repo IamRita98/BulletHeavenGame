@@ -7,7 +7,6 @@ public class PickupBehavior : MonoBehaviour
 {
     public static event System.Action<GameObject> OnXPPickup;
     Transform playerPos;
-    float distanceToGivePlayerXP = .15f;
     float duration = .35f;
 
     private void Awake()

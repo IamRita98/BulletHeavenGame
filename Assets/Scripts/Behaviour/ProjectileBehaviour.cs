@@ -24,6 +24,7 @@ public class ProjectileBehaviour : MonoBehaviour
     float spread = 20;
     int chainCounter = 0;
     public bool shouldSplit=false;
+    public bool durationT3 = false;
 
     private void Start()
     {

@@ -11,7 +11,6 @@ public class PetFiringGeneric : MonoBehaviour
     public float totalSpread = 45;
     public bool activate = false;
     public float abilityAttackRate = .25f;
-    bool inCombat = false;
     public bool isUpgraded = false;
     private void OnEnable()
     {

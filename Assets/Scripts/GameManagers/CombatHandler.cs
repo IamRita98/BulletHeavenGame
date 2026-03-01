@@ -44,16 +44,6 @@ public class CombatHandler : MonoBehaviour
         playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
-    {
-        ContactDamage.OnCollision += CollisionDamage;
-    }
-
-    private void OnDisable()
-    {
-        ContactDamage.OnCollision -= CollisionDamage;
-    }
-
     private void Update()
     {
         //handling invincibility
@@ -126,6 +116,7 @@ public class CombatHandler : MonoBehaviour
             damageTakenVFX.DamageTaken(gObject);
         }
     }
+
     void FloatingTextNum(float dam, GameObject gObject)
     {
         GameObject textGO = oPoolText.objectPool[0];
@@ -139,6 +130,7 @@ public class CombatHandler : MonoBehaviour
         text.transform.position=new Vector2(text.transform.position.x,text.transform.position.y+1);
         textGO.SetActive(true);
     }
+
     IEnumerator ShouldExplode(GameObject gObject, float dam)
     {
         int roll = HandleRoll();
@@ -156,11 +148,13 @@ public class CombatHandler : MonoBehaviour
         }
 
     }
+
     int HandleRoll()
     {
         int rolled = Random.Range(1, 101);
         return rolled;
     }
+
     public void InvincibilityDuration(float newInvincDuration)//checking to see if we need to update to a longer window
     {
         if (playerInvincibilityDuration <= newInvincDuration)
@@ -171,25 +165,4 @@ public class CombatHandler : MonoBehaviour
         }
         
     }
-
-    void CollisionDamage(float damage, GameObject GO)
-    {
-        
-    }
-    //public IEnumerator InvincibilityWindow(float duration)
-    //{
-    //    print("Im frustrated");
-    //    yield return new WaitForSeconds(duration);
-    //    if (isShortInvinc)
-    //    {
-    //        shortInvinc = false;
-    //        isShortInvinc = false;
-    //    }
-    //    if (isLongInvinc)
-    //    {
-    //        shouldBeInvinc = false;
-    //        isLongInvinc = false;
-    //    }
-        
-    //}
 }

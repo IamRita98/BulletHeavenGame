@@ -14,6 +14,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public static event System.Action OnLevelUp;
 
+    ObjectPooling bulletOPool;
     public SpritesReferenceSO spriteReferences;
     CombatHandler cHandler;
     public Button WeapDamageButton;
@@ -26,8 +27,8 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability2;
     AbilityStats ability3;
     int possibleChoices = 3;
-    List<string> upgradeArr = new List<string> { "weaponDam", "globalDam", "fireRate", "health", "projectile", "weapArea" };
-    List<string> defaultDaniel = new List<string> { "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
+    List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration" };
+    List<string> defaultDaniel = new List<string> { "DDautoAttack", "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
                                                     "DDability3Path2" , "DDability3Path3" };
     GameObject playerCharacter;
     AbilityStats[] abilities;
@@ -35,8 +36,8 @@ public class UpgradeManager : MonoBehaviour
     UIManager uIManager;
     public enum UpgradeTypes
     {   //global upgrades
-        weapDam,
         weapFireRate,
+        duration,
         weapArea,
         health,
         projectiles,
@@ -44,6 +45,7 @@ public class UpgradeManager : MonoBehaviour
 
         //character specific upgrades
         //defaultDaniel
+        defaultDanielAutoAttacks,
         defaultDanielAbility1Path1,
         defaultDanielAbility1Path2,
         defaultDanielAbility1Path3,
@@ -65,6 +67,7 @@ public class UpgradeManager : MonoBehaviour
         baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
         cHandler = gameObject.GetComponent<CombatHandler>();
+        bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         GetPlayerCharacterAndAbilities();
         InitializeUpgrades();
     }
@@ -89,10 +92,6 @@ public class UpgradeManager : MonoBehaviour
         ability2GO = GameObject.FindGameObjectWithTag("Ability2");
         ability3GO = GameObject.FindGameObjectWithTag("Ability3");
     }
-    /*    private void OnEnable()
-        {
-            SceneManager.activeSceneChanged +=
-        }*/
 
     public void RollUpgrades()
     {
@@ -115,22 +114,8 @@ public class UpgradeManager : MonoBehaviour
     private Dictionary<UpgradeTypes, UpgradeInfo> upgrades;
     private void InitializeUpgrades()
     {
-
         upgrades = new Dictionary<UpgradeTypes, UpgradeInfo>
         {
-            {
-                UpgradeTypes.weapDam,
-                new UpgradeInfo{
-                    GetTier = () => baseWeaponStats.bDamUpgT,
-                    descriptions = new Dictionary<int, string>
-                    {
-                        {0,"Weapon Damage \n 15% Damage \n Flavor text"},
-                        {1,"+10% Damage, +10% Area" },
-                        {2,"+40% Damage, +1 Projectiles, -10% Firerate" },
-                        {3,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
-                    }
-                }
-            },
             {
                 UpgradeTypes.globalDam,
                 new UpgradeInfo{
@@ -138,7 +123,7 @@ public class UpgradeManager : MonoBehaviour
                     descriptions = new Dictionary<int, string>
                     {
                         {0,"+15% to Global Damage"},
-                        {1,"+40% Global Damage, +10% Area, -20% Attackrate" },
+                        {1," +40% Global Damage, \n +10% Area, \n -20% Attackrate" },
                         {2,"Enemies have a 25% chance of exploding for 30% of the damage of the killing blow" },
                     }
                 }
@@ -152,7 +137,20 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"+15% Firerate" },
                         {1,"+40% Firerate, -10% Weapon Damage" },
-                        {2, "+1 Projectile, +10% Firerate, each subsequent hit on an enemy adds +1 damage(max 35 stacks)" }
+                        {2, "+1 Projectile,\n +10% Firerate, each subsequent hit on an enemy adds +1 damage(max 35 stacks)" }
+                    }
+                }
+            },
+            {
+                UpgradeTypes.duration,
+                new UpgradeInfo
+                {
+                    GetTier = () => baseWeaponStats.attackRUpgT,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"+15% Duration" },
+                        {1,"+25% Duration,\n +5% damage,\n & +10 HP" },
+                        {2, "-20% Projectile speed,\n all projectiles now have a damaging AoE around them as they travel" }
                     }
                 }
             },
@@ -195,6 +193,19 @@ public class UpgradeManager : MonoBehaviour
                         {1,"+20 HP" },
                         {2,"+30 HP" },
                         {3, "+30 HP" }
+                    }
+                }
+            },
+            {
+                UpgradeTypes.defaultDanielAutoAttacks,
+                new UpgradeInfo
+                {
+                    GetTier = () => ability1.upgradeTier,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"AutoAttack1"},
+                        {1,"AutoAttack2" },
+                        {2,"AutoAttack3"}
                     }
                 }
             },
@@ -324,9 +335,6 @@ public class UpgradeManager : MonoBehaviour
     {
         switch (upgrade)
         {
-            case "weaponDam":
-                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapDam], upgradeButton, UpgradeTypes.weapDam);
-                break;
             case "globalDam":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.globalDam], upgradeButton, UpgradeTypes.globalDam);
                 break;
@@ -341,6 +349,9 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case "weapArea":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton, UpgradeTypes.weapArea);
+                break;
+            case "DDautoAttack":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAutoAttacks], upgradeButton, UpgradeTypes.defaultDanielAutoAttacks);
                 break;
             case "DDability1Path1":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAbility1Path1], upgradeButton, UpgradeTypes.defaultDanielAbility1Path1);
@@ -376,32 +387,90 @@ public class UpgradeManager : MonoBehaviour
     {
         switch (upgradeType)
         {
-            case UpgradeManager.UpgradeTypes.weapDam:
+            /// <summary>
+            /// Global upgrades
+            /// </summary>
+            case UpgradeManager.UpgradeTypes.globalDam: //Increment both Weap dam & all ability dam, then increment the tier stat in base stats
                 switch (tier)
                 {
                     case 0:
+                        foreach (var ability in abilities)
+                        {
+                            ability.BaseDamage.AddMultiValue(1.15f);
+                        }
                         baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
-                        baseWeaponStats.bDamUpgT++;
+                        playerBStats.globalDamT++;
                         break;
                     case 1:
-                        baseWeaponStats.BaseDamage.AddMultiValue(1.10f);
-                        baseWeaponStats.WeapArea.AddMultiValue(1.10f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
-                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
-                        baseWeaponStats.bDamUpgT++;
+                        foreach (var ability in abilities)
+                        {
+                            ability.BaseDamage.AddMultiValue(1.4f);
+                        }
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.4f);
+                        baseWeaponStats.AttackRate.AddFlatMultiValue(-.2f);
+                        playerBStats.globalDamT++;
                         break;
                     case 2:
-                        baseWeaponStats.BaseDamage.AddMultiValue(1.40f);
-                        playerBStats.Projectiles.AddFlatValue(1f);
-                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
-                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
-                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
-                        baseWeaponStats.bDamUpgT++;
+                        upgradeArr.Remove("globalDam");
+                        cHandler.shouldExplode = true;
                         break;
-                    case 3:
-                        baseWeaponStats.bDamUpgT++;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.weapFireRate:
+                switch (tier)
+                {
+                    case 0:
+                        baseWeaponStats.AttackRate.AddMultiValue(.85f);
+                        baseWeaponStats.attackRUpgT++;
+                        break;
+                    case 1:
+                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
+                        baseWeaponStats.BaseDamage.AddFlatMultiValue(-.1f);
+                        baseWeaponStats.attackRUpgT++;
+                        break;
+                    case 2:
+                        baseWeaponStats.Projectiles.AddFlatValue(1);
+                        baseWeaponStats.AttackRate.AddMultiValue(0.9f);
+                        cHandler.fireRateTier3 = true;
+                        baseWeaponStats.attackRUpgT++;
+                        upgradeArr.Remove("fireRate");
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.duration:
+                switch (tier)
+                {
+                    case 0:
+                        baseWeaponStats.LifeTime.AddFlatMultiValue(.15f);
+                        foreach(AbilityStats abilityStat in abilities)
+                        {
+                            abilityStat.LifeTime.AddFlatMultiValue(.15f);
+                        }
+                        baseWeaponStats.lifeTimeUpgT++;
+                        break;
+                    case 1:
+                        baseWeaponStats.LifeTime.AddFlatMultiValue(.25f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.05f);
+                        playerBStats.MaxHealth.AddFlatValue(10);
+                        playerBStats.Health.AddFlatValue(10);
+                        foreach (AbilityStats abilityStat in abilities)
+                        {
+                            abilityStat.LifeTime.AddFlatMultiValue(.25f);
+                            abilityStat.BaseDamage.AddMultiValue(1.05f);
+                        }
+                        baseWeaponStats.lifeTimeUpgT++;
+                        break;
+                    case 2:
+                        baseWeaponStats.ProjectileSpeed.AddFlatMultiValue(-.2f);
+                        foreach(GameObject bullet in bulletOPool.activePool) bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        foreach(GameObject bullet in bulletOPool.objectPool) bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        foreach (AbilityStats abilityStat in abilities)
+                        {
+                            abilityStat.ProjectileSpeed.AddFlatMultiValue(-.2f);
+                            abilityStat.gameObject.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        }
+                        baseWeaponStats.lifeTimeUpgT++;
+                        upgradeArr.Remove("duration");
                         break;
                 }
                 break;
@@ -449,55 +518,6 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
-            case UpgradeManager.UpgradeTypes.weapFireRate:
-                switch (tier)
-                {
-                    case 0:
-                        baseWeaponStats.AttackRate.AddMultiValue(.85f);
-                        baseWeaponStats.attackRUpgT++;
-                        break;
-                    case 1:
-                        baseWeaponStats.AttackRate.AddMultiValue(.60f);
-                        baseWeaponStats.BaseDamage.AddFlatMultiValue(-.1f);
-                        baseWeaponStats.attackRUpgT++;
-                        break;
-                    case 2:
-                        baseWeaponStats.Projectiles.AddFlatValue(1);
-                        baseWeaponStats.AttackRate.AddMultiValue(0.9f);
-                        cHandler.fireRateTier3 = true;
-                        baseWeaponStats.attackRUpgT++;
-                        upgradeArr.Remove("fireRate");
-                        break;
-                    case 3:
-                        break;
-                }
-                break;
-            case UpgradeManager.UpgradeTypes.globalDam: //Increment both Weap dam & all ability dam, then increment the tier stat in base stats
-                switch (tier)
-                {
-                    case 0:
-                        foreach (var ability in abilities)
-                        {
-                            ability.BaseDamage.AddMultiValue(1.15f);
-                        }
-                        baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
-                        playerBStats.globalDamT++;
-                        break;
-                    case 1:
-                        foreach (var ability in abilities)
-                        {
-                            ability.BaseDamage.AddMultiValue(1.4f);
-                        }
-                        baseWeaponStats.BaseDamage.AddMultiValue(1.4f);
-                        baseWeaponStats.AttackRate.AddFlatMultiValue(-.2f);
-                        playerBStats.globalDamT++;
-                        break;
-                    case 2:
-                        upgradeArr.Remove("globalDam");
-                        cHandler.shouldExplode = true;
-                        break;
-                }
-                break;
             case UpgradeManager.UpgradeTypes.health:
                 switch (tier)
                 {
@@ -520,6 +540,39 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
+            /// <summary>
+            /// DefaultDanielUpgrades
+            /// </summary>
+            case UpgradeManager.UpgradeTypes.defaultDanielAutoAttacks:
+                switch (tier)
+                {
+                    case 0:
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
+                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        baseWeaponStats.bDamUpgT++;
+                        break;
+                    case 1:
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.10f);
+                        baseWeaponStats.WeapArea.AddMultiValue(1.10f);
+                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
+                        baseWeaponStats.bDamUpgT++;
+                        break;
+                    case 2:
+                        baseWeaponStats.BaseDamage.AddMultiValue(1.40f);
+                        playerBStats.Projectiles.AddFlatValue(1f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
+                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
+                        baseWeaponStats.bDamUpgT++;
+                        break;
+                    case 3:
+                        baseWeaponStats.bDamUpgT++;
+                        break;
+                }
+                break;
+            // DDability 1
             case UpgradeManager.UpgradeTypes.defaultDanielAbility1Path1:
                 DanielBeamBehaviur ability1Behav= ability1GO.GetComponent<DanielBeamBehaviur>();
                 switch (tier)
@@ -613,6 +666,7 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
+            //DD ability 2
             case UpgradeManager.UpgradeTypes.defaultDanielAbility2Path1:
                 switch (tier)
                 {
@@ -684,6 +738,7 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
+            //DD ability 3
             case UpgradeManager.UpgradeTypes.defaultDanielAbility3Path1:
                 switch (tier)
                 {
@@ -762,6 +817,9 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
+                /// <summary>
+                /// SarahSword Upgrades (to come)
+                /// </summary>
         }
         uIManager.HideUpgrades();
         OnLevelUp?.Invoke();

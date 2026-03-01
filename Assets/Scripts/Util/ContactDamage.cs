@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ContactDamage : MonoBehaviour
 {
-    public static event System.Action<float, GameObject> OnCollision;
     CombatHandler combatHandler;
 
     private void OnEnable()

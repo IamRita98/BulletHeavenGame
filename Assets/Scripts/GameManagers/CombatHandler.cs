@@ -66,7 +66,7 @@ public class CombatHandler : MonoBehaviour
         dType = type;
         if (gObject.CompareTag("Enemy"))
         {
-            FloatingTextNum(dam, gObject);
+            FloatingTextNum(dam, gObject,type);
             EnemyBaseStats ebs = gObject.GetComponent<EnemyBaseStats>();
             ebs.Health.AddFlatValue(-dam);
             print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
@@ -93,7 +93,7 @@ public class CombatHandler : MonoBehaviour
                 }
                 print("Stacking firerate dmg: " + fireRateStackingUpgrade.enemyDamageStacks[gObject]);
                 dType = DamageType.Untyped;
-                FloatingTextNum(dam, gObject);
+                FloatingTextNum(dam, gObject,type);
             }
             damageTakenVFX = gObject.GetComponentInChildren<DamageTakenVFX>();
             damageTakenVFX.DamageTaken(gObject);
@@ -102,7 +102,7 @@ public class CombatHandler : MonoBehaviour
         else if (gObject.CompareTag("Player"))
         {
             if (shouldBeInvinc) return;
-            FloatingTextNum(dam, gObject);
+            FloatingTextNum(dam, gObject,type);
             BaseStats pbs = gObject.GetComponent<BaseStats>();
             playerInvincibilityDuration = pbs.invincibilityDuration;
             pbs.Health.AddFlatValue(-dam);
@@ -117,7 +117,7 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    void FloatingTextNum(float dam, GameObject gObject)
+    void FloatingTextNum(float dam, GameObject gObject,DamageType type)
     {
         GameObject textGO = oPoolText.objectPool[0];
         oPoolText.activePool.Add(textGO);
@@ -125,10 +125,13 @@ public class CombatHandler : MonoBehaviour
         TMP_Text text = textGO.GetComponent<TMP_Text>();
         dam = (int)dam;
         text.text = dam.ToString();
-        text.transform.SetParent(gObject.transform);
+        fDB = textGO.GetComponent<FloatingDamageBehaviour>();
+        
+        //text.transform.SetParent(gObject.transform);
         text.transform.position = gObject.transform.position;
         text.transform.position=new Vector2(text.transform.position.x,text.transform.position.y+1);
         textGO.SetActive(true);
+        fDB.Setup(text, type);
     }
 
     IEnumerator ShouldExplode(GameObject gObject, float dam)

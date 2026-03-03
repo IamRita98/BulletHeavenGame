@@ -25,31 +25,31 @@ public class FloatingDamageBehaviour : MonoBehaviour
         oPool = GameObject.FindGameObjectWithTag ("FloatingDamageNumbersPool").GetComponent<ObjectPooling>();
         number = gameObject.GetComponent<TMP_Text>();
     }
+    public void Setup(TMP_Text text, CombatHandler.DamageType type)
+    {
+        number = text;
+        PickColor(type);
+    }
     private void Update()
     {
-        if (!isColored)
-        {
-            isColored = true;
-            PickColor();
-        }
         timer += Time.deltaTime;
         if (timer>= lifeSpan)
         {
-            GameObject temp= oPool.activePool[0];
-            oPool.activePool.Remove(temp);
-            oPool.objectPool.Add(temp);
-            temp.transform.SetParent(oPool.transform);
-            temp.SetActive(false);
+            oPool.activePool.Remove(gameObject);
+            oPool.objectPool.Add(gameObject);
+            //gameObject.transform.SetParent(oPool.transform);
+            gameObject.SetActive(false);
             isColored = false;
             timer = 0;
         }
         rb.velocity = (direction * speed) * Time.deltaTime;
     }
-    void PickColor()
+    void PickColor(CombatHandler.DamageType type)
     {
-        switch (cHandler.dType)
+        switch (type)
         {
             case CombatHandler.DamageType.Physical:
+                number.color = Color.white;
                 break;
             case CombatHandler.DamageType.Poison:
                 number.color = Color.green;

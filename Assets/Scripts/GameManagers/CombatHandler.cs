@@ -149,7 +149,6 @@ public class CombatHandler : MonoBehaviour
             yield return new WaitForSeconds(.4f);
             explodeCircle.SetActive(false);
         }
-
     }
 
     int HandleRoll()
@@ -166,6 +165,5 @@ public class CombatHandler : MonoBehaviour
             shouldBeInvinc = true;
             invincibilityTimer = 0;
         }
-        
     }
 }

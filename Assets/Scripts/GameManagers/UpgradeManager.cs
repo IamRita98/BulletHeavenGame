@@ -61,6 +61,7 @@ public class UpgradeManager : MonoBehaviour
         sarahSwordAbility1,
     }
 
+    public bool durationT3Taken = false;
 
     private void Awake()
     {
@@ -191,10 +192,9 @@ public class UpgradeManager : MonoBehaviour
                     GetTier = () => playerBStats.healthUpgT,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"+10 HP" },
-                        {1,"+20 HP" },
-                        {2,"+30 HP" },
-                        {3, "+30 HP" }
+                        {0,"+15 HP" },
+                        {1,"+60% HP, \n Heal 1 hp every 2 seconds" },
+                        {2,"Every 10 minutes gain 1 revive. \n On death kill all non-boss enemies on screen." },
                     }
                 }
             },
@@ -467,32 +467,8 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case 2:
                         baseWeaponStats.ProjectileSpeed.AddFlatMultiValue(-.2f);
-                        foreach (GameObject bullet in bulletOPool.activePool) 
-                        {
-                            if (bullet == null) continue;
-                            bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
-                        }
-                        foreach (GameObject bullet in bulletOPool.objectPool)
-                        {
-                            if (bullet == null) continue;
-                            bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
-                        }
-                        foreach (GameObject proj in petProjPool.objectPool)
-                        {
-                            if (proj == null) continue;
-                            proj.GetComponent<ProjectileBehaviour>().durationT3 = true;
-                        }
-                        foreach (GameObject proj in petProjPool.activePool)
-                        {
-                            if (proj == null) continue;
-                            proj.GetComponent<ProjectileBehaviour>().durationT3 = true;
-                        }
-                        foreach (AbilityStats abilityStat in abilities)
-                        {
-                            abilityStat.ProjectileSpeed.AddFlatMultiValue(-.2f);
-                            if(abilityStat.gameObject.GetComponent<ProjectileBehaviour>()!=null) abilityStat.gameObject.GetComponent<ProjectileBehaviour>().durationT3 = true;
-
-                        }
+                        durationT3Taken = true;
+                        foreach (AbilityStats abilityStat in abilities) abilityStat.ProjectileSpeed.AddFlatMultiValue(-.2f);
                         baseWeaponStats.lifeTimeUpgT++;
                         upgradeArr.Remove("duration");
                         break;
@@ -546,21 +522,17 @@ public class UpgradeManager : MonoBehaviour
                 switch (tier)
                 {
                     case 0:
-                        playerBStats.Health.AddFlatValue(10);
-                        playerBStats.MaxHealth.AddFlatValue(10);
-                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
+                        playerBStats.Health.AddFlatValue(15);
+                        playerBStats.MaxHealth.AddFlatValue(15);
                         break;
                     case 1:
-                        playerBStats.Health.AddFlatValue(20);
-                        playerBStats.MaxHealth.AddFlatValue(20);
-                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
+                        playerBStats.Health.AddMultiValue(1.60f);
+                        playerBStats.MaxHealth.AddMultiValue(1.60f);
+                        //player.regen+2;
                         break;
                     case 2:
-                        playerBStats.Health.AddFlatValue(30);
-                        playerBStats.MaxHealth.AddFlatValue(30);
-                        print("Max HP " + playerBStats.MaxHealth.StatsValue());
-                        break;
-                    case 3:
+                        //player.addcomponent(Revive);
+                        upgradeArr.Remove("health");
                         break;
                 }
                 break;

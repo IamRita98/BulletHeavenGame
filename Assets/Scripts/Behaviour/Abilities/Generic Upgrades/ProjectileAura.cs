@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ProjectileAura : MonoBehaviour
 {
-    float dam;
+    float projDam;
     CombatHandler cHandler;
     ProjectileBehaviour pBehaviour;
     float tickTimer = 1 / 3f;
@@ -21,21 +21,20 @@ public class ProjectileAura : MonoBehaviour
     }
     public void SetAuraStats(float damage)
     {
-        dam = damage;
+        projDam = damage;
     }
-    private void Update()
-    {
-        timer++;
-        if (timer >= tickTimer) tickDamage = true;
-    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Enemy")) return;
-        
+        timer++;
+        if (timer >= tickTimer) tickDamage = true;
         if (tickDamage)
         {
+            float dam = projDam / 5;
             tickDamage = false;
             timer = 0;
+            print("AuraDmg:" + dam);
             cHandler.HandleDamage(dam, collision.gameObject, CombatHandler.DamageType.Untyped);
         }
 

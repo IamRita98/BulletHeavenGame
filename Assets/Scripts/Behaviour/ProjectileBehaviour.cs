@@ -39,7 +39,8 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         SceneManager.activeSceneChanged += GetReferences;
         if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
-        pAura = gameObject.GetComponentInChildren<ProjectileAura>();
+        pAura = gameObject.GetComponentInChildren<ProjectileAura>(true);
+
     }
     private void OnDisable()
     {

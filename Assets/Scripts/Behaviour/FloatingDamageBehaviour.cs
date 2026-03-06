@@ -61,7 +61,7 @@ public class FloatingDamageBehaviour : MonoBehaviour
                 number.color = Color.yellow;
                 break;
             case CombatHandler.DamageType.Untyped:
-                number.color = Color.gray;
+                number.color = Color.blue;
                 break;
         }
     }

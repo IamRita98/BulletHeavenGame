@@ -53,6 +53,7 @@ public class BulletRingBehaviour : MonoBehaviour
         {
             GameObject projectile = oPool.objectPool[0];
             ProjectileBehaviour pBehaviour = projectile.GetComponent<ProjectileBehaviour>();
+            projectile.SetActive(true);
             pBehaviour.SetStats(baseWeaponStats.BaseDamage.StatsValue(), baseWeaponStats.WeapArea.StatsValue(), baseWeaponStats.LifeTime.StatsValue(), baseWeaponStats.ProjectileSpeed.StatsValue(), baseWeaponStats.Pierce.StatsValue());
 
             if (path2Tier1)
@@ -63,7 +64,7 @@ public class BulletRingBehaviour : MonoBehaviour
                 if (path2Tier3) pBehaviour.shouldSplit = true ;
             }
 
-            projectile.SetActive(true);
+            
             oPool.activePool.Add(projectile);
             oPool.objectPool.Remove(projectile);
             projectile.transform.position = gameObject.transform.position;

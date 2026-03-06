@@ -15,6 +15,7 @@ public class UpgradeManager : MonoBehaviour
     public static event System.Action OnLevelUp;
 
     ObjectPooling bulletOPool;
+    ObjectPooling petProjPool;
     public SpritesReferenceSO spriteReferences;
     CombatHandler cHandler;
     public Button WeapDamageButton;
@@ -68,6 +69,7 @@ public class UpgradeManager : MonoBehaviour
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
         cHandler = gameObject.GetComponent<CombatHandler>();
         bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
+        petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
         GetPlayerCharacterAndAbilities();
         InitializeUpgrades();
     }
@@ -145,7 +147,7 @@ public class UpgradeManager : MonoBehaviour
                 UpgradeTypes.duration,
                 new UpgradeInfo
                 {
-                    GetTier = () => baseWeaponStats.attackRUpgT,
+                    GetTier = () => baseWeaponStats.lifeTimeUpgT,
                     descriptions= new Dictionary<int, string>
                     {
                         {0,"+15% Duration" },
@@ -350,6 +352,9 @@ public class UpgradeManager : MonoBehaviour
             case "weapArea":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton, UpgradeTypes.weapArea);
                 break;
+            case "duration":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.duration], upgradeButton, UpgradeTypes.duration);
+                break;
             case "DDautoAttack":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAutoAttacks], upgradeButton, UpgradeTypes.defaultDanielAutoAttacks);
                 break;
@@ -462,12 +467,31 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case 2:
                         baseWeaponStats.ProjectileSpeed.AddFlatMultiValue(-.2f);
-                        foreach(GameObject bullet in bulletOPool.activePool) bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
-                        foreach(GameObject bullet in bulletOPool.objectPool) bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        foreach (GameObject bullet in bulletOPool.activePool) 
+                        {
+                            if (bullet == null) continue;
+                            bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        }
+                        foreach (GameObject bullet in bulletOPool.objectPool)
+                        {
+                            if (bullet == null) continue;
+                            bullet.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        }
+                        foreach (GameObject proj in petProjPool.objectPool)
+                        {
+                            if (proj == null) continue;
+                            proj.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        }
+                        foreach (GameObject proj in petProjPool.activePool)
+                        {
+                            if (proj == null) continue;
+                            proj.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                        }
                         foreach (AbilityStats abilityStat in abilities)
                         {
                             abilityStat.ProjectileSpeed.AddFlatMultiValue(-.2f);
-                            abilityStat.gameObject.GetComponent<ProjectileBehaviour>().durationT3 = true;
+                            if(abilityStat.gameObject.GetComponent<ProjectileBehaviour>()!=null) abilityStat.gameObject.GetComponent<ProjectileBehaviour>().durationT3 = true;
+
                         }
                         baseWeaponStats.lifeTimeUpgT++;
                         upgradeArr.Remove("duration");

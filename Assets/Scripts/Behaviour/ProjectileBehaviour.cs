@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 public class ProjectileBehaviour : MonoBehaviour
 {
     ObjectPooling oPool;
+    ProjectileAura pAura;
     float speed;
     public float lifeTime;
-    float damage;
+    public float damage;
     Vector3 baseArea;
     float area;
     public float timer = 0;
@@ -31,12 +32,14 @@ public class ProjectileBehaviour : MonoBehaviour
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         baseArea = transform.localScale;
         nearestEnemy = gameObject.GetComponent<TrackNeareastEnemy>();
+        
     }
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
         if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+        pAura = gameObject.GetComponentInChildren<ProjectileAura>();
     }
     private void OnDisable()
     {
@@ -118,6 +121,19 @@ public class ProjectileBehaviour : MonoBehaviour
         area = size;
         speed = moveSpeed;
         transform.localScale *= area;
+        if (durationT3)
+        {
+            if (!this.transform.GetChild(0).gameObject.activeInHierarchy)
+            {
+                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                pAura.SetAuraStats(damage);
+            }
+            else
+            {
+                pAura.SetAuraStats(damage);
+            }
+            
+        }
     }
 
     void SpawnSplitProjectile()

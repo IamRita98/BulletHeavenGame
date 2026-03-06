@@ -79,9 +79,10 @@ public class ProjectileWeapon : MonoBehaviour
     GameObject SpawnBullet()
     {
         GameObject projGO = oPool.objectPool[0];
+        projGO.SetActive(true);
         projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
         print("bullet dam: " + bws.BaseDamage.StatsValue());
-        projGO.SetActive(true);
+        
         oPool.activePool.Add(projGO);
         oPool.objectPool.Remove(projGO);
         return projGO;

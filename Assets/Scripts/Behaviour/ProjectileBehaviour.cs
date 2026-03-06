@@ -26,21 +26,20 @@ public class ProjectileBehaviour : MonoBehaviour
     int chainCounter = 0;
     public bool shouldSplit=false;
     public bool durationT3 = false;
+    UpgradeManager upgradeManager;
 
     private void Start()
     {
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         baseArea = transform.localScale;
         nearestEnemy = gameObject.GetComponent<TrackNeareastEnemy>();
-        
     }
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
         if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
-        pAura = gameObject.GetComponentInChildren<ProjectileAura>(true);
-
+        
     }
     private void OnDisable()
     {
@@ -50,6 +49,7 @@ public class ProjectileBehaviour : MonoBehaviour
     void GetReferences(Scene oldScene, Scene newScene)
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
+        upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
     }
 
     private void Update()
@@ -122,8 +122,9 @@ public class ProjectileBehaviour : MonoBehaviour
         area = size;
         speed = moveSpeed;
         transform.localScale *= area;
-        if (durationT3)
+        if (upgradeManager.durationT3Taken)
         {
+            pAura = gameObject.GetComponentInChildren<ProjectileAura>(true);
             if (!this.transform.GetChild(0).gameObject.activeInHierarchy)
             {
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);

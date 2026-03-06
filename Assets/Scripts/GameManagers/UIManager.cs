@@ -23,6 +23,11 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
     public GameObject gameOverUI;
+    public GameObject levelTimer;
+    TMP_Text levelTimerText;
+    float levelTimerTime = 0;
+    float levelTimerMinutes = 0;
+
 
 
     //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
@@ -47,12 +52,14 @@ public class UIManager : MonoBehaviour
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
+        levelTimerText = levelTimer.GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
         ShowPlayerHPAndXP();
         ShowPlayerCooldowns();
+        DisplayLevelTimer();
     }
 
     void ShowPlayerHPAndXP()
@@ -112,6 +119,18 @@ public class UIManager : MonoBehaviour
             btn.gameObject.SetActive(false);
         }
         gameStateManager.UnPauseGame();
+    }
+
+    public void DisplayLevelTimer()
+    {
+        levelTimerTime += Time.deltaTime;
+        if (levelTimerTime > 60)
+        {
+            levelTimerMinutes++;
+            levelTimerTime %= 60;
+        }
+        levelTimerText.text = string.Format("{0:00}:{1:00}", levelTimerMinutes, levelTimerTime);
+        //levelTimerText.text = levelTimerMinutes.ToString() + ":" + levelTimerTime.ToString().Truncate(3);
     }
 
     void PlayerDeathUI()

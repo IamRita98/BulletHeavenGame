@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class ChillElement : MonoBehaviour
 {
-    EnemyBaseStats ebs;
+    BaseStats ebs;
     float slowDuration;
     float strength;
     bool isSlowed = false;
@@ -14,7 +14,7 @@ public class ChillElement : MonoBehaviour
 
     void Awake()
     {
-        ebs = gameObject.GetComponent<EnemyBaseStats>();
+        ebs = gameObject.GetComponent<BaseStats>();
     }
     /// <summary>
     /// (Pass strength as a decimal ie: .6)Apply Debuffs takes in a target along with strength of slow and duration

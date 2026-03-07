@@ -19,8 +19,9 @@ public class CombatHandler : MonoBehaviour
     FloatingDamageBehaviour fDB;
     public static event System.Action<GameObject> OnEnemyDeath;
     public static event System.Action OnPlayerDeath;
-    ObjectPooling oPool;
+    ObjectPooling explOPool;
     ObjectPooling oPoolText;
+    ObjectPooling enemyPool;
     SpriteRenderer playerSRend;
     FireRateStackingUpgrade fireRateStackingUpgrade;
     DamageTakenVFX damageTakenVFX;
@@ -31,21 +32,33 @@ public class CombatHandler : MonoBehaviour
     public bool shouldBeInvinc = false;
     public bool shouldExplode = false;
     public bool fireRateTier3 = false;
+    public bool hasRevives = false;
+    float reviveTimer = 0;
+    public int revives = 0;
     int fireRateStackAmount = 1;
     float invincibilityTimer;
+    BaseStats pbs;
 
    
     private void Awake()
     {
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
-        oPool = gameObject.GetComponent<ObjectPooling>();
+        explOPool = gameObject.GetComponent<ObjectPooling>();
         oPoolText = GameObject.FindGameObjectWithTag("FloatingDamageNumbersPool").GetComponent<ObjectPooling>();
         fireRateStackingUpgrade = gameObject.GetComponent<FireRateStackingUpgrade>();
         playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
+        pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }
 
     private void Update()
     {
+        if (hasRevives) reviveTimer++;
+        if (reviveTimer >= 600f)
+        {
+            reviveTimer = 0;
+            revives++;
+        }
         //handling invincibility
         if (!shouldBeInvinc) return;
         invincibilityTimer += Time.deltaTime;
@@ -67,7 +80,8 @@ public class CombatHandler : MonoBehaviour
         if (gObject.CompareTag("Enemy"))
         {
             FloatingTextNum(dam, gObject,type);
-            EnemyBaseStats ebs = gObject.GetComponent<EnemyBaseStats>();
+            ReturnToPoolOnDeath returnToPool = gObject.GetComponent<ReturnToPoolOnDeath>();
+            BaseStats ebs = gObject.GetComponent<BaseStats>();
             ebs.Health.AddFlatValue(-dam);
             print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
             if (ebs.Health.StatsValue() <= 0)
@@ -77,7 +91,7 @@ public class CombatHandler : MonoBehaviour
                     StartCoroutine(ShouldExplode(gObject, dam));
                 }
                 OnEnemyDeath?.Invoke(gObject);
-                ebs.ReturnToPool();
+                returnToPool.ReturnToPool();
                 return;
             }
             else if (fireRateTier3)
@@ -109,14 +123,46 @@ public class CombatHandler : MonoBehaviour
             InvincibilityDuration(playerInvincibilityDuration);
             if (pbs.Health.StatsValue() <= 0)
             {
-                OnPlayerDeath?.Invoke();
-                return;
+                Debug.Log("Max hp: "+pbs.MaxHealth.StatsValue());
+                if (revives >= 1)
+                {
+                    Revive();
+                    ClearScreen();
+                }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                    return;
+                }
+                    
             }
             damageTakenVFX = playerSRend.GetComponent<DamageTakenVFX>();
             damageTakenVFX.DamageTaken(gObject);
         }
     }
-
+    public void ClearScreen()
+    {
+        foreach(GameObject enemy in enemyPool.activePool)
+        {
+            ReturnToPoolOnDeath returnToPool = enemy.GetComponent<ReturnToPoolOnDeath>();
+            returnToPool.ReturnToPool();
+        }
+    }
+    void Revive()
+    {
+        /*
+        * We set HP back to 0 if negative and find the difference between the goalHealth & the health value with mult
+        * & bonuses added (Health.StatsValue()) to find the true value required to set HP back to half of max
+        */
+        float goalHealth = pbs.MaxHealth.StatsValue() / 2;
+        pbs.Health.AddFlatValue(-1 * pbs.Health.StatsValue());
+        pbs.Health.AddFlatValue(goalHealth);
+        float div = pbs.Health.StatsValue();
+        pbs.Health.AddFlatValue(-goalHealth);
+        float diff = div - goalHealth;
+        Debug.Log("curr hp: " + pbs.Health.StatsValue() + " Div:" + div);
+        pbs.Health.AddFlatValue(Mathf.Abs(diff));
+    }
     void FloatingTextNum(float dam, GameObject gObject,DamageType type)
     {
         GameObject textGO = oPoolText.objectPool[0];
@@ -137,11 +183,11 @@ public class CombatHandler : MonoBehaviour
     IEnumerator ShouldExplode(GameObject gObject, float dam)
     {
         int roll = HandleRoll();
-        GameObject explodeCircle = oPool.objectPool[0];
+        GameObject explodeCircle = explOPool.objectPool[0];
         if (roll >= 75)
         {
-            oPool.activePool.Add(explodeCircle);
-            oPool.objectPool.Remove(explodeCircle);
+            explOPool.activePool.Add(explodeCircle);
+            explOPool.objectPool.Remove(explodeCircle);
             explodeCircle.transform.position = gObject.transform.position;
             GenericOnEnterDam genDam = explodeCircle.GetComponent<GenericOnEnterDam>();
             genDam.damage = dam * .3f;

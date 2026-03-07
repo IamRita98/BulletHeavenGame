@@ -7,7 +7,7 @@ using UnityEngine;
 public class DamageOverTime : MonoBehaviour
 {
     CombatHandler combatHandler;
-    EnemyBaseStats ebs;
+    BaseStats ebs;
     float defaultProcTimer = 1f / 3f;
     float timer;
     float procTimer;
@@ -23,7 +23,7 @@ public class DamageOverTime : MonoBehaviour
     }
     private void Awake()
     {
-        ebs = GetComponent<EnemyBaseStats>();
+        ebs = GetComponent<BaseStats>();
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
     }
 

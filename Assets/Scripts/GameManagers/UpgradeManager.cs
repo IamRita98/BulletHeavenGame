@@ -519,20 +519,26 @@ public class UpgradeManager : MonoBehaviour
                 }
                 break;
             case UpgradeManager.UpgradeTypes.health:
+                HealthRegen hRegen = playerCharacter.GetComponent<HealthRegen>();
                 switch (tier)
                 {
                     case 0:
                         playerBStats.Health.AddFlatValue(15);
                         playerBStats.MaxHealth.AddFlatValue(15);
+                        playerBStats.healthUpgT++;
                         break;
                     case 1:
                         playerBStats.Health.AddMultiValue(1.60f);
                         playerBStats.MaxHealth.AddMultiValue(1.60f);
-                        //player.regen+2;
+                        playerBStats.healthUpgT++;
+                        hRegen.regenValue+=0;
                         break;
                     case 2:
-                        //player.addcomponent(Revive);
+                        cHandler.revives++;
+                        cHandler.hasRevives = true;
+                        playerBStats.healthUpgT++;
                         upgradeArr.Remove("health");
+                        hRegen.regenValue += 0;
                         break;
                 }
                 break;

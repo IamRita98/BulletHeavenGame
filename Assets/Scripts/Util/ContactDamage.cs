@@ -21,7 +21,7 @@ public class ContactDamage : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Enemy")) return;
-        EnemyBaseStats ebs = collision.gameObject.GetComponent<EnemyBaseStats>();
+        BaseStats ebs = collision.gameObject.GetComponent<BaseStats>();
         combatHandler.HandleDamage(ebs.ContactDamage.StatsValue(), gameObject,CombatHandler.DamageType.Physical);
         //OnCollision?.Invoke(damage, gameObject);
     }

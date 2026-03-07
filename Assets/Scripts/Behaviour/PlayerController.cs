@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
+        moveSpeed = bStats.MovementSpeed.StatsValue();
         dir.x = Input.GetAxisRaw("Horizontal");
         dir.y = Input.GetAxisRaw("Vertical");
         dir.Normalize();

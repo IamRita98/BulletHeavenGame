@@ -64,7 +64,8 @@ public class UIManager : MonoBehaviour
 
     void ShowPlayerHPAndXP()
     {
-        playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
+        //playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
+        playerHp.text=string.Format("{0}/{0}HP", (int)playerBStats.Health.StatsValue(), (int)playerBStats.MaxHealth.StatsValue());
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
     }
 

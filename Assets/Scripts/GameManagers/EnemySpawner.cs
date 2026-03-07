@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
             spawnPos = Camera.main.ViewportToWorldPoint(new Vector2(x, y)); //(0,0)bot left and (1,1) top right
 
             GameObject enemySpawned = oPool.objectPool[0];
-            EnemyBaseStats eBaseStats = enemySpawned.GetComponent<EnemyBaseStats>();
+            BaseStats eBaseStats = enemySpawned.GetComponent<BaseStats>();
             eBaseStats.Health.StatOverwrite(eBaseStats.MaxHealth.StatsValue());
             enemySpawned.transform.position = spawnPos;
             enemySpawned.SetActive(true);

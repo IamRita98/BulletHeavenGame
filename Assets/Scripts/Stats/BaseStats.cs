@@ -8,15 +8,24 @@ using UnityEngine;
 
 public class BaseStats : MonoBehaviour
 {
+
+    //Enemy related variables
+    [Header("Enemy related variables")]
+    [SerializeField] float contactDamage;
+    [SerializeField] float attackDamage;
+    [Tooltip("enemy contact dam")]
+    public Stats ContactDamage;
+    public Stats AttackDamage;
+
+    
     public enum Character
     {
         DefaultDaniel,
         SarahSword,
         Enemy,
     }
-
+    [Header("Player related variables")]
     public Character characterSelected;
-
     //Some stats such as a global damage increase need to be applied specifically to the Weapon and Abilities seperately
     [SerializeField] float health = 0;
     [SerializeField] float maxHealth = 0;
@@ -63,5 +72,8 @@ public class BaseStats : MonoBehaviour
         Projectiles = new Stats(projectiles);
         XP = new Stats(xp);
         PickupRadius = new Stats(pickUpRadius);
+
+        ContactDamage = new Stats(contactDamage);
+        AttackDamage = new Stats(attackDamage);
     }
 }

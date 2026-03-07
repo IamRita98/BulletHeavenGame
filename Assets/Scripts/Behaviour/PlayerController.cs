@@ -47,11 +47,24 @@ public class PlayerController : MonoBehaviour
         Movement();
         CheckForSpriteFlip();
         Animations();
+        AbilityInput();
+        HealthClamping();
+    }
+    void AbilityInput()
+    {
         if (Input.GetKeyDown(KeyCode.Mouse0)) abilityManager.Ability1();
         if (Input.GetKeyDown(KeyCode.Mouse1)) abilityManager.Ability2();
         if (Input.GetKeyDown(KeyCode.Space)) abilityManager.Ability3();
     }
-
+    void HealthClamping()
+    {
+        if (bStats.Health.StatsValue() > bStats.MaxHealth.StatsValue())
+        {
+            float temp = bStats.Health.StatsValue() - bStats.MaxHealth.StatsValue();
+            bStats.Health.AddFlatValue(-temp);
+        }
+        
+    }
     void Movement()
     {
         dir.x = Input.GetAxisRaw("Horizontal");

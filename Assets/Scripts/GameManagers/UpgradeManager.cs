@@ -193,8 +193,8 @@ public class UpgradeManager : MonoBehaviour
                     descriptions= new Dictionary<int, string>
                     {
                         {0,"+15 HP" },
-                        {1,"+60% HP, \n Heal 1 hp every 2 seconds" },
-                        {2,"Every 10 minutes gain 1 revive. \n On death kill all non-boss enemies on screen." },
+                        {1,"+60% HP, \n Gain +2 hp regen" },
+                        {2,"Every 10 minutes gain 1 revive. \n On death kill all non-boss enemies on screen. \n +1 hp regen" },
                     }
                 }
             },
@@ -531,14 +531,14 @@ public class UpgradeManager : MonoBehaviour
                         playerBStats.Health.AddMultiValue(1.60f);
                         playerBStats.MaxHealth.AddMultiValue(1.60f);
                         playerBStats.healthUpgT++;
-                        hRegen.regenValue+=0;
+                        hRegen.regenValue += 2;
                         break;
                     case 2:
                         cHandler.revives++;
                         cHandler.hasRevives = true;
                         playerBStats.healthUpgT++;
                         upgradeArr.Remove("health");
-                        hRegen.regenValue += 0;
+                        hRegen.regenValue += 1;
                         break;
                 }
                 break;

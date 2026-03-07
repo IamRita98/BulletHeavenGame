@@ -142,8 +142,16 @@ public class CombatHandler : MonoBehaviour
     }
     public void ClearScreen()
     {
-        foreach(GameObject enemy in enemyPool.activePool)
+        /*        foreach(GameObject enemy in enemyPool.activePool)
+                {
+                    ReturnToPoolOnDeath returnToPool = enemy.GetComponent<ReturnToPoolOnDeath>();
+                    print(enemy);
+                    returnToPool.ReturnToPool();
+                }*/
+        int temp = enemyPool.activePool.Count;
+        for (int i = 0; i < temp; i++)
         {
+            GameObject enemy = enemyPool.activePool[0];
             ReturnToPoolOnDeath returnToPool = enemy.GetComponent<ReturnToPoolOnDeath>();
             returnToPool.ReturnToPool();
         }

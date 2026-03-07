@@ -16,6 +16,7 @@ public class UpgradeManager : MonoBehaviour
 
     ObjectPooling bulletOPool;
     ObjectPooling petProjPool;
+    ObjectPooling enemyPool;
     public SpritesReferenceSO spriteReferences;
     CombatHandler cHandler;
     public Button WeapDamageButton;
@@ -28,7 +29,7 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability2;
     AbilityStats ability3;
     int possibleChoices = 3;
-    List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration" };
+    List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration", "speed" };
     List<string> defaultDaniel = new List<string> { "DDautoAttack", "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
                                                     "DDability3Path2" , "DDability3Path3" };
     GameObject playerCharacter;
@@ -43,6 +44,7 @@ public class UpgradeManager : MonoBehaviour
         health,
         projectiles,
         globalDam,
+        speed,
 
         //character specific upgrades
         //defaultDaniel
@@ -71,6 +73,7 @@ public class UpgradeManager : MonoBehaviour
         cHandler = gameObject.GetComponent<CombatHandler>();
         bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
+        enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
         GetPlayerCharacterAndAbilities();
         InitializeUpgrades();
     }
@@ -195,6 +198,19 @@ public class UpgradeManager : MonoBehaviour
                         {0,"+15 HP" },
                         {1,"+60% HP, \n Gain +2 hp regen" },
                         {2,"Every 10 minutes gain 1 revive. \n On death kill all non-boss enemies on screen. \n +1 hp regen" },
+                    }
+                }
+            },
+            {
+                UpgradeTypes.speed,
+                new UpgradeInfo
+                {
+                    GetTier = () => playerBStats.movementSpUpgT,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"+15% movement speed" },
+                        {1,"Gain a short invlun dash on a 10s cd(Gain an extra dash charge if you already have a dash)" },
+                        {2,"Gain 100% increased movement speed but enemies gain 50% movement speed" },
                     }
                 }
             },
@@ -354,6 +370,9 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case "duration":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.duration], upgradeButton, UpgradeTypes.duration);
+                break;
+            case "speed":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.speed], upgradeButton, UpgradeTypes.speed);
                 break;
             case "DDautoAttack":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAutoAttacks], upgradeButton, UpgradeTypes.defaultDanielAutoAttacks);
@@ -539,6 +558,34 @@ public class UpgradeManager : MonoBehaviour
                         playerBStats.healthUpgT++;
                         upgradeArr.Remove("health");
                         hRegen.regenValue += 1;
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.speed:
+                switch (tier)
+                {
+                    case 0:
+                        playerBStats.MovementSpeed.AddMultiValue(1.15f);
+                        print("Speed: " + playerBStats.MovementSpeed.StatsValue());
+                        playerBStats.movementSpUpgT++;
+                        break;
+                    case 1:
+                        playerBStats.movementSpUpgT++;
+                        break;
+                    case 2:
+                        print("Cum");
+                        playerBStats.MovementSpeed.AddMultiValue(2f);
+                        print("Speed: " + playerBStats.MovementSpeed.StatsValue());
+                        foreach (GameObject enemy in enemyPool.activePool)
+                        {
+                            enemy.GetComponent<BaseStats>().MovementSpeed.AddMultiValue(1.5f);
+                        }
+                        foreach (GameObject enemy in enemyPool.objectPool)
+                        {
+                            enemy.GetComponent<BaseStats>().MovementSpeed.AddMultiValue(1.5f);
+                        }
+                        upgradeArr.Remove("speed");
+                        playerBStats.movementSpUpgT++;
                         break;
                 }
                 break;

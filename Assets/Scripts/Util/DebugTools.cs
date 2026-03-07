@@ -7,6 +7,7 @@ public class DebugTools : MonoBehaviour
     AbilityManager abilityManager;
     BaseStats baseStats;
     LevelUpManager levelUpManager;
+    bool timeScaleChanged = false;
     private void Awake()
     {
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
@@ -46,11 +47,29 @@ public class DebugTools : MonoBehaviour
     }
     void SlowDownGame()
     {
-        Time.timeScale = .2f;
+        if (timeScaleChanged)
+        {
+            Time.timeScale = 1;
+            timeScaleChanged = false;
+        }
+        else
+        {
+            Time.timeScale = .2f;
+            timeScaleChanged = true;
+        }
     }
     void SpeedUpGame()
     {
-        Time.timeScale = 1f;
+        if (timeScaleChanged)
+        {
+            Time.timeScale = 1;
+            timeScaleChanged = false;
+        }
+        else
+        {
+            Time.timeScale = 5f;
+            timeScaleChanged = true;
+        }
     }
     void ResetToMaxHP()
     {

@@ -34,6 +34,8 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         abilityStats = GetComponent<AbilityStats>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sRend = gameObject.GetComponent<SpriteRenderer>();
+        sRend.color = new Color(1f, .1f, .1f, .4f);
     }
 
     void SwitchOldBeamForNewCircle()
@@ -56,10 +58,15 @@ public class AltBeamCircleBehaviour : MonoBehaviour
     {
         circleAOE.enabled = true;
         beamRenderer.enabled = true;
-        ScaleWithStats();
+        UpgradeManager.OnLevelUp += ScaleStats;
+        ScaleStats();
+    }
+    private void OnDisable()
+    {
+        UpgradeManager.OnLevelUp -= ScaleStats;
     }
 
-    void ScaleWithStats()
+    void ScaleStats()
     {
         size = new Vector3(defaultRadiusSize, defaultRadiusSize, 0) * abilityStats.Area.StatsValue();
         gameObject.transform.localScale = size;

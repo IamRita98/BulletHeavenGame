@@ -55,7 +55,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0)) abilityManager.Ability1();
         if (Input.GetKeyDown(KeyCode.Mouse1)) abilityManager.Ability2();
         if (Input.GetKeyDown(KeyCode.Space)) abilityManager.Ability3();
-        if (Input.GetKeyDown(KeyCode.LeftShift)) abilityManager.Ability4();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (abilityManager.ability4 != null)
+            {
+                abilityManager.Ability4();
+                Debug.Log("Cummies");
+            }
+            
+        }
     }
     void HealthClamping()
     {

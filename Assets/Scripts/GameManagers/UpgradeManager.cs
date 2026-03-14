@@ -14,6 +14,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public static event System.Action OnLevelUp;
 
+    AbilityManager abilityManager;
     public GameObject genDash;
     ObjectPooling bulletOPool;
     ObjectPooling petProjPool;
@@ -30,6 +31,8 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability2;
     AbilityStats ability3;
     int possibleChoices = 3;
+    List<BaseStats.Character> playerCharacters = new List<BaseStats.Character> { BaseStats.Character.SarahSword };
+    
     List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration", "speed" };
     List<string> defaultDaniel = new List<string> { "DDautoAttack", "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
                                                     "DDability3Path2" , "DDability3Path3" };
@@ -75,6 +78,7 @@ public class UpgradeManager : MonoBehaviour
         bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
         enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
+        abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
         GetPlayerCharacterAndAbilities();
         InitializeUpgrades();
     }
@@ -572,6 +576,13 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case 1:
                         playerBStats.movementSpUpgT++;
+                        GameObject tempDashGO=Instantiate(genDash);
+
+                        tempDashGO.transform.SetParent(playerCharacter.transform);
+                        tempDashGO.transform.localPosition = playerCharacter.transform.position;
+                        playerBStats.movementSpUpgT++;
+                        if (playerCharacters.Contains(playerBStats.characterSelected)) abilityManager.ability2Charges++;
+                        else abilityManager.ability4 = tempDashGO;
                         break;
                     case 2:
                         print("Cum");
@@ -586,10 +597,7 @@ public class UpgradeManager : MonoBehaviour
                             enemy.GetComponent<BaseStats>().MovementSpeed.AddMultiValue(1.5f);
                         }
                         upgradeArr.Remove("speed");
-                        Instantiate(genDash);
-                        genDash.transform.parent = playerCharacter.transform;
-                        genDash.transform.localPosition = playerCharacter.transform.position;
-                        playerBStats.movementSpUpgT++;
+                        
                         break;
                 }
                 break;

@@ -48,11 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aea061a86b60af469c72195bcd48e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dType: 0
   shortInvinc: 0
   isShortInvinc: 0
   isLongInvinc: 0
   shouldBeInvinc: 0
   shouldExplode: 0
+  fireRateTier3: 0
+  hasRevives: 0
+  revives: 0
 --- !u!114 &6253128725195602159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,8 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41bb9e0e5dd9de478660aa96ce0563e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  genDash: {fileID: 3128018025617578022, guid: 241e1c690049b764fbd1acd478f83306, type: 3}
   spriteReferences: {fileID: 0}
   WeapDamageButton: {fileID: 0}
+  durationT3Taken: 0
 --- !u!114 &882833941755458029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +110,7 @@ MonoBehaviour:
   ability2CD: {fileID: 0}
   ability3CD: {fileID: 0}
   gameOverUI: {fileID: 0}
+  levelTimer: {fileID: 0}
 --- !u!114 &3215002357353382402
 MonoBehaviour:
   m_ObjectHideFlags: 0

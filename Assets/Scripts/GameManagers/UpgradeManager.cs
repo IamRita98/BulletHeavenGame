@@ -31,7 +31,7 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability2;
     AbilityStats ability3;
     int possibleChoices = 3;
-    List<BaseStats.Character> playerCharacters = new List<BaseStats.Character> { BaseStats.Character.SarahSword };
+    List<BaseStats.Character> playerCharactersWithDashes = new List<BaseStats.Character> { BaseStats.Character.SarahSword };
     
     List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration", "speed" };
     List<string> defaultDaniel = new List<string> { "DDautoAttack", "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
@@ -577,12 +577,14 @@ public class UpgradeManager : MonoBehaviour
                     case 1:
                         playerBStats.movementSpUpgT++;
                         GameObject tempDashGO=Instantiate(genDash);
-
                         tempDashGO.transform.SetParent(playerCharacter.transform);
-                        tempDashGO.transform.localPosition = playerCharacter.transform.position;
-                        playerBStats.movementSpUpgT++;
-                        if (playerCharacters.Contains(playerBStats.characterSelected)) abilityManager.ability2Charges++;
+                        tempDashGO.transform.localPosition = Vector3.zero;
+                        if (playerCharactersWithDashes.Contains(playerBStats.characterSelected)) abilityManager.ability2Charges++;
                         else abilityManager.ability4 = tempDashGO;
+                        uIManager.ability4CD.gameObject.SetActive(true);
+                        abilityManager.GetAbility4References();
+                        //abilityManager.ability4CoolDown = tempDashGO.GetComponent<AbilityStats>().Cooldown.StatsValue();
+                        tempDashGO.SetActive(false);
                         break;
                     case 2:
                         print("Cum");

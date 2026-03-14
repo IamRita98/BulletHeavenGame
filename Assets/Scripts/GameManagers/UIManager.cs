@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text ability1CD;
     public TMP_Text ability2CD;
     public TMP_Text ability3CD;
+    public TMP_Text ability4CD;
     public GameObject gameOverUI;
     public GameObject levelTimer;
     TMP_Text levelTimerText;
@@ -65,7 +66,7 @@ public class UIManager : MonoBehaviour
     void ShowPlayerHPAndXP()
     {
         //playerHp.text = (playerBStats.Health.StatsValue() + "/" + playerBStats.MaxHealth.StatsValue() + "HP");
-        playerHp.text=string.Format("{0}/{1}HP", (int)playerBStats.Health.StatsValue(), (int)playerBStats.MaxHealth.StatsValue());
+        playerHp.text = string.Format("{0}/{1}HP", (int)playerBStats.Health.StatsValue(), (int)playerBStats.MaxHealth.StatsValue());
         playerXp.text = (playerBStats.XP.StatsValue() + "/" + levelUpManager.XPThreshold + "XP");
     }
 
@@ -97,9 +98,21 @@ public class UIManager : MonoBehaviour
         {
             ability3CD.text = ("Ability 3 Rdy");
         }
+
+        if (abilityManager.ability4 != null)
+        {
+            if (abilityManager.ability4OnCoolDown)
+            {
+                ability4CD.text = (abilityManager.ability4Timer.ToString("0.##") + "s");
+            }
+            else
+            {
+                ability4CD.text = ("Ability 4 Rdy");
+            }
+        }
     }
 
-    public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo,int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)
+    public void DisplayUpgrade(UpgradeManager.UpgradeInfo upgradeInfo, int upgradeButton, UpgradeManager.UpgradeTypes upgradeType)
     {
         gameStateManager.PauseGame();
         Button tempButton = upgradeButtonList[upgradeButton];
@@ -110,12 +123,12 @@ public class UIManager : MonoBehaviour
         string textToDisplay;
         textToDisplay = upgradeInfo.descriptions[tier];
         buttonText.text = textToDisplay;
-        tempButton.onClick.AddListener(delegate { upgradeManager.ApplyUpgrades(tier, upgradeType);});
+        tempButton.onClick.AddListener(delegate { upgradeManager.ApplyUpgrades(tier, upgradeType); });
     }
 
     public void HideUpgrades()
     {
-        foreach(Button btn in upgradeButtonList)
+        foreach (Button btn in upgradeButtonList)
         {
             btn.gameObject.SetActive(false);
         }

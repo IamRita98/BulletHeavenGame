@@ -16,7 +16,7 @@ public class AbilityManager : MonoBehaviour
     public float ability1CoolDown;
     public float ability2CoolDown;
     public float ability3CoolDown;
-    public float ability4CoolDown;
+    float ability4CoolDown = 5;
     public bool ability1OnCoolDown = false;
     public bool ability2OnCoolDown = false;
     public bool ability3OnCoolDown = false;
@@ -62,9 +62,17 @@ public class AbilityManager : MonoBehaviour
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
+
         ability1Timer = ability1CoolDown;
         ability2Timer = ability2CoolDown;
         ability3Timer = ability3CoolDown;
+        
+    }
+
+    public void GetAbility4References()
+    {
+        ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        ability4Timer = ability4CoolDown;
     }
 
     void UpdateCooldownValues()
@@ -72,8 +80,7 @@ public class AbilityManager : MonoBehaviour
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        if(ability4!=null) ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
-
+        //if(ability4!=null) ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
     }
 
     void TrackAbilityCooldowns()
@@ -99,6 +106,7 @@ public class AbilityManager : MonoBehaviour
             ability3OnCoolDown = false;
             if (ability3MaxCharges > ability3Charges) ability3Charges++;
         }
+        print("A4CD: "+ability4CoolDown);
         if (ability4OnCoolDown) ability4Timer -= Time.deltaTime;
         if (ability4Timer <= 0)
         {
@@ -116,7 +124,6 @@ public class AbilityManager : MonoBehaviour
             ability1.SetActive(true);
             ability1OnCoolDown = true;
             if (ability1Timer <= 0) ability1Timer = ability1CoolDown;
-            return;
         }
     }
 
@@ -125,11 +132,11 @@ public class AbilityManager : MonoBehaviour
         if (ability2Charges > 0)
         {
             if (ability2.activeInHierarchy) return;
+            ability2Charges--;
+            ability2.SetActive(true);
+            ability2OnCoolDown = true;
+            if (ability2Timer <= 0) ability2Timer = ability2CoolDown;
         }
-        ability2Charges--;
-        ability2.SetActive(true);
-        ability2OnCoolDown = true;
-        if (ability2Timer <= 0) ability2Timer = ability2CoolDown;
     }
 
     public void Ability3()
@@ -137,21 +144,21 @@ public class AbilityManager : MonoBehaviour
         if (ability3Charges > 0)
         {
             if (ability3.activeInHierarchy) return;
+            ability3Charges--;
+            ability3.SetActive(true);
+            ability3OnCoolDown = true;
+            if (ability3Timer <= 0) ability3Timer = ability3CoolDown;
         }
-        ability3Charges--;
-        ability3.SetActive(true);
-        ability3OnCoolDown = true;
-        if (ability3Timer <= 0) ability3Timer = ability3CoolDown;
     }
     public void Ability4()
     {
         if (ability4Charges > 0)
         {
             if (ability4.activeInHierarchy) return;
+            ability4Charges--;
+            ability4.SetActive(true);
+            ability4OnCoolDown = true;
+            if (ability4Timer <= 0) ability4Timer = ability4CoolDown;
         }
-        ability4Charges--;
-        ability4.SetActive(true);
-        ability4OnCoolDown = true;
-        if (ability4Timer <= 0) ability4Timer = ability4CoolDown;
     }
 }

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2249499009750883638}
-  - component: {fileID: -8009150367474941645}
   - component: {fileID: 7104564025528662555}
+  - component: {fileID: 207386236327952314}
   m_Layer: 0
   m_Name: GenericDash
   m_TagString: GenericDash
@@ -33,7 +33,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8009150367474941645
+--- !u!114 &7104564025528662555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128018025617578022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d97d6fc64453374ea123f00a4f8f7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &207386236327952314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,10 +60,10 @@ MonoBehaviour:
   contactDamage: 0
   attackDamage: 0
   characterSelected: 0
-  health: 0
-  maxHealth: 0
-  speed: 0
-  projectiles: 0
+  health: 1
+  maxHealth: 1
+  speed: 1
+  projectiles: 1
   xp: 0
   pickUpRadius: 0
   invincibilityDuration: 0
@@ -61,21 +73,9 @@ MonoBehaviour:
   projUpgT: 0
   XpPickupUpgT: 0
   baseDamage: 0
-  cooldown: 5
+  cooldown: 3
   lifeTime: 0.5
   area: 0
   pierce: 0
   projectileSpeed: 15
   upgradeTier: 0
---- !u!114 &7104564025528662555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3128018025617578022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d97d6fc64453374ea123f00a4f8f7c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

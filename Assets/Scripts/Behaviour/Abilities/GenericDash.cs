@@ -71,7 +71,6 @@ public class GenericDash : MonoBehaviour
     {
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         gotReferences = true;
-        gameObject.SetActive(false);
-
+        //gameObject.SetActive(false);
     }
 }

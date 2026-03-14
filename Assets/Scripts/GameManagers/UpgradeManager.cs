@@ -14,7 +14,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public static event System.Action OnLevelUp;
 
-
+    public GameObject genDash;
     ObjectPooling bulletOPool;
     ObjectPooling petProjPool;
     ObjectPooling enemyPool;
@@ -586,6 +586,9 @@ public class UpgradeManager : MonoBehaviour
                             enemy.GetComponent<BaseStats>().MovementSpeed.AddMultiValue(1.5f);
                         }
                         upgradeArr.Remove("speed");
+                        Instantiate(genDash);
+                        genDash.transform.parent = playerCharacter.transform;
+                        genDash.transform.localPosition = playerCharacter.transform.position;
                         playerBStats.movementSpUpgT++;
                         break;
                 }

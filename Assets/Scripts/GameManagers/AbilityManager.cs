@@ -12,6 +12,7 @@ public class AbilityManager : MonoBehaviour
     GameObject ability1;
     GameObject ability2;
     GameObject ability3;
+    GameObject ability4;
     public float ability1CoolDown;
     public float ability2CoolDown;
     public float ability3CoolDown;
@@ -21,6 +22,7 @@ public class AbilityManager : MonoBehaviour
     public float ability1Timer;
     public float ability2Timer;
     public float ability3Timer;
+    public int ability1Charges=0;
 
     private void Update()
     {
@@ -77,7 +79,13 @@ public class AbilityManager : MonoBehaviour
     public void Ability1()
     {
         if (ability1OnCoolDown) return;
+        
         ability1.SetActive(true);
+        if (ability1Charges > 0)
+        {
+            ability1Charges--;
+            return;
+        }
         ability1OnCoolDown = true;
         ability1Timer = ability1CoolDown;
     }
@@ -96,5 +104,12 @@ public class AbilityManager : MonoBehaviour
         ability3.SetActive(true);
         ability3OnCoolDown = true;
         ability3Timer = ability3CoolDown;
+    }
+    public void Ability4()
+    {
+        //if (ability4OnCoolDown) return;
+        //ability4.SetActive(true);
+        //ability4OnCoolDown = true;
+        //ability4Timer = ability3CoolDown;
     }
 }

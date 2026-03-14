@@ -21,6 +21,7 @@ TagManager:
   - DDMirroredBeams
   - PetProjPool
   - FloatingDamageNumbersPool
+  - GenericDash
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - PlayerInteractable
   - Player
   - Enemy
-  - 
+  - Collision
   - 
   - 
   - 

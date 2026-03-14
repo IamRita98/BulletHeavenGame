@@ -16,7 +16,7 @@ public class AbilityManager : MonoBehaviour
     public float ability1CoolDown;
     public float ability2CoolDown;
     public float ability3CoolDown;
-    float ability4CoolDown = 5;
+    public float ability4CoolDown = 5;
     public bool ability1OnCoolDown = false;
     public bool ability2OnCoolDown = false;
     public bool ability3OnCoolDown = false;
@@ -80,7 +80,7 @@ public class AbilityManager : MonoBehaviour
         ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
         ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        //if(ability4!=null) ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        if(ability4!=null) ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
     }
 
     void TrackAbilityCooldowns()

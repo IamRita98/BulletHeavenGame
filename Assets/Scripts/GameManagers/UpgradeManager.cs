@@ -576,8 +576,8 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case 1:
                         playerBStats.movementSpUpgT++;
-                        GameObject tempDashGO=Instantiate(genDash);
-                        tempDashGO.transform.SetParent(playerCharacter.transform);
+                        GameObject tempDashGO=Instantiate(genDash,playerCharacter.transform);
+                        //tempDashGO.transform.SetParent(playerCharacter.transform);
                         tempDashGO.transform.localPosition = Vector3.zero;
                         if (playerCharactersWithDashes.Contains(playerBStats.characterSelected)) abilityManager.ability2Charges++;
                         else abilityManager.ability4 = tempDashGO;

@@ -108,7 +108,7 @@ public class AltBeamCircleBehaviour : MonoBehaviour
         {
             chill = collision.gameObject.GetComponent<ChillElement>();
             chill.enabled = true;
-            chill.SetDebuffs(baseSlowStrength, baseSlowDuration);
+            chill.SetDebuffs(baseSlowStrength, baseSlowDuration + (abilityStats.LifeTime.StatsValue()/2));
         }
         damageTimer += Time.deltaTime;
         if (damageTimer >= tickTimer)

@@ -48,6 +48,8 @@ public class BaseStats : MonoBehaviour
     public int movementSpUpgT = 0;
     public int projUpgT = 0;
     public int XpPickupUpgT = 0;
+    public int cooldownT = 0;
+    public int areaUpgT = 0;
 
 
     private void Awake()

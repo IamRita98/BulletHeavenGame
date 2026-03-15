@@ -10,6 +10,12 @@ public class DDSupportBeams : MonoBehaviour
     public PolygonCollider2D polygonCollider;
     public SpriteRenderer beamRenderer;
     private bool nowUsable = false;
+    Vector3 defaultSize;
+
+    private void Awake()
+    {
+        defaultSize = transform.localScale;
+    }
 
     private void OnEnable()
     {
@@ -22,6 +28,7 @@ public class DDSupportBeams : MonoBehaviour
     }
     private void OnDisable()
     {
+        transform.localScale = defaultSize;
         SceneManager.activeSceneChanged -= GetReferences;
         if (nowUsable)
         {
@@ -46,8 +53,9 @@ public class DDSupportBeams : MonoBehaviour
         if (!collision.CompareTag("Enemy")) return;
         combatHandler.HandleDamage(damage, collision.gameObject,CombatHandler.DamageType.Light);
     }
-    public void UpdateInfo(float passedDamage)
+    public void UpdateInfo(float passedDamage, Vector3 area)
     {
         damage = passedDamage;
+        transform.localScale = area;
     }
 }

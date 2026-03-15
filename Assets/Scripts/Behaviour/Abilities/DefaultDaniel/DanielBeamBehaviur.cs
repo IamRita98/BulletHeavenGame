@@ -41,8 +41,9 @@ public class DanielBeamBehaviur : MonoBehaviour
     float damage;
     const float baseSpeed=100;
     float speed=baseSpeed;
+    Vector3 beamScale;
 
-    
+
 
     //Path2 variables burn/XP
     public bool path2Tier2 = false;
@@ -70,15 +71,15 @@ public class DanielBeamBehaviur : MonoBehaviour
         if (p1Tier2)
         {
             beam2Script = beam2.GetComponent<DDSupportBeams>();
-            beam2Script.UpdateInfo(damage);
+            beam2Script.UpdateInfo(damage, beamScale);
             beam2.SetActive(true);
            
             beam3Script = beam3.GetComponent<DDSupportBeams>();
-            beam3Script.UpdateInfo(damage);
+            beam3Script.UpdateInfo(damage, beamScale);
             beam3.SetActive(true);
         }
         beam1Script = beam1.GetComponent<DDSupportBeams>();
-        beam1Script.UpdateInfo(damage);
+        beam1Script.UpdateInfo(damage, beamScale);
         beam1.SetActive(true);
     }
     private void TurnOffSupportBeams()
@@ -120,7 +121,7 @@ public class DanielBeamBehaviur : MonoBehaviour
         damage = abilityStats.BaseDamage.StatsValue();
         transform.localPosition = new Vector3(beamDefaultXpos * abilityStats.Area.StatsValue(), transform.localPosition.y, transform.localPosition.z);
         speed += abilityStats.ProjectileSpeed.StatsValue();
-        Vector3 beamScale = defaultSize * abilityStats.Area.StatsValue();
+        beamScale = defaultSize * abilityStats.Area.StatsValue();
         if (path2Tier2)
         {
             beamScale = new Vector3(beamScale.x, beamScale.y + flatYScalingOfBigBeam, beamScale.z);
@@ -182,7 +183,7 @@ public class DanielBeamBehaviur : MonoBehaviour
             if (collision.gameObject.activeInHierarchy)
             {
                 DamageOverTime burn = collision.GetComponent<DamageOverTime>();
-                burn.ApplyDamageOverTimeEffect(burnDamage, burnDuration, DamageOverTime.DoTType.burn);
+                burn.ApplyDamageOverTimeEffect(burnDamage, burnDuration + (abilityStats.LifeTime.StatsValue()/2), DamageOverTime.DoTType.burn);
             }
             else if(!collision.gameObject.activeInHierarchy)
             {

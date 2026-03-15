@@ -33,6 +33,7 @@ public class AbilityManager : MonoBehaviour
     public int ability3MaxCharges = 1;
     public int ability4Charges = 1;
     public int ability4MaxCharges = 1;
+    public bool cooldownT3 = false;
 
 
     private void Update()
@@ -106,7 +107,7 @@ public class AbilityManager : MonoBehaviour
             ability3OnCoolDown = false;
             if (ability3MaxCharges > ability3Charges) ability3Charges++;
         }
-        print("A4CD: "+ability4CoolDown);
+        //Ability 4
         if (ability4OnCoolDown) ability4Timer -= Time.deltaTime;
         if (ability4Timer <= 0)
         {
@@ -120,9 +121,14 @@ public class AbilityManager : MonoBehaviour
         if (ability1Charges > 0)
         {
             if (ability1.activeInHierarchy) return;
+            if (cooldownT3 && RollToResetAbility())
+            {
+                ability1.SetActive(true);
+                return;
+            }
             ability1Charges--;
-            ability1.SetActive(true);
             ability1OnCoolDown = true;
+            ability1.SetActive(true);
             if (ability1Timer <= 0) ability1Timer = ability1CoolDown;
         }
     }
@@ -132,6 +138,11 @@ public class AbilityManager : MonoBehaviour
         if (ability2Charges > 0)
         {
             if (ability2.activeInHierarchy) return;
+            if (cooldownT3 && RollToResetAbility())
+            {
+                ability2.SetActive(true);
+                return;
+            }
             ability2Charges--;
             ability2.SetActive(true);
             ability2OnCoolDown = true;
@@ -144,6 +155,11 @@ public class AbilityManager : MonoBehaviour
         if (ability3Charges > 0)
         {
             if (ability3.activeInHierarchy) return;
+            if (cooldownT3 && RollToResetAbility())
+            {
+                ability3.SetActive(true);
+                return;
+            }
             ability3Charges--;
             ability3.SetActive(true);
             ability3OnCoolDown = true;
@@ -155,10 +171,35 @@ public class AbilityManager : MonoBehaviour
         if (ability4Charges > 0)
         {
             if (ability4.activeInHierarchy) return;
+            if (cooldownT3 && RollToResetAbility())
+            {
+                ability4.SetActive(true);
+                return;
+            }
             ability4Charges--;
             ability4.SetActive(true);
             ability4OnCoolDown = true;
             if (ability4Timer <= 0) ability4Timer = ability4CoolDown;
         }
+    }
+    float wins;
+    bool RollToResetAbility()
+    {
+        
+        float cdResetThreshold = 90;
+        float tmpRoll = Random.Range(1, 101);
+        print("Rolled: "+tmpRoll);
+        if (tmpRoll > cdResetThreshold)
+        {
+            wins++;
+            if(wins > 1)
+            {
+                print ("I can't stop winning!");
+            }
+            print("DINGDINGDINGDING YOU WIN");
+            return true;
+        }
+        wins = 0;
+        return false;
     }
 }

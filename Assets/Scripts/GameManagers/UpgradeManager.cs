@@ -33,7 +33,7 @@ public class UpgradeManager : MonoBehaviour
     int possibleChoices = 3;
     List<BaseStats.Character> playerCharactersWithDashes = new List<BaseStats.Character> { BaseStats.Character.SarahSword };
     
-    List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "weapArea", "duration", "speed" };
+    List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "area", "duration", "speed", "cooldown" };
     List<string> defaultDaniel = new List<string> { "DDautoAttack", "DDability1Path1", "DDability1Path2", "DDability1Path3", "DDability2Path1", "DDability2Path2", "DDability2Path3", "DDability3Path1", 
                                                     "DDability3Path2" , "DDability3Path3" };
     GameObject playerCharacter;
@@ -44,11 +44,12 @@ public class UpgradeManager : MonoBehaviour
     {   //global upgrades
         weapFireRate,
         duration,
-        weapArea,
+        area,
         health,
         projectiles,
         globalDam,
         speed,
+        cooldown,
 
         //character specific upgrades
         //defaultDaniel
@@ -166,16 +167,15 @@ public class UpgradeManager : MonoBehaviour
                 }
             },
             {
-                UpgradeTypes.weapArea,
+                UpgradeTypes.area,
                 new UpgradeInfo
                 {
-                    GetTier = () => baseWeaponStats.weapAreaUpgT,
+                    GetTier = () => playerBStats.areaUpgT,
                     descriptions= new Dictionary<int, string>
                     {
-                        {0,"+5% Area" },
-                        {1,"+10% Area" },
-                        {2,"15% Area" },
-                        {3,"15% Area" }
+                        {0,"+10% Area on attacks and abilities" },
+                        {1,"+20% Area on attacks and abilities" },
+                        {2,"70% Area on attacks and abilities \n But, deal 15% less damage and attack 10% slower" },
                     }
                 }
             },
@@ -216,6 +216,19 @@ public class UpgradeManager : MonoBehaviour
                         {0,"+15% movement speed" },
                         {1,"Gain a short invlun dash on a 10s cd(Gain an extra dash charge if you already have a dash)" },
                         {2,"Gain 100% increased movement speed but enemies gain 50% movement speed" },
+                    }
+                }
+            },
+            {
+                UpgradeTypes.cooldown,
+                new UpgradeInfo
+                {
+                    GetTier = () => playerBStats.cooldownT,
+                    descriptions= new Dictionary<int, string>
+                    {
+                        {0,"10% cooldown reduction to abilities" },
+                        {1,"20% cooldown reduction to abilities, \n -10% attackrate" },
+                        {2, "10% chance on ability use for the ability to not go on CD" }
                     }
                 }
             },
@@ -370,14 +383,17 @@ public class UpgradeManager : MonoBehaviour
             case "projectile":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.projectiles], upgradeButton, UpgradeTypes.projectiles);
                 break;
-            case "weapArea":
-                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.weapArea], upgradeButton, UpgradeTypes.weapArea);
+            case "area":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.area], upgradeButton, UpgradeTypes.area);
                 break;
             case "duration":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.duration], upgradeButton, UpgradeTypes.duration);
                 break;
             case "speed":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.speed], upgradeButton, UpgradeTypes.speed);
+                break;
+            case "cooldown":
+                uIManager.DisplayUpgrade(upgrades[UpgradeTypes.cooldown], upgradeButton, UpgradeTypes.cooldown);
                 break;
             case "DDautoAttack":
                 uIManager.DisplayUpgrade(upgrades[UpgradeTypes.defaultDanielAutoAttacks], upgradeButton, UpgradeTypes.defaultDanielAutoAttacks);
@@ -498,25 +514,35 @@ public class UpgradeManager : MonoBehaviour
                         break;
                 }
                 break;
-            case UpgradeManager.UpgradeTypes.weapArea:
+            case UpgradeManager.UpgradeTypes.area:
                 switch (tier)
                 {
                     case 0:
                         baseWeaponStats.WeapArea.AddMultiValue(1.10f);
-                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
-                        baseWeaponStats.weapAreaUpgT++;
+                        foreach (AbilityStats aStats in abilities)
+                        {
+                            aStats.Area.AddMultiValue(1.10f);
+                        }
+                        playerBStats.areaUpgT++;
                         break;
                     case 1:
-                        baseWeaponStats.WeapArea.AddMultiValue(1.15f);
-                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
-                        baseWeaponStats.weapAreaUpgT++;
+                        baseWeaponStats.WeapArea.AddMultiValue(1.20f);
+                        foreach (AbilityStats aStats in abilities)
+                        {
+                            aStats.Area.AddMultiValue(1.20f);
+                        }
+                        playerBStats.areaUpgT++;
                         break;
                     case 2:
-                        baseWeaponStats.WeapArea.AddMultiValue(1.20f);
-                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
-                        baseWeaponStats.weapAreaUpgT++;
-                        break;
-                    case 3:
+                        baseWeaponStats.WeapArea.AddMultiValue(1.69f);
+                        baseWeaponStats.BaseDamage.AddMultiValue(.85f);
+                        baseWeaponStats.AttackRate.AddMultiValue(.90f);
+                        foreach (AbilityStats aStats in abilities)
+                        {
+                            aStats.Area.AddMultiValue(1.69f);
+                            aStats.BaseDamage.AddMultiValue(.85f);
+                        }
+                        upgradeArr.Remove("area");
                         break;
                 }
                 break;
@@ -587,7 +613,6 @@ public class UpgradeManager : MonoBehaviour
                         tempDashGO.SetActive(false);
                         break;
                     case 2:
-                        print("Cum");
                         playerBStats.MovementSpeed.AddMultiValue(2f);
                         print("Speed: " + playerBStats.MovementSpeed.StatsValue());
                         foreach (GameObject enemy in enemyPool.activePool)
@@ -599,7 +624,30 @@ public class UpgradeManager : MonoBehaviour
                             enemy.GetComponent<BaseStats>().MovementSpeed.AddMultiValue(1.5f);
                         }
                         upgradeArr.Remove("speed");
-                        
+                        break;
+                }
+                break;
+            case UpgradeManager.UpgradeTypes.cooldown:
+                switch (tier)
+                {
+                    case 0:
+                        foreach(AbilityStats aStats in abilities)
+                        {
+                            aStats.Cooldown.AddMultiValue(.9f);
+                        }
+                        playerBStats.cooldownT++;
+                        break;
+                    case 1:
+                        foreach (AbilityStats aStats in abilities)
+                        {
+                            aStats.Cooldown.AddMultiValue(.8f);
+                        }
+                        baseWeaponStats.AttackRate.AddMultiValue(.9f);
+                        playerBStats.cooldownT++;
+                        break;
+                    case 2:
+                        abilityManager.cooldownT3 = true;
+                        upgradeArr.Remove("cooldown");
                         break;
                 }
                 break;

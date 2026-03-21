@@ -563,6 +563,7 @@ public class UpgradeManager : MonoBehaviour
                         playerBStats.Projectiles.AddFlatValue(1f);
                         print("Projectiles " + playerBStats.Projectiles.StatsValue());
                         playerBStats.projUpgT++;
+                        upgradeArr.Remove("projectile");
                         break;
                     case 3:
                         break;
@@ -677,6 +678,7 @@ public class UpgradeManager : MonoBehaviour
                         print("Projectiles " + playerBStats.Projectiles.StatsValue());
                         print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         baseWeaponStats.bDamUpgT++;
+                        upgradeArr.Remove("DDautoAttack");
                         break;
                     case 3:
                         baseWeaponStats.bDamUpgT++;
@@ -797,6 +799,7 @@ public class UpgradeManager : MonoBehaviour
                         ability1.BaseDamage.AddFlatValue(5);//burn
                         print("Max Dam " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
+                        upgradeArr.Remove("DDability2Path1");
                         break;
                     case 3:
                         break;
@@ -821,6 +824,7 @@ public class UpgradeManager : MonoBehaviour
                         ability2.BaseDamage.AddFlatValue(5);//burn
                         print("Max Dam " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
+                        upgradeArr.Remove("DDability2Path2");
                         break;
                     case 3:
                         break;
@@ -870,6 +874,7 @@ public class UpgradeManager : MonoBehaviour
                         ability1.BaseDamage.AddFlatValue(5);//burn
                         print("Max Dam " + ability1.BaseDamage.StatsValue());
                         ability1.upgradeTier++;
+                        upgradeArr.Remove("DDability3Path1");
                         break;
                     case 3:
                         break;
@@ -894,6 +899,7 @@ public class UpgradeManager : MonoBehaviour
                         ability2.BaseDamage.AddFlatValue(5);//burn
                         print("Max Dam " + ability2.BaseDamage.StatsValue());
                         ability2.upgradeTier++;
+                        upgradeArr.Remove("DDability3Path2");
                         break;
                     case 3:
                         break;

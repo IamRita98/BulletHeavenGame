@@ -12,6 +12,7 @@ public class ProjectileWeapon : MonoBehaviour
     public float totalSpread = 45;
     public bool isSpread;
     bool inCombat = false;
+    SFXManager sfxManager;
 
     private void OnEnable()
     {
@@ -26,7 +27,9 @@ public class ProjectileWeapon : MonoBehaviour
     void GetReferences(Scene oldScene, Scene newScene)
     {
         if (newScene.name == "MainMenu") return;
+
         inCombat = true;
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         bws = gameObject.GetComponent<BaseWeaponStats>();
     }
@@ -73,7 +76,7 @@ public class ProjectileWeapon : MonoBehaviour
 
         }
 
-
+        sfxManager.PlayBulletSFX();
     }
 
     GameObject SpawnBullet()

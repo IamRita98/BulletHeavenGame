@@ -23,6 +23,8 @@ TagManager:
   - FloatingDamageNumbersPool
   - GenericDash
   - SFXManager
+  - ObjectiveWall
+  - EnemyBoss
   layers:
   - Default
   - TransparentFX

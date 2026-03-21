@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 822981896101159815}
   - component: {fileID: -345739020897167420}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: BossLicky
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,8 +34,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.09, y: -0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6444760478488651131}
   m_Father: {fileID: 0}
@@ -164,12 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affb6424666614142851c8edeb66e0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactDamage: 1
-  attackDamage: 1
-  characterSelected: 2
-  health: 20
-  maxHealth: 20
-  speed: 2
+  contactDamage: 5
+  attackDamage: 5
+  characterSelected: 0
+  health: 120
+  maxHealth: 120
+  speed: 3
   projectiles: 0
   xp: 0
   pickUpRadius: 0

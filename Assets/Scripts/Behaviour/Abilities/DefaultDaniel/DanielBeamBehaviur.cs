@@ -42,6 +42,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     const float baseSpeed=100;
     float speed=baseSpeed;
     Vector3 beamScale;
+    SFXManager sfxManager;
 
 
 
@@ -106,7 +107,7 @@ public class DanielBeamBehaviur : MonoBehaviour
         {
             TurnOnSupportBeams();
         }
-        
+        sfxManager.PlayBeamSFX();
     }
 
     private void OnDisable()
@@ -133,6 +134,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         if (newScene.name == "MainMenu") return;
         
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
         abilityStats = GetComponent<AbilityStats>();

@@ -38,6 +38,7 @@ public class CombatHandler : MonoBehaviour
     int fireRateStackAmount = 1;
     float invincibilityTimer;
     BaseStats pbs;
+    SFXManager sfxManager;
 
    
     private void Awake()
@@ -49,6 +50,7 @@ public class CombatHandler : MonoBehaviour
         playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
         pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
     }
 
     private void Update()
@@ -92,6 +94,7 @@ public class CombatHandler : MonoBehaviour
                 }
                 OnEnemyDeath?.Invoke(gObject);
                 returnToPool.ReturnToPool();
+                sfxManager.PlayMonsterDeathSFX();
                 return;
             }
             else if (fireRateTier3)
@@ -138,6 +141,7 @@ public class CombatHandler : MonoBehaviour
             }
             damageTakenVFX = playerSRend.GetComponent<DamageTakenVFX>();
             damageTakenVFX.DamageTaken(gObject);
+            sfxManager.PlayPlayerHurtSFX();
         }
     }
     public void ClearScreen()
@@ -151,6 +155,7 @@ public class CombatHandler : MonoBehaviour
         int temp = enemyPool.activePool.Count;
         for (int i = 0; i < temp; i++)
         {
+            sfxManager.PlayMonsterDeathSFX();
             GameObject enemy = enemyPool.activePool[0];
             ReturnToPoolOnDeath returnToPool = enemy.GetComponent<ReturnToPoolOnDeath>();
             returnToPool.ReturnToPool();

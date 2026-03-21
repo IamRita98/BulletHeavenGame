@@ -149,7 +149,7 @@ public class UpgradeManager : MonoBehaviour
                     {
                         {0,"+15% Firerate" },
                         {1,"+40% Firerate, -10% Weapon Damage" },
-                        {2, "+1 Projectile,\n +10% Firerate, each subsequent hit on an enemy adds +1 damage(max 35 stacks)" }
+                        {2, "+1 Projectile,\n +10% Firerate,\n each subsequent hit on an enemy adds +1 damage(max 35 stacks) to that enemy" }
                     }
                 }
             },

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class LevelUpManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelUpManager : MonoBehaviour
     ObjectPooling xpPool;
     BaseWeaponStats bws;
     UpgradeManager um;
+    SFXManager sfxManager;
 
     private void Awake()
     {
@@ -16,6 +18,7 @@ public class LevelUpManager : MonoBehaviour
         xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
         um = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
         bws = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
     }
 
     private void OnEnable()
@@ -35,6 +38,7 @@ public class LevelUpManager : MonoBehaviour
         float XpValue = XpGO.GetComponent<XpPickupStats>().xpValue;
         playerStats.XP.AddFlatValue(XpValue);
         CheckIfLeveled();
+        sfxManager.PlayXPGemPickupSFX();
 
         xpPool.activePool.Remove(XpGO);
         xpPool.objectPool.Add(XpGO);

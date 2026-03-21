@@ -25,10 +25,12 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     public bool path3Tier1 = false;
     public bool path3Tier3 = false;
     bool buffIsApplied = false;
+    SFXManager sfxManager;
 
 
     void Awake()
     {
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         weapon = GameObject.FindGameObjectWithTag("Weapon");
         bws = weapon.GetComponent<BaseWeaponStats>();
@@ -51,6 +53,7 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         ability3Circle.enabled = true;
         ability3Renderer.enabled = true;
         isActive = true;
+        sfxManager.PlayPlaceBuffFieldSFX();
     }
 
     private void OnDisable()

@@ -74638,7 +74638,7 @@ MonoBehaviour:
     Path: event:/Level1Music
   Event: 
   EventPlayTrigger: 1
-  EventStopTrigger: 0
+  EventStopTrigger: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -75504,6 +75504,10 @@ PrefabInstance:
       propertyPath: levelTimer
       value: 
       objectReference: {fileID: 80130350}
+    - target: {fileID: 882833941755458029, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
+      propertyPath: restartGameBtn
+      value: 
+      objectReference: {fileID: 935055670}
     - target: {fileID: 882833941755458029, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
       propertyPath: upgradeButtonList.Array.data[0]
       value: 

@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639097236591493481
+  lastModified: 639097288904469027
   FileSizes: []
   Exists: 1
 --- !u!114 &-5717409022795001007
@@ -87,7 +87,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639097183746058365
+  lastModified: 639097288904594111
   FileSizes: []
   Exists: 1
 --- !u!114 &-3986773564983610074
@@ -257,7 +257,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 8706433105446911605}
   cacheVersion: 131858
-  cacheTime: 639097236592370331
+  cacheTime: 639097288904594111
   SerializableEventsDict:
   - key: event:/MainMenuMusic
     index: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/DefaultDaniel.bank
   Name: DefaultDaniel
   StudioPath: bank:/DefaultDaniel
-  lastModified: 639097207919130343
+  lastModified: 639097288904459044
   FileSizes: []
   Exists: 1
 --- !u!114 &2520801736134942653
@@ -337,7 +337,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Monsters.bank
   Name: Monsters
   StudioPath: bank:/Monsters
-  lastModified: 639097229846218747
+  lastModified: 639097288904469027
   FileSizes: []
   Exists: 1
 --- !u!114 &6114485744635343094
@@ -383,7 +383,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Generic.bank
   Name: Generic
   StudioPath: bank:/Generic
-  lastModified: 639097236592370331
+  lastModified: 639097288904459044
   FileSizes: []
   Exists: 1
 --- !u!114 &8001729127765763606
@@ -428,7 +428,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639097236591503485
+  lastModified: 639097288904469027
   FileSizes:
   - Name: 
     Value: 1380

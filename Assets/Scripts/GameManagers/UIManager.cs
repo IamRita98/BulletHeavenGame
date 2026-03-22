@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
     TMP_Text levelTimerText;
     float levelTimerTime = 0;
     float levelTimerMinutes = 0;
+    public Button restartGameBtn;
 
 
 
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         CombatHandler.OnPlayerDeath += PlayerDeathUI;
+        restartGameBtn.onClick.AddListener(RestartGame);
     }
     private void OnDisable()
     {
@@ -150,5 +153,12 @@ public class UIManager : MonoBehaviour
     void PlayerDeathUI()
     {
         gameOverUI.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("TestLevel");
+        gameStateManager.UnPauseGame();
+        playerBStats.Health.AddFlatValue(playerBStats.MaxHealth.StatsValue());
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -38,8 +39,5 @@ public class GameStateManager : MonoBehaviour
         player.transform.position = Vector3.zero;
     }
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("TestLevel");
-    }
+    
 }

@@ -37,4 +37,9 @@ public class GameStateManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = Vector3.zero;
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("TestLevel");
+    }
 }

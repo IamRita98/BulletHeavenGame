@@ -970,8 +970,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
+      propertyPath: cooldown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
       propertyPath: lifeTime
-      value: 0.9
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7807051063967819764, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}
       propertyPath: baseDamage
@@ -1257,8 +1261,63 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9120650930306449738, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3902982220394205567}
+    - targetCorrespondingSourceObject: {fileID: 9120650930306449738, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3060373293167321977}
   m_SourcePrefab: {fileID: 100100000, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+--- !u!1 &2877641594361086780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9120650930306449738, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}
+  m_PrefabInstance: {fileID: 6448134844588786294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3902982220394205567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877641594361086780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97caa2bebf4f51441b8cbb3af008af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: event:/Gun
+--- !u!114 &3060373293167321977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877641594361086780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -516643786
+      Data2: 1332255676
+      Data3: -1366727234
+      Data4: -860625819
+    Path: event:/Gun
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &6548350086279574906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 260093664454194956, guid: 85b49feca8912114a82ff4e6c975bb22, type: 3}

@@ -1,0 +1,435 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8397079397665900520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PlayerDamageTaken
+  m_EditorClassIdentifier: 
+  Path: event:/PlayerDamageTaken
+  Guid:
+    Data1: -1511257462
+    Data2: 1078743102
+    Data3: -1484532069
+    Data4: 1832667313
+  Banks:
+  - {fileID: 7462171774073482359}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7246434939510297910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Levelup
+  m_EditorClassIdentifier: 
+  Path: event:/Levelup
+  Guid:
+    Data1: -1519648499
+    Data2: 1300780129
+    Data3: 882434439
+    Data4: 27740116
+  Banks:
+  - {fileID: 7462171774073482359}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7203004282474915285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639097236591493481
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5717409022795001007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 639097183746058365
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3986773564983610074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Level1Music
+  m_EditorClassIdentifier: 
+  Path: event:/Level1Music
+  Guid:
+    Data1: 1421742768
+    Data2: 1202027937
+    Data3: 713999799
+    Data4: -994878249
+  Banks:
+  - {fileID: -5717409022795001007}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3845149953506435730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MonsterDeath
+  m_EditorClassIdentifier: 
+  Path: event:/MonsterDeath
+  Guid:
+    Data1: 378200698
+    Data2: 1133599948
+    Data3: 503864498
+    Data4: -1081432490
+  Banks:
+  - {fileID: -7203004282474915285}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2447826692850138361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainMenuMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MainMenuMusic
+  Guid:
+    Data1: -1696154229
+    Data2: 1158979148
+    Data3: 636464809
+    Data4: -2026001864
+  Banks:
+  - {fileID: -5717409022795001007}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-944556215864443938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DDGun/Parameter 1
+  m_EditorClassIdentifier: 
+  Name: Parameter 1
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 3174652519
+    data2: 543921686
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-810204930049513446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/XPPickup
+  m_EditorClassIdentifier: 
+  Path: event:/XPPickup
+  Guid:
+    Data1: -1782468755
+    Data2: 1159376605
+    Data3: -1326620764
+    Data4: -277972766
+  Banks:
+  - {fileID: 7462171774073482359}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 8706433105446911605}
+  - {fileID: -7203004282474915285}
+  - {fileID: -5717409022795001007}
+  - {fileID: 1537733393686266029}
+  - {fileID: 5129011271439543909}
+  - {fileID: 7462171774073482359}
+  EditorEvents:
+  - {fileID: -2447826692850138361}
+  - {fileID: -3986773564983610074}
+  - {fileID: 2520801736134942653}
+  - {fileID: 6114485744635343094}
+  - {fileID: 8001729127765763606}
+  - {fileID: -3845149953506435730}
+  - {fileID: -8397079397665900520}
+  - {fileID: -810204930049513446}
+  - {fileID: -7246434939510297910}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -7203004282474915285}
+  StringsBanks:
+  - {fileID: 8706433105446911605}
+  cacheVersion: 131858
+  cacheTime: 639097236592370331
+  SerializableEventsDict:
+  - key: event:/MainMenuMusic
+    index: 0
+  - key: event:/Level1Music
+    index: 1
+  - key: event:/DDLaser
+    index: 2
+  - key: event:/DDGun
+    index: 3
+  - key: event:/DDLeylines
+    index: 4
+  - key: event:/MonsterDeath
+    index: 5
+  - key: event:/PlayerDamageTaken
+    index: 6
+  - key: event:/XPPickup
+    index: 7
+  - key: event:/Levelup
+    index: 8
+--- !u!114 &1537733393686266029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/DefaultDaniel.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/DefaultDaniel.bank
+  Name: DefaultDaniel
+  StudioPath: bank:/DefaultDaniel
+  lastModified: 639097207919130343
+  FileSizes: []
+  Exists: 1
+--- !u!114 &2520801736134942653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DDLaser
+  m_EditorClassIdentifier: 
+  Path: event:/DDLaser
+  Guid:
+    Data1: -741332433
+    Data2: 1093378664
+    Data3: 2017891476
+    Data4: -1095642061
+  Banks:
+  - {fileID: 1537733393686266029}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5129011271439543909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Monsters.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/Monsters.bank
+  Name: Monsters
+  StudioPath: bank:/Monsters
+  lastModified: 639097229846218747
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6114485744635343094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DDGun
+  m_EditorClassIdentifier: 
+  Path: event:/DDGun
+  Guid:
+    Data1: -516643786
+    Data2: 1332255676
+    Data3: -1366727234
+    Data4: -860625819
+  Banks:
+  - {fileID: 1537733393686266029}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -944556215864443938}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7462171774073482359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Generic.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/Generic.bank
+  Name: Generic
+  StudioPath: bank:/Generic
+  lastModified: 639097236592370331
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8001729127765763606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DDLeylines
+  m_EditorClassIdentifier: 
+  Path: event:/DDLeylines
+  Guid:
+    Data1: -625728022
+    Data2: 1334496397
+    Data3: -1638575952
+    Data4: 1117266312
+  Banks:
+  - {fileID: 1537733393686266029}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8706433105446911605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639097236591503485
+  FileSizes:
+  - Name: 
+    Value: 1380
+  Exists: 1

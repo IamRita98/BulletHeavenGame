@@ -74450,6 +74450,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1831128295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1978462435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978462437}
+  - component: {fileID: 1978462436}
+  m_Layer: 0
+  m_Name: MusicPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1978462436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978462435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1421742768
+      Data2: 1202027937
+      Data3: 713999799
+      Data4: -994878249
+    Path: event:/Level1Music
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &1978462437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978462435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.6000175, y: 25.74589, z: -0.3968576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2007708644
 GameObject:
   m_ObjectHideFlags: 0
@@ -75381,6 +75444,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3901098990790263427, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2379800971605485448}
+    - targetCorrespondingSourceObject: {fileID: 3901098990790263427, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2379800971605485450}
+    - targetCorrespondingSourceObject: {fileID: 3901098990790263427, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2379800971605485449}
   m_SourcePrefab: {fileID: 100100000, guid: 519e6358001a7544abf9f0fdc5320525, type: 3}
 --- !u!1 &2379800971605485445 stripped
 GameObject:
@@ -75427,6 +75496,50 @@ MonoBehaviour:
   currentObjective: {fileID: 1853591400}
   movePlayer: {fileID: 1576783713}
   enemyDeathsTracker: 0
+--- !u!114 &2379800971605485449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379800971605485445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1519648499
+      Data2: 1300780129
+      Data3: 882434439
+      Data4: 27740116
+    Path: event:/Levelup
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &2379800971605485450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379800971605485445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97caa2bebf4f51441b8cbb3af008af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: event:/Levelup
 --- !u!1001 &2944182609243565976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76858,3 +76971,4 @@ SceneRoots:
   - {fileID: 8074709396313442939}
   - {fileID: 787368805}
   - {fileID: 1576783712}
+  - {fileID: 1978462437}

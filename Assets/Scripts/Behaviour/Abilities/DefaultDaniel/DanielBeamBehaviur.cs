@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -42,7 +43,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     const float baseSpeed=100;
     float speed=baseSpeed;
     Vector3 beamScale;
-    SFXManager sfxManager;
+    PlaySFXAfterFirstEnable sfxPlayer;
 
 
 
@@ -59,6 +60,7 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         defaultSize = transform.localScale;
         beamDefaultXpos = transform.localPosition.x;
+        sfxPlayer = GetComponent<PlaySFXAfterFirstEnable>();
 
         //if for whatever reason they are not assigned in inspector (backup assignement)
         GameObject[] supportBeams = GameObject.FindGameObjectsWithTag("DDMirroredBeams");
@@ -103,11 +105,11 @@ public class DanielBeamBehaviur : MonoBehaviour
         SceneManager.activeSceneChanged += GetReferences;
         ScaleStats();
         FindNearestEnemy();
+        sfxPlayer.playSFX();
         if (p1Tier1)
         {
             TurnOnSupportBeams();
         }
-        sfxManager.PlayBeamSFX();
     }
 
     private void OnDisable()
@@ -134,7 +136,6 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         if (newScene.name == "MainMenu") return;
         
-        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
         abilityStats = GetComponent<AbilityStats>();

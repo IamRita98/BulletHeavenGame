@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,9 +39,10 @@ public class CombatHandler : MonoBehaviour
     int fireRateStackAmount = 1;
     float invincibilityTimer;
     BaseStats pbs;
-    SFXManager sfxManager;
+    PlaySFXAfterFirstEnable sfxPlayer;
 
-   
+
+
     private void Awake()
     {
         gameStateManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<GameStateManager>();
@@ -50,7 +52,6 @@ public class CombatHandler : MonoBehaviour
         playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
         pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
-        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
     }
 
     private void Update()
@@ -94,7 +95,8 @@ public class CombatHandler : MonoBehaviour
                 }
                 OnEnemyDeath?.Invoke(gObject);
                 returnToPool.ReturnToPool();
-                sfxManager.PlayMonsterDeathSFX();
+                sfxPlayer = ebs.gameObject.GetComponent<PlaySFXAfterFirstEnable>();
+                sfxPlayer.playSFX();
                 return;
             }
             else if (fireRateTier3)
@@ -141,7 +143,8 @@ public class CombatHandler : MonoBehaviour
             }
             damageTakenVFX = playerSRend.GetComponent<DamageTakenVFX>();
             damageTakenVFX.DamageTaken(gObject);
-            sfxManager.PlayPlayerHurtSFX();
+            sfxPlayer = pbs.gameObject.GetComponent<PlaySFXAfterFirstEnable>();
+            sfxPlayer.playSFX();
         }
     }
     public void ClearScreen()
@@ -155,7 +158,6 @@ public class CombatHandler : MonoBehaviour
         int temp = enemyPool.activePool.Count;
         for (int i = 0; i < temp; i++)
         {
-            sfxManager.PlayMonsterDeathSFX();
             GameObject enemy = enemyPool.activePool[0];
             ReturnToPoolOnDeath returnToPool = enemy.GetComponent<ReturnToPoolOnDeath>();
             returnToPool.ReturnToPool();

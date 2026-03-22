@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 525506798426719718}
   - component: {fileID: 3642977849042331695}
   - component: {fileID: 7300238745338610763}
+  - component: {fileID: 2426000165741175419}
+  - component: {fileID: 7493135442361368223}
   m_Layer: 0
   m_Name: DanielBeam
   m_TagString: Ability1
@@ -79,6 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d6b6f697cf7ce46880f69d6564bd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactDamage: 0
+  attackDamage: 0
   characterSelected: 0
   health: 0
   maxHealth: 0
@@ -92,6 +96,8 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
+  cooldownT: 0
+  areaUpgT: 0
   baseDamage: 10
   cooldown: 3
   lifeTime: 0.3
@@ -111,7 +117,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa3ffdce562d8c4cb6dc4850fd92216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSquareCollider: 0
+  beam1: {fileID: 0}
+  beam2: {fileID: 0}
+  beam3: {fileID: 0}
+  beam1Script: {fileID: 0}
+  beam2Script: {fileID: 0}
+  beam3Script: {fileID: 0}
+  p1Tier1: 0
+  p1Tier2: 0
+  p1Tier3: 0
+  parentGO: {fileID: 0}
+  trackNearestEnemy: {fileID: 0}
+  abilityStats: {fileID: 0}
+  foundNearestEnemy: 0
+  timer: 0
+  polygonCollider: {fileID: 0}
+  beamRenderer: {fileID: 0}
+  combatHandler: {fileID: 0}
+  path2Tier2: 0
+  path2Tier3: 0
 --- !u!212 &3642977849042331695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -213,3 +237,47 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &2426000165741175419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853350142767089970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -741332433
+      Data2: 1093378664
+      Data3: 2017891476
+      Data4: -1095642061
+    Path: event:/DDLaser
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &7493135442361368223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853350142767089970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97caa2bebf4f51441b8cbb3af008af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: event:/DDLaser

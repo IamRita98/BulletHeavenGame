@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2992829316885050316}
   - component: {fileID: 5922842737814347063}
   - component: {fileID: -5738381140165036707}
+  - component: {fileID: 268807763103417772}
   m_Layer: 6
   m_Name: XPDrop
   m_TagString: XpPickup
@@ -134,3 +135,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5000001
+--- !u!114 &268807763103417772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448841558521530272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  EventReference:
+    Guid:
+      Data1: -1782468755
+      Data2: 1159376605
+      Data3: -1326620764
+      Data4: -277972766
+    Path: event:/XPPickup
+  Event: 
+  EventPlayTrigger: 5
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

@@ -12,7 +12,12 @@ public class ProjectileWeapon : MonoBehaviour
     public float totalSpread = 45;
     public bool isSpread;
     bool inCombat = false;
+    PlaySFXAfterFirstEnable sfxPlayer;
 
+    private void Awake()
+    {
+        sfxPlayer = GetComponent<PlaySFXAfterFirstEnable>();
+    }
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
@@ -27,6 +32,7 @@ public class ProjectileWeapon : MonoBehaviour
     {
         if (newScene.name == "MainMenu") return;
 
+        
         inCombat = true;
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         bws = gameObject.GetComponent<BaseWeaponStats>();
@@ -81,7 +87,7 @@ public class ProjectileWeapon : MonoBehaviour
         projGO.SetActive(true);
         projGO.GetComponent<ProjectileBehaviour>().SetStats(bws.BaseDamage.StatsValue(), bws.WeapArea.StatsValue(), bws.LifeTime.StatsValue(), bws.ProjectileSpeed.StatsValue(), bws.Pierce.StatsValue());
         print("bullet dam: " + bws.BaseDamage.StatsValue());
-        
+        sfxPlayer.playSFX();
         oPool.activePool.Add(projGO);
         oPool.objectPool.Remove(projGO);
         return projGO;

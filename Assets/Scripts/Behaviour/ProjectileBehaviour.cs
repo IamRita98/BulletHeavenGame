@@ -27,18 +27,26 @@ public class ProjectileBehaviour : MonoBehaviour
     public bool shouldSplit=false;
     public bool durationT3 = false;
     UpgradeManager upgradeManager;
+    
 
+
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
         oPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
         baseArea = transform.localScale;
         nearestEnemy = gameObject.GetComponent<TrackNeareastEnemy>();
+        
     }
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += GetReferences;
         if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+
         
     }
     private void OnDisable()
@@ -48,6 +56,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     void GetReferences(Scene oldScene, Scene newScene)
     {
+        
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
         upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
     }

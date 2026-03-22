@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioClip mainMenuMusic;
+/*    public AudioClip mainMenuMusic;
     public AudioClip testLevelMusic;
     public AudioSource aSource;
 
@@ -36,5 +36,5 @@ public class MusicManager : MonoBehaviour
     {
         aSource.clip = audioToPlay;
         aSource.Play();
-    }
+    }*/
 }

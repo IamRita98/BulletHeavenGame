@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    /// <summary>
+/*    /// <summary>
     /// Currently there is a bug where if a new SFX starts while another one is running, the first one will have it's volume changed
     /// to the volume of the new one. There may be a fix in code. Alternatively, we could do actual audio mixing, changing
     /// the volume for each method call is kind of jank. Wwise probably has a solution to this too...
@@ -91,5 +91,5 @@ public class SFXManager : MonoBehaviour
         aSource.volume = .9f;
         aSource.clip = playerHurtSFX;
         aSource.PlayOneShot(aSource.clip);
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 public class DefaultDanielAbility3Behaviour : MonoBehaviour
 {
@@ -25,12 +26,11 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
     public bool path3Tier1 = false;
     public bool path3Tier3 = false;
     bool buffIsApplied = false;
-    SFXManager sfxManager;
-
+    PlaySFXAfterFirstEnable sfxPlayer;
 
     void Awake()
     {
-        sfxManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
+        sfxPlayer = GetComponent<PlaySFXAfterFirstEnable>();
         player = GameObject.FindGameObjectWithTag("Player");
         weapon = GameObject.FindGameObjectWithTag("Weapon");
         bws = weapon.GetComponent<BaseWeaponStats>();
@@ -53,7 +53,8 @@ public class DefaultDanielAbility3Behaviour : MonoBehaviour
         ability3Circle.enabled = true;
         ability3Renderer.enabled = true;
         isActive = true;
-        sfxManager.PlayPlaceBuffFieldSFX();
+
+        sfxPlayer.playSFX();
     }
 
     private void OnDisable()

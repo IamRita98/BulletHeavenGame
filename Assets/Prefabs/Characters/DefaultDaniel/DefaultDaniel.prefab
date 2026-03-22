@@ -432,7 +432,9 @@ GameObject:
   - component: {fileID: -4047059303583794901}
   - component: {fileID: -338868586248066087}
   - component: {fileID: 262969877460355598}
+  - component: {fileID: 8016494531329809753}
   - component: {fileID: -5585094283975126804}
+  - component: {fileID: 986626574889267950}
   m_Layer: 7
   m_Name: DefaultDaniel
   m_TagString: Player
@@ -503,6 +505,8 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
+  cooldownT: 0
+  areaUpgT: 0
 --- !u!114 &-7559953969165350205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +593,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &8016494531329809753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695794501510375941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97caa2bebf4f51441b8cbb3af008af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: event:/PlayerDamageTaken
 --- !u!114 &-5585094283975126804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +619,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regenValue: 0
+--- !u!114 &986626574889267950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695794501510375941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1511257462
+      Data2: 1078743102
+      Data3: -1484532069
+      Data4: 1832667313
+    Path: event:/PlayerDamageTaken
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6127438455446333661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,8 +1331,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9139898658284481220, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8188256862166589269}
   m_SourcePrefab: {fileID: 100100000, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
+--- !u!1 &2522491711040107178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9139898658284481220, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}
+  m_PrefabInstance: {fileID: 6761804917623756910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8188256862166589269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522491711040107178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -625728022
+      Data2: 1334496397
+      Data3: -1638575952
+      Data4: 1117266312
+    Path: event:/DDLeylines
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &5669054281633846228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1403512756455689146, guid: 52b1d601573a5a84ba2cc0f0e4f6f4e0, type: 3}

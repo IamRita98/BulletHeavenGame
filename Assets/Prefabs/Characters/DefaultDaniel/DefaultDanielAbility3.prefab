@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -7458340182199466163}
   - component: {fileID: 7033759305045061530}
   - component: {fileID: -2932034434038713391}
+  - component: {fileID: 2350123611528215756}
   m_Layer: 6
   m_Name: DefaultDanielAbility3
   m_TagString: Ability3
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe07243125fb71479fa33ef558065ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   path3Tier1: 0
   path3Tier3: 0
 --- !u!114 &7033759305045061530
@@ -162,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d6b6f697cf7ce46880f69d6564bd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactDamage: 0
+  attackDamage: 0
   characterSelected: 0
   health: 0
   maxHealth: 0
@@ -175,6 +179,8 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
+  cooldownT: 0
+  areaUpgT: 0
   baseDamage: 10
   cooldown: 20
   lifeTime: 10
@@ -198,3 +204,16 @@ MonoBehaviour:
   activate: 0
   abilityAttackRate: 0.25
   isUpgraded: 0
+--- !u!114 &2350123611528215756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139898658284481220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97caa2bebf4f51441b8cbb3af008af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: event:/DDLeylines

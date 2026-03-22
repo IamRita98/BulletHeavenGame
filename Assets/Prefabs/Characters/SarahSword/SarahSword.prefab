@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affb6424666614142851c8edeb66e0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactDamage: 0
+  attackDamage: 0
   characterSelected: 1
   health: 10
   maxHealth: 10
@@ -82,6 +84,8 @@ MonoBehaviour:
   movementSpUpgT: 0
   projUpgT: 0
   XpPickupUpgT: 0
+  cooldownT: 0
+  areaUpgT: 0
 --- !u!114 &-7559953969165350205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +235,7 @@ GameObject:
   - component: {fileID: 8878451243625935800}
   - component: {fileID: 8661832554887014058}
   - component: {fileID: 3913625574668810235}
+  - component: {fileID: -406072361360695656}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -312,6 +317,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5986132716307518295}
   m_Enabled: 1
+--- !u!114 &-406072361360695656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986132716307518295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1001 &2786266279984756668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -599,6 +618,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfa1a5ac15c6134e9bd2ebd4445e660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beam1: {fileID: 0}
+  beam2: {fileID: 0}
+  beam3: {fileID: 0}
+  beam1Script: {fileID: 0}
+  beam2Script: {fileID: 0}
+  beam3Script: {fileID: 0}
+  p1Tier1: 0
+  p1Tier2: 0
+  p1Tier3: 0
   parentGO: {fileID: 0}
   trackNearestEnemy: {fileID: 0}
   abilityStats: {fileID: 0}
@@ -607,6 +635,8 @@ MonoBehaviour:
   polygonCollider: {fileID: 0}
   beamRenderer: {fileID: 0}
   combatHandler: {fileID: 0}
+  path2Tier2: 0
+  path2Tier3: 0
 --- !u!4 &8503392637119956052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5618813574647577129, guid: 5938c3845cfcd834f988ac46ba3ddd84, type: 3}

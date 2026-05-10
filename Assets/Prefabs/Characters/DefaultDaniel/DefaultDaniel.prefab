@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 8016494531329809753}
   - component: {fileID: -5585094283975126804}
   - component: {fileID: 986626574889267950}
+  - component: {fileID: 9183386055560499463}
   m_Layer: 7
   m_Name: DefaultDaniel
   m_TagString: Player
@@ -478,6 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6672f9c46c772841a422327465faa8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: {x: 0, y: 0}
+  dumbAIControlActive: 1
 --- !u!114 &-5518224994411204026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +653,18 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &9183386055560499463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695794501510375941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628111b545bb7144a803add0b37d6759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6127438455446333661
 GameObject:
   m_ObjectHideFlags: 0

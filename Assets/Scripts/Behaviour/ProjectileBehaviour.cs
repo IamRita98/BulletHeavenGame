@@ -79,7 +79,6 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             if (collision.gameObject == enemy)
             {
-                print("Passed");
                 return;
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Vector2 dir;
+    public Vector2 dir;
     Rigidbody2D rb;
     BaseStats bStats;
     float moveSpeed;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     bool spriteIsFlipped = false;
     SpriteRenderer sRend;
     Animator anim;
+    public bool dumbAIControlActive = false;
 
     private void Start()
     {
@@ -47,11 +48,13 @@ public class PlayerController : MonoBehaviour
         Movement();
         CheckForSpriteFlip();
         Animations();
-        AbilityInput();
         HealthClamping();
+        //maybe I dont need this below and directly call it from the dumbplayerai script?
+        AbilityInput();
     }
     void AbilityInput()
     {
+        if (dumbAIControlActive) return;//dont ready any input below here
         if (Input.GetKeyDown(KeyCode.Mouse0)) abilityManager.Ability1();
         if (Input.GetKeyDown(KeyCode.Mouse1)) abilityManager.Ability2();
         if (Input.GetKeyDown(KeyCode.Space)) abilityManager.Ability3();
@@ -60,7 +63,6 @@ public class PlayerController : MonoBehaviour
             if (abilityManager.ability4 != null)
             {
                 abilityManager.Ability4();
-                Debug.Log("Cummies");
             }
             
         }
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         moveSpeed = bStats.MovementSpeed.StatsValue();
+        if (dumbAIControlActive) return;//don't read any input below here
         dir.x = Input.GetAxisRaw("Horizontal");
         dir.y = Input.GetAxisRaw("Vertical");
         dir.Normalize();

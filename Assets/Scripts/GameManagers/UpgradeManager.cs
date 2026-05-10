@@ -13,6 +13,7 @@ public class UpgradeManager : MonoBehaviour
     /// Event Called on Levelup to Update values
     /// </summary>
     public static event System.Action OnLevelUp;
+    public static event System.Action ChooseUpgrade;
 
     AbilityManager abilityManager;
     public GameObject genDash;
@@ -31,6 +32,11 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability2;
     AbilityStats ability3;
     int possibleChoices = 3;
+    List<int> rolledUpgrades = new List<int>();
+    
+    //For when DumbAI is active
+    public bool isDumbAIActive=false;
+
     List<BaseStats.Character> playerCharactersWithDashes = new List<BaseStats.Character> { BaseStats.Character.SarahSword };
     
     List<string> upgradeArr = new List<string> { "globalDam", "fireRate", "health", "projectile", "area", "duration", "speed", "cooldown" };
@@ -108,7 +114,8 @@ public class UpgradeManager : MonoBehaviour
     public void RollUpgrades()
     {
         //string[] rolledUpg=new string[possibleChoices];
-        List<int> rolledUpgrades = new List<int>();
+        if(rolledUpgrades.Count>=0) rolledUpgrades.Clear();
+
         for (int i = 0; i < possibleChoices; i++)
         {
             int rolled = UnityEngine.Random.Range(0, upgradeArr.Count);
@@ -116,6 +123,9 @@ public class UpgradeManager : MonoBehaviour
             rolledUpgrades.Add(rolled);
             GetUpgradeInfo(upgradeArr[rolled], i);
         }
+        //try sending a signal for DumbPlayerAI to make a choice?
+        if(isDumbAIActive) ChooseUpgrade?.Invoke();
+
     }
 
     public class UpgradeInfo
@@ -430,6 +440,10 @@ public class UpgradeManager : MonoBehaviour
 
     public void ApplyUpgrades(int tier, UpgradeManager.UpgradeTypes upgradeType)
     {
+        if (isDumbAIActive)
+        {
+            Debug.Log($"[DumbAI] Took upgrade" + upgradeType + " tier:" + tier);
+        }
         switch (upgradeType)
         {
             /// <summary>
@@ -660,23 +674,23 @@ public class UpgradeManager : MonoBehaviour
                 {
                     case 0:
                         baseWeaponStats.BaseDamage.AddMultiValue(1.15f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        //print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 1:
                         baseWeaponStats.BaseDamage.AddMultiValue(1.10f);
                         baseWeaponStats.WeapArea.AddMultiValue(1.10f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
-                        print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
+                        //print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        //print("Weap Area " + baseWeaponStats.WeapArea.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         break;
                     case 2:
                         baseWeaponStats.BaseDamage.AddMultiValue(1.40f);
                         playerBStats.Projectiles.AddFlatValue(1f);
                         baseWeaponStats.AttackRate.AddMultiValue(.90f);
-                        print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
-                        print("Projectiles " + playerBStats.Projectiles.StatsValue());
-                        print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
+                        //print("Weap dmg " + baseWeaponStats.BaseDamage.StatsValue());
+                        //print("Projectiles " + playerBStats.Projectiles.StatsValue());
+                        //print("Fire rate " + baseWeaponStats.AttackRate.StatsValue());
                         baseWeaponStats.bDamUpgT++;
                         upgradeArr.Remove("DDautoAttack");
                         break;

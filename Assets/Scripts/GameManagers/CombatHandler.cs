@@ -86,7 +86,7 @@ public class CombatHandler : MonoBehaviour
             ReturnToPoolOnDeath returnToPool = gObject.GetComponent<ReturnToPoolOnDeath>();
             BaseStats ebs = gObject.GetComponent<BaseStats>();
             ebs.Health.AddFlatValue(-dam);
-            print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
+            //print(gObject + ": " + ebs.Health.StatsValue() + "/" + ebs.MaxHealth.StatsValue() + "hp");
             if (ebs.Health.StatsValue() <= 0)
             {
                 if (shouldExplode)
@@ -128,7 +128,7 @@ public class CombatHandler : MonoBehaviour
             InvincibilityDuration(playerInvincibilityDuration);
             if (pbs.Health.StatsValue() <= 0)
             {
-                Debug.Log("Max hp: "+pbs.MaxHealth.StatsValue());
+                //Debug.Log("Max hp: "+pbs.MaxHealth.StatsValue());
                 if (revives >= 1)
                 {
                     Revive();

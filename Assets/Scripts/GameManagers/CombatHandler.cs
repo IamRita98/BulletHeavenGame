@@ -49,13 +49,21 @@ public class CombatHandler : MonoBehaviour
         explOPool = gameObject.GetComponent<ObjectPooling>();
         oPoolText = GameObject.FindGameObjectWithTag("FloatingDamageNumbersPool").GetComponent<ObjectPooling>();
         fireRateStackingUpgrade = gameObject.GetComponent<FireRateStackingUpgrade>();
-        playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
-        pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        //playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
+        //pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
     }
 
     private void Update()
     {
+        if (pbs==null)
+        {
+            pbs = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        }
+        if (playerSRend==null)
+        {
+            playerSRend = GameObject.FindGameObjectWithTag("PlayerSprite").GetComponent<SpriteRenderer>();
+        }
         if (hasRevives) reviveTimer++;
         if (reviveTimer >= 600f)
         {

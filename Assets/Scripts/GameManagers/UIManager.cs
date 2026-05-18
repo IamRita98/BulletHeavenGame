@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     float levelTimerTime = 0;
     float levelTimerMinutes = 0;
     public Button restartGameBtn;
-
+    GameObject p;
 
 
     //We should consider making an event for each ability activation. This would let us MakeStats in the ability only when
@@ -49,8 +49,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
-        baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        //playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        //baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         upgradeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
@@ -60,6 +60,19 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (p == null)
+        {
+            p = GameObject.FindGameObjectWithTag("Player");
+        }
+        if (playerBStats == null&&p!=null)
+        {
+            playerBStats = p.GetComponent<BaseStats>();
+        }
+        if (baseWeaponStats==null && p != null)
+        {
+            baseWeaponStats = p.GetComponentInChildren<BaseWeaponStats>();
+        }
+        if (playerBStats == null) return;
         ShowPlayerHPAndXP();
         ShowPlayerCooldowns();
         DisplayLevelTimer();

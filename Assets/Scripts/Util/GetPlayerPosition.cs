@@ -9,11 +9,19 @@ public class GetPlayerPosition : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
-        playerPos = player.transform.position;
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+        else
+        {
+            playerPos = player.transform.position;
+        }
+            
     }
 }

@@ -23,9 +23,9 @@ public class UpgradeManager : MonoBehaviour
     public SpritesReferenceSO spriteReferences;
     CombatHandler cHandler;
     public Button WeapDamageButton;
-    GameObject ability1GO;
-    GameObject ability2GO;
-    GameObject ability3GO;
+    public GameObject ability1GO;
+    public GameObject ability2GO;
+    public GameObject ability3GO;
     BaseStats playerBStats;
     BaseWeaponStats baseWeaponStats;
     AbilityStats ability1;
@@ -33,6 +33,7 @@ public class UpgradeManager : MonoBehaviour
     AbilityStats ability3;
     int possibleChoices = 3;
     List<int> rolledUpgrades = new List<int>();
+    public bool abilitiesInitialized = false;
     
     //For when DumbAI is active
     public bool isDumbAIActive=false;
@@ -78,16 +79,16 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
-        baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        //playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        //baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
         uIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
         cHandler = gameObject.GetComponent<CombatHandler>();
-        bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
-        petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
+        //bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
+        //petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
         enemyPool = GameObject.FindGameObjectWithTag("EnemyPool").GetComponent<ObjectPooling>();
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
-        GetPlayerCharacterAndAbilities();
-        InitializeUpgrades();
+        //GetPlayerCharacterAndAbilities();
+        //InitializeUpgrades();
     }
 
     void GetPlayerCharacterAndAbilities()
@@ -103,12 +104,23 @@ public class UpgradeManager : MonoBehaviour
         }
         playerCharacter = GameObject.FindGameObjectWithTag("Player");
         abilities = playerCharacter.transform.GetComponentsInChildren<AbilityStats>(true);
-        ability1 = abilities[0];
-        ability2 = abilities[1];
-        ability3 = abilities[2];
-        ability1GO = GameObject.FindGameObjectWithTag("Ability1");
-        ability2GO = GameObject.FindGameObjectWithTag("Ability2");
-        ability3GO = GameObject.FindGameObjectWithTag("Ability3");
+        if (abilities.Length>0)
+        {
+            ability1 = abilities[0];
+            ability1GO = ability1.gameObject;
+        }
+        if (abilities.Length > 1)
+        {
+            ability2 = abilities[1];
+            ability2GO = ability2.gameObject;
+        }
+        if (abilities.Length > 2)
+        {
+            ability3 = abilities[2];
+            ability3GO = ability3.gameObject;
+        }
+
+
     }
 
     public void RollUpgrades()
@@ -127,7 +139,31 @@ public class UpgradeManager : MonoBehaviour
         if(isDumbAIActive) ChooseUpgrade?.Invoke();
 
     }
-
+    private void Update()
+    {
+        if (petProjPool)
+        {
+            petProjPool = GameObject.FindGameObjectWithTag("PetProjPool").GetComponent<ObjectPooling>();
+        }
+        if (playerBStats == null)
+        {
+            playerBStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        }
+        if (baseWeaponStats==null)
+        {
+            baseWeaponStats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        }
+        if(!abilitiesInitialized&&playerBStats!=null)
+        {
+            GetPlayerCharacterAndAbilities();
+            InitializeUpgrades();
+            abilitiesInitialized = true;
+        }
+        if (bulletOPool==null)
+        {
+            bulletOPool = GameObject.FindGameObjectWithTag("ProjectilePool").GetComponent<ObjectPooling>();
+        }
+    }
     public class UpgradeInfo
     {
         public Dictionary<int, string> descriptions;

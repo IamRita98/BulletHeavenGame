@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8490021550995439165}
   - component: {fileID: -3053432036865345099}
   - component: {fileID: -4012890416234639655}
+  - component: {fileID: -6076672423438231027}
   m_Layer: 0
   m_Name: PersistentGameManger
   m_TagString: PersistentManager
@@ -58,15 +59,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e61163d73b686488b1d99258996414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability4: {fileID: 0}
   ability1CoolDown: 0
   ability2CoolDown: 0
   ability3CoolDown: 0
+  ability4CoolDown: 5
   ability1OnCoolDown: 0
   ability2OnCoolDown: 0
   ability3OnCoolDown: 0
+  ability4OnCoolDown: 0
   ability1Timer: 0
   ability2Timer: 0
   ability3Timer: 0
+  ability4Timer: 0
+  ability1Charges: 1
+  ability1MaxCharges: 1
+  ability2Charges: 1
+  ability2MaxCharges: 1
+  ability3Charges: 1
+  ability3MaxCharges: 1
+  ability4Charges: 1
+  ability4MaxCharges: 1
+  cooldownT3: 0
 --- !u!114 &-4012890416234639655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,3 +94,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameIsPaused: 0
+  testingSession: 1
+--- !u!114 &-6076672423438231027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294146632076936032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a677b21bbcce14640b971eb4df97eff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

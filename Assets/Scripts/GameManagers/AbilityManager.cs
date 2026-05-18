@@ -34,40 +34,77 @@ public class AbilityManager : MonoBehaviour
     public int ability4Charges = 1;
     public int ability4MaxCharges = 1;
     public bool cooldownT3 = false;
-
-
+    public bool isAbilitiesInitialized = false;
+    AbilityStats[] abilities;
     private void Update()
     {
-        TrackAbilityCooldowns();
+        if (player == null)
+        {
+            isAbilitiesInitialized = false;
+            GetReferences();
+            if(player!=null) isAbilitiesInitialized = true;
+
+        }
+        if(player!=null) TrackAbilityCooldowns();
+
     }
 
     private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences();
+        //if (SceneManager.GetActiveScene().name != "MainMenu") GetReferences();
+        if (SceneManager.GetActiveScene().name == "MainMenu") isAbilitiesInitialized = false;
         UpgradeManager.OnLevelUp += UpdateCooldownValues;
+        CombatHandler.OnPlayerDeath += ResetCooldowns;
     }
 
     private void OnDisable()
     {
         UpgradeManager.OnLevelUp -= UpdateCooldownValues;
+        CombatHandler.OnPlayerDeath -= ResetCooldowns;
     }
-
-    public void GetReferences()
+    public void ResetCooldowns()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        bStats = player.GetComponent<BaseStats>();
-        ability1 = GameObject.FindGameObjectWithTag("Ability1");
-        ability2 = GameObject.FindGameObjectWithTag("Ability2");
-        ability3 = GameObject.FindGameObjectWithTag("Ability3");
-
-        ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
-
+        ability1OnCoolDown = false;
+        ability2OnCoolDown = false;
+        ability3OnCoolDown = false;
         ability1Timer = ability1CoolDown;
         ability2Timer = ability2CoolDown;
         ability3Timer = ability3CoolDown;
-        
+        ability1Charges = ability1MaxCharges;
+        ability2Charges = ability2MaxCharges;
+        ability3Charges = ability3MaxCharges;
+        if (ability4)
+        {
+            ability4OnCoolDown = false;
+            ability4Timer = ability4CoolDown;
+            ability4Charges = ability4MaxCharges;
+        }
+    }
+    public void GetReferences()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+        abilities = player.transform.GetComponentsInChildren<AbilityStats>(true);
+        bStats = player.GetComponent<BaseStats>();
+        if (abilities.Length > 0)
+        {
+            ability1 = abilities[0].gameObject;
+            ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        }
+        if (abilities.Length > 1)
+        {
+            ability2 = abilities[1].gameObject;
+            ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        }
+        if (abilities.Length > 2)
+        {
+            ability3 = abilities[2].gameObject;
+            ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        }
+        ability1Timer = ability1CoolDown;
+        ability2Timer = ability2CoolDown;
+        ability3Timer = ability3CoolDown;
+        //will implement ability4 later
     }
 
     public void GetAbility4References()
@@ -78,9 +115,9 @@ public class AbilityManager : MonoBehaviour
 
     void UpdateCooldownValues()
     {
-        ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
-        ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        if(ability1 !=null) ability1CoolDown = ability1.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        if (ability2 != null) ability2CoolDown = ability2.GetComponent<AbilityStats>().Cooldown.StatsValue();
+        if (ability3 != null) ability3CoolDown = ability3.GetComponent<AbilityStats>().Cooldown.StatsValue();
         if(ability4!=null) ability4CoolDown = ability4.GetComponent<AbilityStats>().Cooldown.StatsValue();
     }
 
@@ -129,7 +166,7 @@ public class AbilityManager : MonoBehaviour
             ability1Charges--;
             ability1OnCoolDown = true;
             ability1.SetActive(true);
-            if (ability1Timer <= 0) ability1Timer = ability1CoolDown;
+            ability1Timer = ability1CoolDown;
         }
     }
 
@@ -146,7 +183,7 @@ public class AbilityManager : MonoBehaviour
             ability2Charges--;
             ability2.SetActive(true);
             ability2OnCoolDown = true;
-            if (ability2Timer <= 0) ability2Timer = ability2CoolDown;
+            ability2Timer = ability2CoolDown;
         }
     }
 
@@ -163,7 +200,7 @@ public class AbilityManager : MonoBehaviour
             ability3Charges--;
             ability3.SetActive(true);
             ability3OnCoolDown = true;
-            if (ability3Timer <= 0) ability3Timer = ability3CoolDown;
+            ability3Timer = ability3CoolDown;
         }
     }
     public void Ability4()
@@ -179,7 +216,7 @@ public class AbilityManager : MonoBehaviour
             ability4Charges--;
             ability4.SetActive(true);
             ability4OnCoolDown = true;
-            if (ability4Timer <= 0) ability4Timer = ability4CoolDown;
+            ability4Timer = ability4CoolDown;
         }
     }
     float wins;

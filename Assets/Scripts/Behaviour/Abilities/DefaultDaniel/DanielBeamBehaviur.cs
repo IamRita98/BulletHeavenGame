@@ -60,6 +60,8 @@ public class DanielBeamBehaviur : MonoBehaviour
         defaultSize = transform.localScale;
         beamDefaultXpos = transform.localPosition.x;
         sfxPlayer = GetComponent<PlaySFXAfterFirstEnable>();
+        trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
+        abilityStats = GetComponent<AbilityStats>();
 
         //if for whatever reason they are not assigned in inspector (backup assignement)
         GameObject[] supportBeams = GameObject.FindGameObjectsWithTag("DDMirroredBeams");
@@ -103,7 +105,8 @@ public class DanielBeamBehaviur : MonoBehaviour
     {
         SceneManager.activeSceneChanged += GetReferences;
         ScaleStats();
-        FindNearestEnemy();
+        if(trackNearestEnemy) FindNearestEnemy();
+
         sfxPlayer.playSFX();
         if (p1Tier1)
         {
@@ -136,8 +139,8 @@ public class DanielBeamBehaviur : MonoBehaviour
         if (newScene.name == "MainMenu") return;
         
         combatHandler = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatHandler>();
-        trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
-        abilityStats = GetComponent<AbilityStats>();
+        //trackNearestEnemy = GameObject.FindGameObjectWithTag("Player").GetComponent<TrackNeareastEnemy>();
+        //abilityStats = GetComponent<AbilityStats>();
         beamRenderer = gameObject.GetComponent<SpriteRenderer>();
         parentGO = gameObject.transform.parent.gameObject;
         polygonCollider = gameObject.GetComponent<PolygonCollider2D>();

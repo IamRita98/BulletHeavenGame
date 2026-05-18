@@ -29,7 +29,7 @@ public class TrackNeareastEnemy : MonoBehaviour
     public GameObject NearestEnemy(List<GameObject> gosToIgnore = null)
     {
         float dist = Mathf.Infinity;
-        if (oPool.activePool.Count < 1) return Camera.main.gameObject;
+        if (oPool.activePool.Count < 1||oPool==null) return Camera.main.gameObject;
         if (gosToIgnore != null)
         {
             for (int i = 0; i < oPool.activePool.Count; i++)//there may be a more efficient way (2b optimized)

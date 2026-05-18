@@ -2317,6 +2317,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4012890416234639655, guid: 12bcf4f0c023527488bd7d7ebe72dfc3, type: 3}
+      propertyPath: testingSession
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1294146632076936032, guid: 12bcf4f0c023527488bd7d7ebe72dfc3, type: 3}
       propertyPath: m_Name
       value: PersistentGameManger

@@ -8,6 +8,7 @@ public class GameStateManager : MonoBehaviour
 {
     public bool gameIsPaused = false;
     GameObject player;
+    public bool testingSession = false;
 
     private void OnEnable()
     {
@@ -19,7 +20,14 @@ public class GameStateManager : MonoBehaviour
         SceneManager.activeSceneChanged -= SceneChanged;
         CombatHandler.OnPlayerDeath -= PauseGame;
     }
-
+    private void Update()
+    {
+        if (player==null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Vector3.zero;
+        }
+    }
     public void PauseGame()
     {
         Time.timeScale = 0f;
@@ -28,15 +36,21 @@ public class GameStateManager : MonoBehaviour
 
     public void UnPauseGame()
     {
-        Time.timeScale = 1f;
+        if (!testingSession)
+        {
+            Time.timeScale = 1f;
+            gameIsPaused = false;
+            return;
+        }
+        Time.timeScale = 2f;
         gameIsPaused = false;
     }
 
     public void SceneChanged(Scene oldScene, Scene newScene)
     {
         if (newScene.name == "MainMenu") return;
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = Vector3.zero;
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //player.transform.position = Vector3.zero;
     }
 
     

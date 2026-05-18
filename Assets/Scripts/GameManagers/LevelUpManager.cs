@@ -17,10 +17,10 @@ public class LevelUpManager : MonoBehaviour
     private void Awake()
     {
         sfxToPlay = RuntimeManager.CreateInstance(levelupSFXKey);
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        //playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
         xpPool = GameObject.FindGameObjectWithTag("XpPool").GetComponent<ObjectPooling>();
         um = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UpgradeManager>();
-        bws = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        //bws = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
     }
 
     private void OnEnable()
@@ -34,7 +34,17 @@ public class LevelUpManager : MonoBehaviour
         PickupBehavior.OnXPPickup -= HandleXPPickup;
         CombatHandler.OnEnemyDeath -= DropXpOnEnemyDeath;
     }
-
+    private void Update()
+    {
+        if (playerStats==null)
+        {
+            playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
+        }
+        if (bws==null)
+        {
+            bws = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BaseWeaponStats>();
+        }
+    }
     void HandleXPPickup(GameObject XpGO)
     {
         float XpValue = XpGO.GetComponent<XpPickupStats>().xpValue;

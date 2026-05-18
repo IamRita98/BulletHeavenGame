@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using UnityEngine;
-using System.Linq;
-using System.IO;
+using UnityEngine.SceneManagement;
 
 public class DumbPlayerAI : MonoBehaviour
 {
@@ -11,51 +12,64 @@ public class DumbPlayerAI : MonoBehaviour
      * 1.5 minutes? Also, add a restart session and make sure restarting scene works (it 
      * currently breaks) add tracking to abilities used, upgrades chosen, and death
      * )*/
-    private string logFilePath;
+
+    //MOVING LOGGING TO SEPARATE SCRIPT
+
+    //private string logFilePath;
+    float useAbilityTime = 1f;
     PlayerController pc;
     bool isMoving=false;
     float movingLength;
     int[] dirArr = { 0, 1, -1 };
     float abilityAttemptTimer = 0f;
     AbilityManager aM;
+    float ability3TimeGate = 3f;
+    bool canUseAbility3 = false;
+    float timeTrack = 0f;
     private void Awake()
     {
-        logFilePath = Path.Combine(Application.persistentDataPath, "crash_log.txt");
-        DontDestroyOnLoad(gameObject);
-        Application.logMessageReceived += OnLog;
+        
     }
     private void Start()
     {
-        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        aM = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
+        //pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //aM = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
     }
-    private void OnDestroy()
-    {
-        Application.logMessageReceived -= OnLog;
-    }
-    void OnLog(string condition, string stackTrace, LogType type)
-    {
-        if (condition.Contains("[DumbAI]"))
-        {
-            File.AppendAllText(logFilePath, $"{condition}\n");
-        }
-        if (type == LogType.Exception || type == LogType.Error)
-        {
-            File.AppendAllText(logFilePath, $"[SESSION] ERROR: {condition}\n{stackTrace}\n\n");
-        }
-    }
+   
     void Update()
     {
+        if (pc == null || aM == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null)
+            {
+                pc = p.GetComponent<PlayerController>();
+            }
+            if (aM == null) 
+            {
+                aM = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
+            }
+            
+        }
         MoveCharacter();
         UseAbility();
+        timeTrack += Time.deltaTime;
+        if (timeTrack >= ability3TimeGate) canUseAbility3 = true;
     }
     private void OnEnable()
     {
         UpgradeManager.ChooseUpgrade += ChooseUpgrade;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene,LoadSceneMode mode)
+    {
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        aM = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
     }
     private void OnDisable()
     {
         UpgradeManager.ChooseUpgrade -= ChooseUpgrade;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     private void MoveCharacter()
     {
@@ -82,7 +96,7 @@ public class DumbPlayerAI : MonoBehaviour
     private void UseAbility()
     {
         //remember to turn off any conflicting functions in other scripts
-        if (abilityAttemptTimer >= .5f)
+        if (abilityAttemptTimer >= useAbilityTime)
         {
             abilityAttemptTimer = 0f;
             RollAbility();
@@ -103,7 +117,7 @@ public class DumbPlayerAI : MonoBehaviour
         }else if (x == 1)
         {
             aM.Ability2();
-        }else if (x == 2)
+        }else if (x == 2&&canUseAbility3)
         {
             aM.Ability3();
         }

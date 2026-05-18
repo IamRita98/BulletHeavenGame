@@ -11,12 +11,16 @@ public class DebugTools : MonoBehaviour
     private void Awake()
     {
         abilityManager = GameObject.FindGameObjectWithTag("PersistentManager").GetComponent<AbilityManager>();
-        baseStats = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityStats>();
+        //baseStats = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityStats>();
         levelUpManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelUpManager>();
     }
 
     private void Update()
     {
+        if (baseStats==null)
+        {
+            baseStats = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityStats>();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ResetCooldowns();

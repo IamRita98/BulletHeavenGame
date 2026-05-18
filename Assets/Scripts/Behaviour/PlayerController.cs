@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     public bool dumbAIControlActive = false;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+    }
+    private void Start()
+    {
+        //DontDestroyOnLoad(this.gameObject);
+
         bStats = gameObject.GetComponent<BaseStats>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         moveSpeed = bStats.MovementSpeed.StatsValue();
@@ -31,12 +36,23 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         CombatHandler.OnPlayerDeath += KillPlayer;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnDisable()
     {
         CombatHandler.OnPlayerDeath -= KillPlayer;
+        //SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //    if (scene.name == "TestLevel")
+    //    {
+    //        DontDestroyOnLoad(this.gameObject);
+    //        return;
+    //    }
 
+    //}
     private void FixedUpdate()
     {
         rb.velocity = dir * moveSpeed;
